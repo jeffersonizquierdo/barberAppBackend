@@ -1,6 +1,6 @@
 package com.barberapp.entities;
 
-import java.io.Serializable; 
+import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,25 +11,29 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table (name = "barbershops")
-public class Barbershop implements Serializable{
+@Table(name = "barbershops")
+public class Barbershop implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	@Id  @Column (name = "id_user") private Long idBarbershop;
-	@Column (name = "location") private String location;
-	@Column (name = "qualification") private Double qualification;
-	@Column (name = "linked_barbers") private int linkedBarbers;
-	
-	
+
+	@Id
+	@Column(name = "id_user")
+	private Long idBarbershop;
+	@Column(name = "location")
+	private String location;
+	@Column(name = "qualification")
+	private Double qualification;
+	@Column(name = "linked_barbers")
+	private int linkedBarbers;
+	private String foto;
+
 	public Barbershop() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 
 	public Barbershop(Long idBarbershop, String location, Double qualification, int linkedBarbers) {
 		super();
@@ -39,12 +43,18 @@ public class Barbershop implements Serializable{
 		this.linkedBarbers = linkedBarbers;
 
 	}
-	
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
 
 	public Long getIdBarbershop() {
 		return idBarbershop;
 	}
-
 
 	public void setIdBarbershop(Long idBarbershop) {
 		this.idBarbershop = idBarbershop;
@@ -54,39 +64,31 @@ public class Barbershop implements Serializable{
 		return location;
 	}
 
-
 	public void setLocation(String location) {
 		this.location = location;
 	}
-
 
 	public Double getQualification() {
 		return qualification;
 	}
 
-
 	public void setQualification(Double qualification) {
 		this.qualification = qualification;
 	}
-
 
 	public int getLinkedBarbers() {
 		return linkedBarbers;
 	}
 
-
 	public void setLinkedBarbers(int linkedBarbers) {
 		this.linkedBarbers = linkedBarbers;
 	}
-	
-	
 
 	@Override
 	public String toString() {
 		return "Barbershop [idBarbershop=" + idBarbershop + ", location=" + location + ", qualification="
-				+ qualification + ", linkedBarbers=" + linkedBarbers + ", catalogue=" +  "]";
+				+ qualification + ", linkedBarbers=" + linkedBarbers + ", catalogue=" + "]";
 	}
-
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
