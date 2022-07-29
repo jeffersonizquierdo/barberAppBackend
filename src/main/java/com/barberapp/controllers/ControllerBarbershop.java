@@ -1,9 +1,13 @@
 package com.barberapp.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import javax.persistence.PostLoad;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.barberapp.entities.Barbershop;
 import com.barberapp.servicies.barbershop.ServiceBarbershop;
@@ -107,7 +113,12 @@ public class ControllerBarbershop {
 		
 		return barbershops;
 	}
-	
+	@PostMapping("/barbershop/upload")
+	public ResponseEntity<?> upload(@RequestParam("archivo") MultipartFile archivo, @RequestParam("id") Long id){
+		Map<String, Object> response = new HashMap<>();
+		Optional<Barbershop> barbershop = serviceBarbershop.findById(id);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+	}
 	
 	
 	
