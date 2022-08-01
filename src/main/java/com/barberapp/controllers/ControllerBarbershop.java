@@ -127,9 +127,17 @@ public class ControllerBarbershop {
 			try {
 				Files.copy(archivo.getInputStream(), rutaArchivo);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				response.put("mensaje", "Error al subir la imagen"+nombreArchivo);
+				response.put("error", e.getMessage().concat(": ").concat(e.getCause().getMessage()));
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+
 			}
+			Barbershop barbershop2 = new Barbershop();
+			barbershop2.setFoto(nombreArchivo);
+			serviceBarbershop.save(barbershop2);
+			
+			response.put("barbershop", barbershop2);
+			response.put("mensaje", "imagen "+nombreArchivo+" subida con exito ");
 		}
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
