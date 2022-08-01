@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.barberapp.entities.Barber;
-import com.barberapp.repositories.RepisitoryBarber;
+import com.barberapp.repositories.RepositoryBarber;
 
 
 
@@ -19,7 +19,7 @@ import com.barberapp.repositories.RepisitoryBarber;
 public class ServiceBarbermpl implements ServiceBarber{
 	
 	@Autowired(required=true)
-	private RepisitoryBarber barber;
+	private RepositoryBarber barber;
 
 	@Override
 	@Transactional(readOnly = true)
