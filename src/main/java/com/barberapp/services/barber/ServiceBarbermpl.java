@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.barberapp.entities.Barber;
-import com.barberapp.repositories.RepisitoryBarber;
+import com.barberapp.repositories.RepositoryBarber;
 
 
 
@@ -19,7 +19,7 @@ import com.barberapp.repositories.RepisitoryBarber;
 public class ServiceBarbermpl implements ServiceBarber{
 	
 	@Autowired(required=true)
-	private RepisitoryBarber barber;
+	private RepositoryBarber barber;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -36,7 +36,7 @@ public class ServiceBarbermpl implements ServiceBarber{
 	
 
 	@Transactional(readOnly = true)
-	public Optional<Barber> findById(Integer id) {
+	public Optional<Barber> findById(Long id) {
 
 		return barber.findById(id);
 	}
@@ -49,7 +49,7 @@ public class ServiceBarbermpl implements ServiceBarber{
 	}
 
 	@Override
-	public void deletById(Integer id) {
+	public void deletById(Long id) {
 		barber.deleteById(id);
 		
 	}
