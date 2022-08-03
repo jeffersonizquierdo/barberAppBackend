@@ -23,23 +23,21 @@ public class Customer  implements Serializable{
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id_username")private Long iBbarbershop;
 	@Column (name = "email", nullable = false, unique = true) private String email;
 	@Column (name = "age") private Date age;
-	@Column (name = "gender") private char geder;
+	@Column (name = "gender") private String gender;
 	
 	
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
-	public Customer(Long iBbarbershop, String email, Date age, char geder) {
+	
+	public Customer(Long iBbarbershop, String email, Date age, String gender) {
 		super();
 		this.iBbarbershop = iBbarbershop;
 		this.email = email;
 		this.age = age;
-		this.geder = geder;
+		this.gender = gender;
 	}
-
 
 	public Long getiBbarbershop() {
 		return iBbarbershop;
@@ -71,13 +69,13 @@ public class Customer  implements Serializable{
 	}
 
 
-	public char getGeder() {
-		return geder;
+	public String getGender() {
+		return gender;
 	}
 
 
-	public void setGeder(char geder) {
-		this.geder = geder;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 
@@ -86,10 +84,5 @@ public class Customer  implements Serializable{
 	}
 
 
-	@Override
-	public String toString() {
-		return "Customer [iBbarbershop=" + iBbarbershop + ", email=" + email + ", age=" + age + ", geder=" + geder
-				+ "]";
-	}
 
 }
