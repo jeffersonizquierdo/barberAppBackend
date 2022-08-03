@@ -29,10 +29,10 @@ public class Booking {
 	private Long id_customer ;
 	
 	@Column(name="acceptatance_status")
-	private boolean  acceptatance_status ;
+	private  Boolean   acceptatance_status ;
 	
 	@Column(name="completed")
-    private boolean completed ;
+    private Boolean completed ;
 
 	public Long getId_booking() {
 		return id_booking;
@@ -66,28 +66,25 @@ public class Booking {
 		this.id_customer = id_customer;
 	}
 
-	public boolean isAcceptatance_status() {
+	public Boolean getAcceptatance_status() {
 		return acceptatance_status;
 	}
 
-	public void setAcceptatance_status(boolean acceptatance_status) {
+	public void setAcceptatance_status(Boolean acceptatance_status) {
 		this.acceptatance_status = acceptatance_status;
 	}
 
-	public boolean isCompleted() {
+	public Boolean getCompleted() {
 		return completed;
 	}
 
-	public void setCompleted(boolean completed) {
+	public void setCompleted(Boolean completed) {
 		this.completed = completed;
 	}
+	
+	
 
-	@Override
-	public String toString() {
-		return "Booking [id_booking=" + id_booking + ", reservation_date=" + reservation_date + ", Inid_barbershop="
-				+ Inid_barbershop + ", id_customer=" + id_customer + ", acceptatance_status=" + acceptatance_status
-				+ ", completed=" + completed + "]";
-	}
+
 	
 	
 

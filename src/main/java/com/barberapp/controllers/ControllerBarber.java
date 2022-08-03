@@ -42,35 +42,34 @@ public class ControllerBarber {
 	
 	/////////////////// CONSULT BARBER   http://localhost:8080/barber/consult/ID ////////////////
 	@GetMapping("/consult/{id}")
-	public ResponseEntity<?> read(@PathVariable(value = "id") Integer barberid){
+	public ResponseEntity<Optional<Barber>> read(@PathVariable(value = "id") Long barberid){
 		Optional<Barber> baberaoptional=BarberSevice.findById(barberid);
 		
 		if(baberaoptional.isPresent()) {
+			return ResponseEntity.ok(baberaoptional);
+		}else {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(baberaoptional);
+	
 		
 	}
 	
 	/////////////////// UPDATE BARBER   http://localhost:8080/barber/update/ID ////////////////
 	
 	@PutMapping("/update/{id}")
-	public ResponseEntity<?>update(@RequestBody Barber barberNew,@PathVariable (value = "id")Integer barberid ){
+	public ResponseEntity<?>update(@RequestBody Barber barberNew,@PathVariable (value = "id")Long barberid ){
 		Optional<Barber> barbero=BarberSevice.findById(barberid);
 		
 		if(!barbero.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
 		
-		barbero.get().setLasname(barberNew.getLasname());
-		barbero.get().setDate_of_birth(barberNew.getDate_of_birth());
+		barbero.get().setAge(barberNew.getAge());
 		barbero.get().setDescription(barberNew.getDescription());
-		barbero.get().setCertificates(barberNew.getDescription());
 		barbero.get().setGender(barberNew.getGender());
 		barbero.get().setQualification(barberNew.getQualification());
-		barbero.get().setCity(barberNew.getCity());
-		barbero.get().setLinked_barbershops(barberNew.getLinked_barbershops());
 		barbero.get().setId_catalogue(barberNew.getId_catalogue());
+		
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(BarberSevice.save(barbero.get()));
 	
@@ -78,10 +77,10 @@ public class ControllerBarber {
 	
 	/////////////////// DELETE BARBER   http://localhost:8080/barber/delete/ID ////////////////
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<Barber> deleteUser(@PathVariable(value = "id")  Integer id){
+	public ResponseEntity<Barber> deleteUser(@PathVariable(value = "id")  Long id){
 		
 		
-		if(!BarberSevice.findById(id).isPresent()) {
+		if(BarberSevice.findById(id).isPresent()) {
 			
 			BarberSevice.deletById(id);
 			return ResponseEntity.ok().build();

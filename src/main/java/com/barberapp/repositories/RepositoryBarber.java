@@ -7,7 +7,7 @@ import com.barberapp.entities.Barber;
 
 
 @Repository
-public interface RepositoryBarber extends JpaRepository<Barber, Integer >{
+public interface RepositoryBarber extends JpaRepository<Barber, Long >{
 
 
 

@@ -16,10 +16,10 @@ public interface ServiceBarber {
 	
 	public Page<Barber>findAll(Pageable pageable);
 	
-	public Optional<Barber>findById(Integer id);
+	public Optional<Barber>findById(Long  id);
 	
 	public Barber save(Barber barberVo);
 	
-	public void deletById(Integer id );
+	public void deletById(Long  id );
 
 }
