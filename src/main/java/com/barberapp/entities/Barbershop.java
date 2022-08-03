@@ -1,13 +1,13 @@
 package com.barberapp.entities;
 
-import java.io.Serializable; 
+import java.io.Serializable;  
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
 
 @Entity
@@ -19,10 +19,11 @@ public class Barbershop implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Id  @Column (name = "id_user") private Long idBarbershop;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id_username")private Long iBbarbershop;
+	@Column (name = "email", nullable = false, unique = true) private String email;
+	@Column (name = "description") private String description;
 	@Column (name = "location") private String location;
 	@Column (name = "qualification") private Double qualification;
-	@Column (name = "linked_barbers") private int linkedBarbers;
 	
 	
 	public Barbershop() {
@@ -30,29 +31,54 @@ public class Barbershop implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public Barbershop(Long idBarbershop, String location, Double qualification, int linkedBarbers) {
+	public Barbershop(Long iBbarbershop, String email, String description, String location, Double qualification) {
 		super();
-		this.idBarbershop = idBarbershop;
+		this.iBbarbershop = iBbarbershop;
+		this.email = email;
+		this.description = description;
 		this.location = location;
 		this.qualification = qualification;
-		this.linkedBarbers = linkedBarbers;
-
 	}
 	
 
-	public Long getIdBarbershop() {
-		return idBarbershop;
+	public String getEmail() {
+		return email;
+	}
+	
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+
+	public Long getiBbarbershop() {
+		return iBbarbershop;
 	}
 
 
-	public void setIdBarbershop(Long idBarbershop) {
-		this.idBarbershop = idBarbershop;
+
+	public void setiBbarbershop(Long iBbarbershop) {
+		this.iBbarbershop = iBbarbershop;
 	}
+
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
 
 	public String getLocation() {
 		return location;
 	}
+
 
 
 	public void setLocation(String location) {
@@ -60,9 +86,11 @@ public class Barbershop implements Serializable{
 	}
 
 
+
 	public Double getQualification() {
 		return qualification;
 	}
+
 
 
 	public void setQualification(Double qualification) {
@@ -70,26 +98,20 @@ public class Barbershop implements Serializable{
 	}
 
 
-	public int getLinkedBarbers() {
-		return linkedBarbers;
-	}
-
-
-	public void setLinkedBarbers(int linkedBarbers) {
-		this.linkedBarbers = linkedBarbers;
-	}
-	
-	
-
-	@Override
-	public String toString() {
-		return "Barbershop [idBarbershop=" + idBarbershop + ", location=" + location + ", qualification="
-				+ qualification + ", linkedBarbers=" + linkedBarbers + ", catalogue=" +  "]";
-	}
-
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "Barbershop [iBbarbershop=" + iBbarbershop + ", description=" + description + ", location=" + location
+				+ ", qualification=" + qualification + "]";
+	}
+	
+	
+	
 
 }
