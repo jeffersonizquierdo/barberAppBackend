@@ -67,7 +67,7 @@ public class ControllerCustomer {
 		if (customer.isPresent()) {
 			
 			customer.get().setAge(newCustomer.getAge());
-			customer.get().setGeder(newCustomer.getGeder());
+			customer.get().setGender(newCustomer.getGender());
 			return ResponseEntity.status(HttpStatus.CREATED).body(serviceCustomer.save(newCustomer));
 			
 		} else {
