@@ -17,27 +17,15 @@ public class Barber implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
-	private Long  id ;
-	
-	@Column(name="age")
-	private Date  age;
-	
-	
-	@Column(name="description")
-	private String description;
-	
-	@Column(name="gender")
-	private String gender;
-	
-	@Column(name="qualification")
-	private double qualification;
-	
-	@Column(name="id_catalogue")
-	private int   id_catalogue;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id_username")private Long id;
+	@Column (name = "email", nullable = false, unique = true) private String email;
+	@Column(name="age")private Date  age;
+	@Column(name="description")private String description;
+	@Column(name="gender")private String gender;
+	@Column(name="qualification")private double qualification;
+	@Column(name="id_catalogue")private int   id_catalogue;
 
+	
 	public Long getId() {
 		return id;
 	}
@@ -50,7 +38,7 @@ public class Barber implements Serializable{
 		return age;
 	}
 
-	public void setAge(Date  age) {
+	public void setAge(Date age) {
 		this.age = age;
 	}
 
@@ -80,9 +68,6 @@ public class Barber implements Serializable{
 		this.qualification = qualification;
 	}
 
-
-	
-
 	public int getId_catalogue() {
 		return id_catalogue;
 	}
@@ -90,8 +75,6 @@ public class Barber implements Serializable{
 	public void setId_catalogue(int id_catalogue) {
 		this.id_catalogue = id_catalogue;
 	}
-	
-	
 	
 	
 }

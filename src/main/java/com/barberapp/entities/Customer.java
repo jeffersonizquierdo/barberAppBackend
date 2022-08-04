@@ -5,6 +5,8 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,32 +20,42 @@ public class Customer  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	
-	@Id @Column (name = "id_user") private Long idUser;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id_username")private Long iBbarbershop;
+	@Column (name = "email", nullable = false, unique = true) private String email;
 	@Column (name = "age") private Date age;
-	@Column (name = "gender") private char geder;
+	@Column (name = "gender") private String gender;
 	
 	
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
-	public Customer(Long idUser, Date age, char geder) {
+	
+	public Customer(Long iBbarbershop, String email, Date age, String gender) {
 		super();
-		this.idUser = idUser;
+		this.iBbarbershop = iBbarbershop;
+		this.email = email;
 		this.age = age;
-		this.geder = geder;
+		this.gender = gender;
+	}
+
+	public Long getiBbarbershop() {
+		return iBbarbershop;
 	}
 
 
-	public Long getIdUser() {
-		return idUser;
+	public void setiBbarbershop(Long iBbarbershop) {
+		this.iBbarbershop = iBbarbershop;
 	}
 
 
-	public void setIdUser(Long idUser) {
-		this.idUser = idUser;
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 
@@ -57,13 +69,13 @@ public class Customer  implements Serializable{
 	}
 
 
-	public char getGeder() {
-		return geder;
+	public String getGender() {
+		return gender;
 	}
 
 
-	public void setGeder(char geder) {
-		this.geder = geder;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 
@@ -72,8 +84,5 @@ public class Customer  implements Serializable{
 	}
 
 
-	@Override
-	public String toString() {
-		return "Customer [idUser=" + idUser + ", age=" + age + ", geder=" + geder + "]";
-	}
+
 }

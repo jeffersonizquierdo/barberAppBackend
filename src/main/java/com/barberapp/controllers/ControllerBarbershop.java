@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.barberapp.entities.Barbershop;
 import com.barberapp.servicies.barbershop.ServiceBarbershop;
 
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("/barbershop")
 public class ControllerBarbershop {
@@ -67,7 +69,6 @@ public class ControllerBarbershop {
 		if (barbershop.isPresent()) {
 			
 			barbershop.get().setLocation(newBarbershop.getLocation());
-			barbershop.get().setLinkedBarbers(newBarbershop.getLinkedBarbers());
 			barbershop.get().setQualification(newBarbershop.getQualification());
 			
 			return ResponseEntity.status(HttpStatus.CREATED).body(serviceBarbershop.save(barbershop.get()));
@@ -96,7 +97,6 @@ public class ControllerBarbershop {
 	}
 	
 	
-	
 	/////////////////// CONSULT ALL BARBERSHOP   http://localhost:8080/barbershop/consult/id ////////////////
 	@GetMapping("/consultall")
 	public List<Barbershop> getAllBarbershop (){
@@ -106,9 +106,6 @@ public class ControllerBarbershop {
 				.collect(Collectors.toList());
 		
 		return barbershops;
-	}
-	
-	
-	
+	}	
 	
 }

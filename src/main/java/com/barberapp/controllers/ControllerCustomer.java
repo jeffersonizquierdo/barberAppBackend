@@ -8,6 +8,7 @@ import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.barberapp.entities.Customer;
 import com.barberapp.servicies.customer.ServiceCustomer;
 
-
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping("customer")
 public class ControllerCustomer {
@@ -66,7 +67,7 @@ public class ControllerCustomer {
 		if (customer.isPresent()) {
 			
 			customer.get().setAge(newCustomer.getAge());
-			customer.get().setGeder(newCustomer.getGeder());
+			customer.get().setGender(newCustomer.getGender());
 			return ResponseEntity.status(HttpStatus.CREATED).body(serviceCustomer.save(newCustomer));
 			
 		} else {
