@@ -1,5 +1,7 @@
 package com.barberapp.entities;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,10 +22,10 @@ public class Booking {
 	
 	
 	@Column(name="reservation_date")
-	private String reservation_date;
+	private Date reservation_date;
 	
 	@Column(name="id_barbershop")
-	private Long Inid_barbershop;
+	private Long id_barbershop;
 	
 	@Column(name="id_customer")
 	private Long id_customer ;
@@ -42,20 +44,20 @@ public class Booking {
 		this.id_booking = id_booking;
 	}
 
-	public String getReservation_date() {
+	public Date getReservation_date() {
 		return reservation_date;
 	}
 
-	public void setReservation_date(String reservation_date) {
+	public void setReservation_date(Date reservation_date) {
 		this.reservation_date = reservation_date;
 	}
 
-	public Long getInid_barbershop() {
-		return Inid_barbershop;
+	public Long getid_barbershop() {
+		return id_barbershop;
 	}
 
-	public void setInid_barbershop(Long inid_barbershop) {
-		Inid_barbershop = inid_barbershop;
+	public void setInid_barbershop(Long id_barbershop) {
+		id_barbershop = id_barbershop;
 	}
 
 	public Long getId_customer() {
