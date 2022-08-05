@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -58,33 +57,4 @@ public class ServicieBarbershopImpl implements ServiceBarbershop{
 		
 	}
 	
-	Cloudinary cloudinary;
-	private Map<String, String> valuesMap = new  HashMap<>();
-	public ServicieBarbershopImpl() {
-		valuesMap.put("cloud name", "dmfy3y2nz");
-		valuesMap.put("api key", "586515517252353");
-		valuesMap.put("api secret", "9QGxkX83AmSaGlQRXWD1CJfEEDE");
-		cloudinary = new Cloudinary(valuesMap);
-	}
-	
-	public Map upload(MultipartFile multipartFile) {
-		File file = convert(multipartFile);
-		Map result = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
-		file.delete();
-		return result;
-	}
-	
-	public Map delete(String id) {
-		Map result = cloudinary.uploader().destroy(id, ObjectUtils.emptyMap());
-		return result;
-	}
-	
-	private File convert(MultipartFile multipartFile) {
-		File file = new File(multipartFile.getOriginalFilename());
-		FileOutputStream fo = new FileOutputStream(file);
-		fo.write(multipartFile.getBytes());
-		fo.close(); 
-		return file;
-	}
-
 }
