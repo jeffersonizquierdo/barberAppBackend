@@ -1,13 +1,17 @@
 package com.barberapp.entities;
 
-import java.io.Serializable;  
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,48 +23,123 @@ public class Barbershop implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id_username")private Long iBbarbershop;
-	@Column (name = "email", nullable = false, unique = true) private String email;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id_username")private Long id;
+	@Column (name = "email", nullable = false, unique = true, length = 200) private String email;
+	@Column (name = "password", nullable = false) private String password;
+	@Column (name = "nickname", nullable = false) private String nickname;
+	@Column (name = "city", nullable = false) private String city;
+	@Column (name = "cellphone", nullable = false, length = 10) private String cellphone;
+	@Column (name = "type_user", nullable = false) private int typeUser;
+	@Column (name = "photo", nullable = true) private String photo;
 	@Column (name = "description") private String description;
 	@Column (name = "location") private String location;
 	@Column (name = "qualification") private Double qualification;
+	@ManyToMany @JoinTable(name = "barbershops_barbers", joinColumns = @JoinColumn
+			(name = "id_barbershop"), inverseJoinColumns = @JoinColumn (name = "id_barber")) private List<Barber> listBarbers;
 	
 	
 	public Barbershop() {
 		super();
-		// TODO Auto-generated constructor stub
+
+		this.listBarbers = new ArrayList<Barber>();
 	}
 
-	public Barbershop(Long iBbarbershop, String email, String description, String location, Double qualification) {
+
+	public Barbershop(Long id, String email, String password, String nickname, String city, String cellphone,
+			int typeUser, String photo, String description, String location, Double qualification) {
 		super();
-		this.iBbarbershop = iBbarbershop;
+		this.id = id;
 		this.email = email;
+		this.password = password;
+		this.nickname = nickname;
+		this.city = city;
+		this.cellphone = cellphone;
+		this.typeUser = typeUser;
+		this.photo = photo;
 		this.description = description;
 		this.location = location;
 		this.qualification = qualification;
 	}
-	
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 
 	public String getEmail() {
 		return email;
 	}
-	
+
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
 
-	public Long getiBbarbershop() {
-		return iBbarbershop;
+
+	public String getPassword() {
+		return password;
 	}
 
 
-
-	public void setiBbarbershop(Long iBbarbershop) {
-		this.iBbarbershop = iBbarbershop;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
+
+	public String getNickname() {
+		return nickname;
+	}
+
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+
+	public String getCity() {
+		return city;
+	}
+
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+
+	public String getCellphone() {
+		return cellphone;
+	}
+
+
+	public void setCellphone(String cellphone) {
+		this.cellphone = cellphone;
+	}
+
+
+	public int getTypeUser() {
+		return typeUser;
+	}
+
+
+	public void setTypeUser(int typeUser) {
+		this.typeUser = typeUser;
+	}
+
+
+	public String getPhoto() {
+		return photo;
+	}
+
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 
 
 	public String getDescription() {
@@ -68,11 +147,9 @@ public class Barbershop implements Serializable{
 	}
 
 
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 
 
 	public String getLocation() {
@@ -80,11 +157,9 @@ public class Barbershop implements Serializable{
 	}
 
 
-
 	public void setLocation(String location) {
 		this.location = location;
 	}
-
 
 
 	public Double getQualification() {
@@ -92,26 +167,24 @@ public class Barbershop implements Serializable{
 	}
 
 
-
 	public void setQualification(Double qualification) {
 		this.qualification = qualification;
 	}
 
+
+	public List<Barber> getListBarbers() {
+		return listBarbers;
+	}
+
+
+	public void setListBarbers(List<Barber> listBarbers) {
+		this.listBarbers = listBarbers;
+	}
 
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-
-
-	@Override
-	public String toString() {
-		return "Barbershop [iBbarbershop=" + iBbarbershop + ", description=" + description + ", location=" + location
-				+ ", qualification=" + qualification + "]";
-	}
-	
-	
-	
 
 }

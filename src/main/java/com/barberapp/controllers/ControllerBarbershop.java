@@ -67,7 +67,12 @@ public class ControllerBarbershop {
 		Optional<Barbershop> barbershop = serviceBarbershop.findById(id);
 		
 		if (barbershop.isPresent()) {
-			
+			barbershop.get().setDescription(newBarbershop.getDescription());
+			barbershop.get().setPassword(newBarbershop.getPassword());
+			barbershop.get().setCellphone(newBarbershop.getCellphone());
+			barbershop.get().setCity(newBarbershop.getCity());
+			barbershop.get().setNickname(newBarbershop.getNickname());
+			barbershop.get().setPhoto(newBarbershop.getPhoto());
 			barbershop.get().setLocation(newBarbershop.getLocation());
 			barbershop.get().setQualification(newBarbershop.getQualification());
 			

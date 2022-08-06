@@ -67,8 +67,14 @@ public class ControllerCustomer {
 		if (customer.isPresent()) {
 			
 			customer.get().setAge(newCustomer.getAge());
-			customer.get().setGender(newCustomer.getGender());
-			return ResponseEntity.status(HttpStatus.CREATED).body(serviceCustomer.save(newCustomer));
+			customer.get().setPassword(newCustomer.getPassword());
+			customer.get().setCellphone(newCustomer.getCellphone());
+			customer.get().setCity(newCustomer.getCity());
+			customer.get().setNickname(newCustomer.getNickname());
+			customer.get().setAge(newCustomer.getAge());
+			customer.get().setPhoto(newCustomer.getPhoto());
+
+			return ResponseEntity.status(HttpStatus.CREATED).body(serviceCustomer.save(customer.get()));
 			
 		} else {
 			

@@ -58,21 +58,24 @@ public class ControllerBarber {
 	/////////////////// UPDATE BARBER   http://localhost:8080/barber/update/ID ////////////////
 	
 	@PutMapping("/update/{id}")
-	public ResponseEntity<?>update(@RequestBody Barber barberNew,@PathVariable (value = "id")Long barberid ){
-		Optional<Barber> barbero=BarberSevice.findById(barberid);
+	public ResponseEntity<?>update(@RequestBody Barber newBarber,@PathVariable (value = "id")Long idBarber ){
+		Optional<Barber> barber=BarberSevice.findById(idBarber);
 		
-		if(!barbero.isPresent()) {
+		if(!barber.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
 		
-		barbero.get().setAge(barberNew.getAge());
-		barbero.get().setDescription(barberNew.getDescription());
-		barbero.get().setGender(barberNew.getGender());
-		barbero.get().setQualification(barberNew.getQualification());
-		barbero.get().setId_catalogue(barberNew.getId_catalogue());
+		barber.get().setAge(newBarber.getAge());
+		barber.get().setDescription(newBarber.getDescription());
+		barber.get().setPassword(newBarber.getPassword());
+		barber.get().setCellphone(newBarber.getCellphone());
+		barber.get().setCity(newBarber.getCity());
+		barber.get().setNickname(newBarber.getNickname());
+		barber.get().setAge(newBarber.getAge());
+		barber.get().setPhoto(newBarber.getPhoto());
+		barber.get().setQualification(newBarber.getQualification());
 		
-		
-		return ResponseEntity.status(HttpStatus.CREATED).body(BarberSevice.save(barbero.get()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(BarberSevice.save(barber.get()));
 	
 	}
 	
