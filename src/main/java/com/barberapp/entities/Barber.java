@@ -20,7 +20,7 @@ public class Barber implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id_username")private Long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id")private Long id;
 	@Column (name = "email", nullable = false, unique = true, length = 200) private String email;
 	@Column (name = "password", nullable = false) private String password;
 	@Column (name = "nickname", nullable = false) private String nickname;

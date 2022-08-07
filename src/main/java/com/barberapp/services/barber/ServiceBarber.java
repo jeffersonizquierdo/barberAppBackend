@@ -18,7 +18,7 @@ public interface ServiceBarber {
 	
 	public Optional<Barber>findById(Long  id);
 	
-	public Barber save(Barber barberVo);
+	public Barber save(Barber barber);
 	
 	public void deletById(Long  id );
 

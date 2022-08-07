@@ -23,7 +23,7 @@ public class Barbershop implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id_username")private Long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id")private Long id;
 	@Column (name = "email", nullable = false, unique = true, length = 200) private String email;
 	@Column (name = "password", nullable = false) private String password;
 	@Column (name = "nickname", nullable = false) private String nickname;
@@ -34,6 +34,7 @@ public class Barbershop implements Serializable{
 	@Column (name = "description") private String description;
 	@Column (name = "location") private String location;
 	@Column (name = "qualification") private Double qualification;
+	@Column (name = "id_catalogue") private int id_catalogue;
 	@ManyToMany @JoinTable(name = "barbershops_barbers", joinColumns = @JoinColumn
 			(name = "id_barbershop"), inverseJoinColumns = @JoinColumn (name = "id_barber")) private List<Barber> listBarbers;
 	
@@ -46,7 +47,8 @@ public class Barbershop implements Serializable{
 
 
 	public Barbershop(Long id, String email, String password, String nickname, String city, String cellphone,
-			int typeUser, String photo, String description, String location, Double qualification) {
+			int typeUser, String photo, String description, String location, Double qualification, int id_catalogue,
+			List<Barber> listBarbers) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -59,6 +61,8 @@ public class Barbershop implements Serializable{
 		this.description = description;
 		this.location = location;
 		this.qualification = qualification;
+		this.id_catalogue = id_catalogue;
+		this.listBarbers = listBarbers;
 	}
 
 
