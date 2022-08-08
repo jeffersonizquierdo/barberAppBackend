@@ -1,11 +1,8 @@
 package com.barberapp.entities;
 
 import java.io.Serializable;
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
-=======
->>>>>>> 80ca007352d385a6c39a453c15586ac5db306d63
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,14 +15,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "barbershops")
-public class Barbershop implements Serializable {
+@Table (name = "barbershops")
+public class Barbershop implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-<<<<<<< HEAD
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id")private Long id;
 	@Column (name = "email", nullable = false, unique = true, length = 200) private String email;
@@ -43,34 +39,16 @@ public class Barbershop implements Serializable {
 			(name = "id_barbershop"), inverseJoinColumns = @JoinColumn (name = "id_barber")) private List<Barber> listBarbers;
 	
 	
-=======
-
-	@Id
-	@Column(name = "id_user")
-	private Long idBarbershop;
-	@Column(name = "location")
-	private String location;
-	@Column(name = "qualification")
-	private Double qualification;
-	@Column(name = "linked_barbers")
-	private int linkedBarbers;
-	private String foto;
-
->>>>>>> 80ca007352d385a6c39a453c15586ac5db306d63
 	public Barbershop() {
 		super();
 
 		this.listBarbers = new ArrayList<Barber>();
 	}
 
-<<<<<<< HEAD
 
 	public Barbershop(Long id, String email, String password, String nickname, String city, String cellphone,
 			int typeUser, String photo, String description, String location, Double qualification, int id_catalogue,
 			List<Barber> listBarbers) {
-=======
-	public Barbershop(Long idBarbershop, String location, Double qualification, int linkedBarbers) {
->>>>>>> 80ca007352d385a6c39a453c15586ac5db306d63
 		super();
 		this.id = id;
 		this.email = email;
@@ -83,7 +61,6 @@ public class Barbershop implements Serializable {
 		this.description = description;
 		this.location = location;
 		this.qualification = qualification;
-<<<<<<< HEAD
 		this.id_catalogue = id_catalogue;
 		this.listBarbers = listBarbers;
 	}
@@ -91,26 +68,6 @@ public class Barbershop implements Serializable {
 
 	public Long getId() {
 		return id;
-=======
-		this.linkedBarbers = linkedBarbers;
-
-	}
-
-	public String getFoto() {
-		return foto;
-	}
-
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
-
-	public Long getIdBarbershop() {
-		return idBarbershop;
-	}
-
-	public void setIdBarbershop(Long idBarbershop) {
-		this.idBarbershop = idBarbershop;
->>>>>>> 80ca007352d385a6c39a453c15586ac5db306d63
 	}
 
 
@@ -203,19 +160,21 @@ public class Barbershop implements Serializable {
 		return location;
 	}
 
+
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
 
 	public Double getQualification() {
 		return qualification;
 	}
 
+
 	public void setQualification(Double qualification) {
 		this.qualification = qualification;
 	}
 
-<<<<<<< HEAD
 
 	public List<Barber> getListBarbers() {
 		return listBarbers;
@@ -224,21 +183,8 @@ public class Barbershop implements Serializable {
 
 	public void setListBarbers(List<Barber> listBarbers) {
 		this.listBarbers = listBarbers;
-=======
-	public int getLinkedBarbers() {
-		return linkedBarbers;
 	}
 
-	public void setLinkedBarbers(int linkedBarbers) {
-		this.linkedBarbers = linkedBarbers;
-	}
-
-	@Override
-	public String toString() {
-		return "Barbershop [idBarbershop=" + idBarbershop + ", location=" + location + ", qualification="
-				+ qualification + ", linkedBarbers=" + linkedBarbers + ", catalogue=" + "]";
->>>>>>> 80ca007352d385a6c39a453c15586ac5db306d63
-	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
