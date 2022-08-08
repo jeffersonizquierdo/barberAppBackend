@@ -1,11 +1,20 @@
 package com.barberapp.controllers;
 
+<<<<<<< HEAD
+=======
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+>>>>>>> 80ca007352d385a6c39a453c15586ac5db306d63
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import javax.persistence.PostLoad;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.NestedRuntimeException;
@@ -21,7 +30,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.barberapp.entities.Barbershop;
 import com.barberapp.servicies.barbershop.ServiceBarbershop;
@@ -171,5 +182,35 @@ public class ControllerBarbershop {
 
 		return barbershops;
 	}
+<<<<<<< HEAD
 
+=======
+	@PostMapping("/barbershop/upload")
+	public ResponseEntity<?> upload(@RequestParam("archivo") MultipartFile archivo, @RequestParam("id") Long id){
+		Map<String, Object> response = new HashMap<>();
+		Optional<Barbershop> barbershop = serviceBarbershop.findById(id);
+		if(!archivo.isEmpty()) {
+			String nombreArchivo = archivo.getOriginalFilename();
+			Path rutaArchivo = Paths.get("uploads").resolve(nombreArchivo).toAbsolutePath();
+			try {
+				Files.copy(archivo.getInputStream(), rutaArchivo);
+			} catch (IOException e) {
+				response.put("mensaje", "Error al subir la imagen"+nombreArchivo);
+				response.put("error", e.getMessage().concat(": ").concat(e.getCause().getMessage()));
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+
+			}
+			Barbershop barbershop2 = new Barbershop();
+			barbershop2.setFoto(nombreArchivo);
+			serviceBarbershop.save(barbershop2);
+			
+			response.put("barbershop", barbershop2);
+			response.put("mensaje", "imagen "+nombreArchivo+" subida con exito ");
+		}
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+	}
+	
+	
+	
+>>>>>>> 80ca007352d385a6c39a453c15586ac5db306d63
 }
