@@ -1,23 +1,17 @@
 package com.barberapp.servicies.barbershop;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.List; 
 import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.barberapp.entities.Barbershop;
 import com.barberapp.repositories.RepositoryBarbershop;
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 
 @Service
 public class ServicieBarbershopImpl implements ServiceBarbershop{
@@ -56,5 +50,5 @@ public class ServicieBarbershopImpl implements ServiceBarbershop{
 		repositoryBarbershop.deleteById(id);
 		
 	}
-	
+
 }
