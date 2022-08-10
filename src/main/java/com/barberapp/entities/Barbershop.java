@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,19 +36,20 @@ public class Barbershop implements Serializable{
 	@Column (name = "qualification") private Double qualification;
 	@ManyToMany @JoinTable(name = "barbershops_barbers", joinColumns = @JoinColumn
 			(name = "id_barbershop"), inverseJoinColumns = @JoinColumn (name = "id_barber")) private List<Barber> listBarbers;
-	@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
-	private List<Images> Catalogue;
+	@OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JoinColumn(name = "barbershop")  
+	private List<Images> catalogue;
 	
 	
 	public Barbershop() {
 		super();
 
+		this.catalogue = new ArrayList<>();
 		this.listBarbers = new ArrayList<Barber>();
 	}
 
 	public Barbershop(Long id, String email, String password, String nickname, String city, String cellphone,
 			int typeUser, String photo, String description, String location, Double qualification,
-			List<Barber> listBarbers, List<Images> catalogue) {
+			List<Barber> listBarbers) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -61,7 +63,6 @@ public class Barbershop implements Serializable{
 		this.location = location;
 		this.qualification = qualification;
 		this.listBarbers = listBarbers;
-		Catalogue = catalogue;
 	}
 
 
@@ -71,11 +72,11 @@ public class Barbershop implements Serializable{
 
 
 	public List<Images> getCatalogue() {
-		return Catalogue;
+		return catalogue;
 	}
 
 	public void setCatalogue(List<Images> catalogue) {
-		Catalogue = catalogue;
+		this.catalogue = catalogue;
 	}
 
 	public void setId(Long id) {
@@ -191,8 +192,15 @@ public class Barbershop implements Serializable{
 	public void setListBarbers(List<Barber> listBarbers) {
 		this.listBarbers = listBarbers;
 	}
+	
+	public List getListaImages() {
+		
+		return null;
+	}
 
 
+	
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

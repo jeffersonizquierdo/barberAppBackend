@@ -154,7 +154,7 @@ public class ControllerCustomer {
 
 	}
 
-	/////////////////// CONSULTALL CUSTOMER http://localhost:8080/customer/delete/id
+	/////////////////// CONSULTALL CUSTOMER http://localhost:8080/customer/consultall
 	/////////////////// ////////////////
 	@GetMapping("/consultall")
 	public List<Customer> consultAllCustomers() {
