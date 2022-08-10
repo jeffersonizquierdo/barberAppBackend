@@ -42,8 +42,6 @@ public class Barber implements Serializable{
 		this.age = age;
 	}
 
-
-
 	public String getDescription() {
 		return description;
 	}
