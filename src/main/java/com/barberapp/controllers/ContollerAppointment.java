@@ -1,6 +1,6 @@
 package com.barberapp.controllers;
 
 
-public class Contollerappointment {
+public class ContollerAppointment {
 	
 }
