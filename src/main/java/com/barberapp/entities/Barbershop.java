@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,15 +13,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table (name = "barbershops")
 public class Barbershop implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id")private Long id;
@@ -34,9 +33,10 @@ public class Barbershop implements Serializable{
 	@Column (name = "description") private String description;
 	@Column (name = "location") private String location;
 	@Column (name = "qualification") private Double qualification;
-	@Column (name = "id_catalogue") private int id_catalogue;
 	@ManyToMany @JoinTable(name = "barbershops_barbers", joinColumns = @JoinColumn
 			(name = "id_barbershop"), inverseJoinColumns = @JoinColumn (name = "id_barber")) private List<Barber> listBarbers;
+	@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
+	private List<Images> Catalogue;
 	
 	
 	public Barbershop() {
@@ -45,10 +45,9 @@ public class Barbershop implements Serializable{
 		this.listBarbers = new ArrayList<Barber>();
 	}
 
-
 	public Barbershop(Long id, String email, String password, String nickname, String city, String cellphone,
-			int typeUser, String photo, String description, String location, Double qualification, int id_catalogue,
-			List<Barber> listBarbers) {
+			int typeUser, String photo, String description, String location, Double qualification,
+			List<Barber> listBarbers, List<Images> catalogue) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -61,8 +60,8 @@ public class Barbershop implements Serializable{
 		this.description = description;
 		this.location = location;
 		this.qualification = qualification;
-		this.id_catalogue = id_catalogue;
 		this.listBarbers = listBarbers;
+		Catalogue = catalogue;
 	}
 
 
@@ -70,6 +69,14 @@ public class Barbershop implements Serializable{
 		return id;
 	}
 
+
+	public List<Images> getCatalogue() {
+		return Catalogue;
+	}
+
+	public void setCatalogue(List<Images> catalogue) {
+		Catalogue = catalogue;
+	}
 
 	public void setId(Long id) {
 		this.id = id;
