@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+@CrossOrigin(origins = "http://localhost:4200/")
 @Entity
 @Table(name="Images")
 public class Images implements Serializable{
@@ -21,17 +24,26 @@ public class Images implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(length = 100)
-	private String description;
-	
 	@Column(length = 30)
 	private String name;
 	
 	@Column(length = 200)
 	private String url;
+
+	@Column(length = 100)
+	private String description;
 	
 	@ManyToOne @JoinColumn (name = "barbershop_id", referencedColumnName = "id") 
 	private Barbershop owner;
+
+	public Images(Long id, String name, String url, String description, Barbershop owner) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.url = url;
+		this.description = description;
+		this.owner = owner;
+	}
 
 	public Long getId() {
 		return id;
@@ -78,13 +90,6 @@ public class Images implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Images(Long id, String description, String name, String url) {
-		super();
-		this.id = id;
-		this.description = description;
-		this.name = name;
-		this.url = url;
-	}
 
 	@Override
 	public String toString() {

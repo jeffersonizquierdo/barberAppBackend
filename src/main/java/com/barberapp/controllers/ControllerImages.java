@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.barberapp.entities.Barber;
+import com.barberapp.entities.Barbershop;
 import com.barberapp.entities.Images;
+import com.barberapp.servicies.barbershop.ServiceBarbershop;
 import com.barberapp.servicies.images.ServiceImages;
 
 @CrossOrigin(origins = "http://localhost:4200/")
@@ -30,7 +30,7 @@ public class ControllerImages {
 
 	@Autowired
 	private ServiceImages serviceImages;
-	
+		
 	
 	// Create a new Image  http://localhost:8080/images/save
 	@PostMapping("/save")
