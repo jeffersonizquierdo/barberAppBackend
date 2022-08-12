@@ -36,8 +36,14 @@ public class Barbershop implements Serializable{
 	@Column (name = "qualification") private Double qualification;
 	@ManyToMany @JoinTable(name = "barbershops_barbers", joinColumns = @JoinColumn
 			(name = "id_barbershop"), inverseJoinColumns = @JoinColumn (name = "id_barber")) private List<Barber> listBarbers;
-	@OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL) @JoinColumn(name = "barbershop")  
+	
+	
+	@OneToMany (mappedBy = "barbershop", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Images> catalogue;
+	
+	
+	@OneToMany (mappedBy = "barbershop", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private List<Booking> bokings;
 	
 	
 	public Barbershop() {
@@ -53,6 +59,11 @@ public class Barbershop implements Serializable{
 		super();
 		this.id = id;
 		this.email = email;
+		
+		
+		
+		
+		
 		this.password = password;
 		this.nickname = nickname;
 		this.city = city;

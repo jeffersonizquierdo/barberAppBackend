@@ -61,10 +61,7 @@ public class ControllerBooking {
 		if (booking.isPresent()) {
 			
 			
-			
-			booking.get().setReservation_date(newbBooking.getReservation_date());
-			booking.get().setAcceptatance_status(newbBooking.getAcceptatance_status());
-			booking.get().setCompleted(newbBooking.getCompleted());
+
 			
 			return ResponseEntity.status(HttpStatus.CREATED).body(serviceBooking.save(booking.get()));
 		

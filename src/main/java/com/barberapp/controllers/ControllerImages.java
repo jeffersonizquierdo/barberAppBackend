@@ -1,6 +1,5 @@
 package com.barberapp.controllers;
-
-import java.util.ArrayList; 
+ 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.barberapp.entities.Barbershop;
 import com.barberapp.entities.Images;
 import com.barberapp.servicies.barbershop.ServiceBarbershop;
 import com.barberapp.servicies.images.ServiceImages;

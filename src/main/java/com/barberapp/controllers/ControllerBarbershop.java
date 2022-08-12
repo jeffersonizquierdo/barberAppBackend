@@ -1,18 +1,16 @@
 package com.barberapp.controllers;
 
-import java.util.HashMap;
+import java.util.HashMap; 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.NestedRuntimeException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.barberapp.entities.Barbershop;
+import com.barberapp.entities.Images;
 import com.barberapp.servicies.barbershop.ServiceBarbershop;
 
 @CrossOrigin(origins = "http://localhost:4200/")
@@ -170,6 +169,14 @@ public class ControllerBarbershop {
 				.collect(Collectors.toList());
 
 		return barbershops;
+	}
+	
+	@GetMapping("/catalogue/{id}")
+	public List<Images> getCatalogueBarbershop(@PathVariable Long id) {
+		
+		Optional<Barbershop> barbershop = serviceBarbershop.findById(id);
+
+		return barbershop.get().getCatalogue();
 	}
 
 }

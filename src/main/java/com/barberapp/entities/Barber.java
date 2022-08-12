@@ -34,6 +34,8 @@ public class Barber implements Serializable{
 	@Column (name = "description", length = 300) private String description;
 	@Column (name = "qualification") private Double qualification;
 	@ManyToMany (mappedBy = "listBarbers") private List<Barbershop> listBarbershops;
+	@OneToMany (mappedBy = "barbershop", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private List<Booking> bokings;
 	
 	public Barber() {
 		super();

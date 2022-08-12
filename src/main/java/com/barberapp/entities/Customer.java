@@ -2,12 +2,16 @@ package com.barberapp.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +30,7 @@ public class Customer  implements Serializable{
 	@Column (name = "type_user", nullable = false) private int typeUser;
 	@Column (name = "photo", nullable = true) private String photo;
 	@Column (name = "age", nullable = false) private Date age;
+
 	
 	public Customer() {
 		super();
