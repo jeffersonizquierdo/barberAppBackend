@@ -1,5 +1,5 @@
 package com.barberapp.controllers;
-
+ 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,11 +21,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.barberapp.entities.Barbershop;
 import com.barberapp.entities.Images;
 import com.barberapp.entities.Promotions;
 import com.barberapp.servicies.barbershop.ServiceBarbershop;
 import com.barberapp.servicies.images.ServiceImages;
+
 
 @CrossOrigin(origins = "http://localhost:4200/")
 @RestController
@@ -34,6 +34,8 @@ public class ControllerImages {
 
 	@Autowired
 	private ServiceImages serviceImages;
+	
+	@Autowired private ServiceBarbershop serviceBarbershop;
 		
 	
 	// Create a new Image  http://localhost:8080/images/save
@@ -136,6 +138,21 @@ public class ControllerImages {
 	}
 	
 	
+<<<<<<< HEAD
+	
+	/////////////////// CONSULTALL CUSTOMER http://localhost:8080/images/consutlall/id
+	/////////////////// ////////////////
+	@GetMapping("/catalogue")
+	public List<Images> consultCatalogue(){
+		
+
+		List<Images> catalogue = StreamSupport.stream(serviceImages.findAll().spliterator(), false)
+				.collect(Collectors.toList());
+		
+		return catalogue;
+		
+	}
+=======
 	@GetMapping("/consultall")
 	public  List<Images> consultAllPromotions(){
 		
@@ -147,4 +164,5 @@ public class ControllerImages {
 		return  images;
 	}	
 	
+>>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
 }

@@ -1,6 +1,6 @@
 package com.barberapp.entities;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,11 +36,18 @@ public class Images implements Serializable{
 	@Column(length = 100)
 	private String description;
 	
+<<<<<<< HEAD
+	@ManyToOne @JoinColumn (name = "barbershop", referencedColumnName = "id")
+	private Barbershop barbershop;
+	
+
+=======
 	@JsonIgnoreProperties(value={"catalogue","hibernateLazyInitializer","handler"},allowSetters = true)
 	@ManyToOne(fetch = FetchType.LAZY) 
 	@JoinColumn (name = "barbershop_id") 
 	//@JoinColumn (name = "barbershop_id", referencedColumnName = "id")
 	private Barbershop owner;
+>>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
 
 	public Images(Long id, String name, String url, String description, Barbershop owner) {
 		super();
@@ -48,7 +55,7 @@ public class Images implements Serializable{
 		this.name = name;
 		this.url = url;
 		this.description = description;
-		this.owner = owner;
+
 	}
 
 	public Long getId() {
@@ -57,14 +64,6 @@ public class Images implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Barbershop getOwner() {
-		return owner;
-	}
-
-	public void setOwner(Barbershop owner) {
-		this.owner = owner;
 	}
 
 	public String getDescription() {
@@ -96,12 +95,12 @@ public class Images implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-
 	@Override
 	public String toString() {
-		return "Images [id=" + id + ", description=" + description + ", name=" + name + ", url=" + url + ", owner="
-				+ owner + "]";
+		return "Images [id=" + id + ", name=" + name + ", url=" + url + ", description=" + description + "]";
 	}
+
+
 
 	
 	

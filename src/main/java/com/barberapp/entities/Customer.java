@@ -4,14 +4,18 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+<<<<<<< HEAD
+=======
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+>>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -32,6 +36,7 @@ public class Customer  implements Serializable{
 	@Column (name = "type_user", nullable = false) private int typeUser;
 	@Column (name = "photo", nullable = true) private String photo;
 	@Column (name = "age", nullable = false) private Date age;
+
 	
 	
 	

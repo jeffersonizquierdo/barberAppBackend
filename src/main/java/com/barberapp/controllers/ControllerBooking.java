@@ -60,7 +60,12 @@ public class ControllerBooking {
 		Optional<Booking> booking = serviceBooking.findById(id);
 		if (booking.isPresent()) {
 			
+<<<<<<< HEAD
+			
+
+=======
 	
+>>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
 			
 			return ResponseEntity.status(HttpStatus.CREATED).body(serviceBooking.save(booking.get()));
 		

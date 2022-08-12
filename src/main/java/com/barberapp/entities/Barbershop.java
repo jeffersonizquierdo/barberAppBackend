@@ -40,6 +40,17 @@ public class Barbershop implements Serializable{
 	
 	
 	@ManyToMany @JoinTable(name = "barbershops_barbers", joinColumns = @JoinColumn
+<<<<<<< HEAD
+			(name = "id_barbershop"), inverseJoinColumns = @JoinColumn (name = "id_barber")) private List<Barber> listBarbers;
+	
+	
+	@OneToMany (mappedBy = "barbershop", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private List<Images> catalogue;
+	
+	
+	@OneToMany (mappedBy = "barbershop", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private List<Booking> bokings;
+=======
 			(name = "id_barbershop"), inverseJoinColumns = @JoinColumn (name = "id_barber")) 
 	private List<Barber> listBarbers;
 	
@@ -50,20 +61,27 @@ public class Barbershop implements Serializable{
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner", cascade=CascadeType.ALL)
 	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
 	private List<Images> catalogue;
+>>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
 	
 	
 	public Barbershop() {
 		super();
 
+		this.catalogue = new ArrayList<>();
 		this.listBarbers = new ArrayList<Barber>();
 	}
 
 	public Barbershop(Long id, String email, String password, String nickname, String city, String cellphone,
 			int typeUser, String photo, String description, String location, Double qualification,
-			List<Barber> listBarbers, List<Images> catalogue) {
+			List<Barber> listBarbers) {
 		super();
 		this.id = id;
 		this.email = email;
+		
+		
+		
+		
+		
 		this.password = password;
 		this.nickname = nickname;
 		this.city = city;
@@ -74,7 +92,10 @@ public class Barbershop implements Serializable{
 		this.location = location;
 		this.qualification = qualification;
 		this.listBarbers = listBarbers;
+<<<<<<< HEAD
+=======
 		this.catalogue = catalogue;
+>>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
 	}
 
 
@@ -204,8 +225,15 @@ public class Barbershop implements Serializable{
 	public void setListBarbers(List<Barber> listBarbers) {
 		this.listBarbers = listBarbers;
 	}
+	
+	public List getListaImages() {
+		
+		return null;
+	}
 
 
+	
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
