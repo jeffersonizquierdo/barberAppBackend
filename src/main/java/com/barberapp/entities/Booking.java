@@ -4,11 +4,15 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+<<<<<<< HEAD
 import javax.persistence.ManyToOne;
+=======
+>>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,16 +22,34 @@ public class Booking {
 	
 	private static final long serialVersionUID = 1L;
 
+	
+	
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+<<<<<<< HEAD
 	@Column(name="id")
 	 private Long  id;
+=======
+	@Column(name="id_booking")
+	 private Long  id_booking;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="id_barber")
+	private Barber id_barber;
+>>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
 	
 	@Column(name="reservation_date")
 	private Date reservation_date;
 	
+<<<<<<< HEAD
 	@ManyToOne @JoinColumn (name = "id_barbershop", referencedColumnName = "id")
 	private Barbershop barbershop;
+=======
+	@Column(name="id_barbershop")
+	private Long id_barbershop;
+>>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
 	
 
 	@ManyToOne @JoinColumn (name = "id_barber", referencedColumnName = "id")
@@ -37,6 +59,7 @@ public class Booking {
 	@ManyToOne @JoinColumn (name = "id_customer", referencedColumnName = "id")
 	private Customer customer ;
 	
+<<<<<<< HEAD
 	
 	@Column(name="completed")
     private Boolean completed ;
@@ -126,9 +149,23 @@ public class Booking {
 				+ ", barber=" + barber + ", customer=" + customer + ", completed=" + completed + "]";
 	}
 	
+=======
+	
+	
+	
+	
+	
+	
+	@Column(name="acceptatance_status")
+	private  Boolean   acceptatance_status ;
+	
+	@Column(name="completed")
+    private Boolean completed ;
+>>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
 	
 	
 
+	
 
 	
 	

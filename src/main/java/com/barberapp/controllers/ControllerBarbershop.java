@@ -161,7 +161,7 @@ public class ControllerBarbershop {
 	}
 
 	/////////////////// CONSULT ALL BARBERSHOP
-	/////////////////// http://localhost:8080/barbershop/consult/id ////////////////
+	/////////////////// http://localhost:8080/barbershop/consult ////////////////
 	@GetMapping("/consultall")
 	public List<Barbershop> getAllBarbershop() {
 

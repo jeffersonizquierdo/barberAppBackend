@@ -36,7 +36,7 @@ public class ControllerBooking {
 	 /////////////////// BOOKING REGISTRAR   http://localhost:8080/booking/save ////////////////
 	@PostMapping("/save")
 	public ResponseEntity<Booking> createBooking (@RequestBody Booking booking){
-		System.out.println(booking.toString());
+		System.out.println(booking.toString()+"este es el objeto obtenido");
 		return ResponseEntity.status(HttpStatus.CREATED).body(serviceBooking.save(booking));
 	}
 	
@@ -53,15 +53,19 @@ public class ControllerBooking {
 		}
 	}
 	
-	/////////////////// UPDATE BOOKING   http://localhost:8080/booking/update ////////////////
+	/////////////////// UPDATE BOOKING   http://localhost:8080/booking/update/ID ////////////////
 	@PutMapping("/update/{id}")
 	public ResponseEntity<Booking> updateBooking (@RequestBody Booking newbBooking, @PathVariable(value = "id") Long id){
 	
 		Optional<Booking> booking = serviceBooking.findById(id);
 		if (booking.isPresent()) {
 			
+<<<<<<< HEAD
 			
 
+=======
+	
+>>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
 			
 			return ResponseEntity.status(HttpStatus.CREATED).body(serviceBooking.save(booking.get()));
 		
@@ -71,7 +75,7 @@ public class ControllerBooking {
 	
 	}
 	
-	/////////////////// DELETE BOOKING   http://localhost:8080/booking/delete ////////////////
+	/////////////////// DELETE BOOKING   http://localhost:8080/booking/delete/ID ////////////////
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Booking> deleteBooking(@PathVariable(value = "id")  Long id){
 		

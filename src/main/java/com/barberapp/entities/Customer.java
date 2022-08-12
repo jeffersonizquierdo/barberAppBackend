@@ -7,9 +7,15 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+<<<<<<< HEAD
+=======
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+>>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -32,10 +38,14 @@ public class Customer  implements Serializable{
 	@Column (name = "age", nullable = false) private Date age;
 
 	
+	
+	
+	
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 
 	public Customer(Long id, String email, String password, String nickname, String city, String cellphone,
 			int typeUser, String photo, Date age) {
@@ -49,7 +59,9 @@ public class Customer  implements Serializable{
 		this.typeUser = typeUser;
 		this.photo = photo;
 		this.age = age;
+
 	}
+
 
 	public Long getId() {
 		return id;
@@ -123,8 +135,7 @@ public class Customer  implements Serializable{
 		this.age = age;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	
+	
 
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @CrossOrigin(origins = "http://localhost:4200/")
 @Entity
@@ -33,10 +36,18 @@ public class Images implements Serializable{
 	@Column(length = 100)
 	private String description;
 	
+<<<<<<< HEAD
 	@ManyToOne @JoinColumn (name = "barbershop", referencedColumnName = "id")
 	private Barbershop barbershop;
 	
 
+=======
+	@JsonIgnoreProperties(value={"catalogue","hibernateLazyInitializer","handler"},allowSetters = true)
+	@ManyToOne(fetch = FetchType.LAZY) 
+	@JoinColumn (name = "barbershop_id") 
+	//@JoinColumn (name = "barbershop_id", referencedColumnName = "id")
+	private Barbershop owner;
+>>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
 
 	public Images(Long id, String name, String url, String description, Barbershop owner) {
 		super();

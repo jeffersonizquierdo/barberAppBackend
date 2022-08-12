@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.barberapp.entities.Images;
+import com.barberapp.entities.Promotions;
 import com.barberapp.servicies.barbershop.ServiceBarbershop;
 import com.barberapp.servicies.images.ServiceImages;
 
@@ -137,6 +138,7 @@ public class ControllerImages {
 	}
 	
 	
+<<<<<<< HEAD
 	
 	/////////////////// CONSULTALL CUSTOMER http://localhost:8080/images/consutlall/id
 	/////////////////// ////////////////
@@ -150,4 +152,17 @@ public class ControllerImages {
 		return catalogue;
 		
 	}
+=======
+	@GetMapping("/consultall")
+	public  List<Images> consultAllPromotions(){
+		
+		
+		List<Images> images = StreamSupport
+				.stream(serviceImages.findAll().spliterator(), false)
+				.collect(Collectors.toList());
+		
+		return  images;
+	}	
+	
+>>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
 }
