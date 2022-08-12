@@ -43,7 +43,7 @@ public class Customer  implements Serializable{
 	
 
 	public Customer(Long id, String email, String password, String nickname, String city, String cellphone,
-			int typeUser, String photo, Date age, Appointment id_appointment) {
+			int typeUser, String photo, Date age) {
 		super();
 		this.id = id;
 		this.email = email;
