@@ -2,12 +2,18 @@ package com.barberapp.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,13 +33,17 @@ public class Customer  implements Serializable{
 	@Column (name = "photo", nullable = true) private String photo;
 	@Column (name = "age", nullable = false) private Date age;
 	
+	
+	
+	
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 
 	public Customer(Long id, String email, String password, String nickname, String city, String cellphone,
-			int typeUser, String photo, Date age) {
+			int typeUser, String photo, Date age, Appointment id_appointment) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -44,7 +54,9 @@ public class Customer  implements Serializable{
 		this.typeUser = typeUser;
 		this.photo = photo;
 		this.age = age;
+
 	}
+
 
 	public Long getId() {
 		return id;
@@ -118,8 +130,7 @@ public class Customer  implements Serializable{
 		this.age = age;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	
+	
 
 }

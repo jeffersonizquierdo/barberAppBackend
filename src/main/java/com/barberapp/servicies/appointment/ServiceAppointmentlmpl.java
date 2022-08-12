@@ -6,15 +6,17 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.barberapp.entities.Appointment;
 import com.barberapp.repositories.RepositoryAppointment;
 
-
+@Service
 public class ServiceAppointmentlmpl implements ServiceAppointment{
 	
-	@Autowired(required = true) private RepositoryAppointment repositoryAppointment;
+	@Autowired
+	private RepositoryAppointment repositoryAppointment;
 
 	@Override
 	@Transactional(readOnly = true)
