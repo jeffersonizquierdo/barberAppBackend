@@ -1,5 +1,6 @@
 package com.barberapp.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.barberapp.entities.Barbershop;
+import com.barberapp.entities.Images;
 import com.barberapp.servicies.barbershop.ServiceBarbershop;
 
 @CrossOrigin(origins = "http://localhost:4200/")
@@ -172,4 +174,35 @@ public class ControllerBarbershop {
 		return barbershops;
 	}
 
-}
+	
+/////////////////// CONSULT CATALOGUE BARBERSHOP
+/////////////////// http://localhost:8080/barbershop/consultCatalogue/id ////////////////
+	@GetMapping("/consultCatalogue/{id}")
+	public List<Images> consultCatalogueBarbershopId(@PathVariable(value = "id") Long id) {
+	
+	
+	Optional<Barbershop> barbershop = null;
+	Map<String, Object> response = new HashMap<>();
+	
+	try {
+	
+		barbershop = serviceBarbershop.findById(id);
+	
+	} catch (DataAccessException e) {
+	List<Images> catalogue;
+	response.put("Mensaje", "Error al hacer consulta en la base de datos");
+	response.put("Error", e.getMessage().concat(": ")
+			.concat(((NestedRuntimeException) e).getMostSpecificCause().getMessage()));
+	return catalogue= new ArrayList<Images>()  ;
+	}
+	
+	if (!barbershop.isPresent()) {
+		List<Images> catalogue;
+	response.put("Mensaje",
+			"La barberia con el ID ".concat(id.toString().concat(" no existe en la base de datos")));
+	return catalogue= new ArrayList<Images>();
+	}
+	
+	return barbershop.get().getCatalogue();
+	}
+	}
