@@ -20,4 +20,7 @@ public interface ServiceBarbershop {
 	public Barbershop save (Barbershop barbershop);
 	
 	public void deleteById (Long id);
+	
+	
+
 }
