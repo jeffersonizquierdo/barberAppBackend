@@ -35,8 +35,7 @@ public class Barbershop implements Serializable{
 	@Column (name = "location") private String location;
 	@Column (name = "qualification") private Double qualification;
 	@Column (name = "id_catalogue") private int id_catalogue;
-	@ManyToMany @JoinTable(name = "barbershops_barbers", joinColumns = @JoinColumn
-			(name = "id_barbershop"), inverseJoinColumns = @JoinColumn (name = "id_barber")) private List<Barber> listBarbers;
+	@ManyToMany @JoinTable(name = "barbershops_barbers") private List<Barber> listBarbers;
 	
 	
 	public Barbershop() {

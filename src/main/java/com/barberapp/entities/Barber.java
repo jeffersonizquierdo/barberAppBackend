@@ -1,16 +1,12 @@
 package com.barberapp.entities;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -31,15 +27,13 @@ public class Barber implements Serializable{
 	@Column (name = "age", nullable = false) private Date age;
 	@Column (name = "description", length = 300) private String description;
 	@Column (name = "qualification") private Double qualification;
-	@ManyToMany (mappedBy = "listBarbers") private List<Barbershop> listBarbershops;
+
 	
 	
 	public Barber() {
 		super();
-		this.listBarbershops = new ArrayList<Barbershop>();
+
 	}
-
-
 
 
 	public Barber(Long id, String email, String password, String nickname, String city, String cellphone, int typeUser,
@@ -57,7 +51,6 @@ public class Barber implements Serializable{
 		this.description = description;
 		this.qualification = qualification;
 	}
-
 
 
 
@@ -162,28 +155,15 @@ public class Barber implements Serializable{
 	
 	
 
-
 	public Double getQualification() {
 		return qualification;
 	}
 
 
 
-
 	public void setQualification(Double qualification) {
 		this.qualification = qualification;
 	}
-
-
-	public List<Barbershop> getListBarbershops() {
-		return listBarbershops;
-	}
-
-
-	public void setListBarbershops(List<Barbershop> listBarbershops) {
-		this.listBarbershops = listBarbershops;
-	}
-
 
 
 
