@@ -8,12 +8,18 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "barber")
@@ -22,31 +28,56 @@ public class Barber implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id")private Long id;
-	@Column (name = "email", nullable = false, unique = true, length = 200) private String email;
-	@Column (name = "password", nullable = false) private String password;
-	@Column (name = "nickname", nullable = false) private String nickname;
-	@Column (name = "city", nullable = false) private String city;
-	@Column (name = "cellphone", nullable = false, length = 10) private String cellphone;
-	@Column (name = "type_user", nullable = false) private int typeUser;
-	@Column (name = "photo", nullable = true) private String photo;
-	@Column (name = "age", nullable = false) private Date age;
-	@Column (name = "description", length = 300) private String description;
-	@Column (name = "qualification") private Double qualification;
-	@ManyToMany (mappedBy = "listBarbers") private List<Barbershop> listBarbershops;
-	@OneToMany (mappedBy = "barbershop", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id")
+	private Long id;
+	
+	@Column (name = "email", nullable = false, unique = true, length = 200)
+	private String email;
+	
+	@Column (name = "password", nullable = false)
+	private String password;
+	
+	@Column (name = "nickname", nullable = false)
+	private String nickname;
+	
+	@Column (name = "city", nullable = false)
+	private String city;
+	
+	@Column (name = "cellphone", nullable = false, length = 10)
+	private String cellphone;
+	
+	@Column (name = "type_user", nullable = false)
+	private int typeUser;
+	
+	@Column (name = "photo", nullable = true)
+	private String photo;
+	
+	@Column (name = "age", nullable = false)
+	private Date age;
+	
+	@Column (name = "description", length = 300)
+	private String description;
+	
+	@Column (name = "qualification")
+	private Double qualification;
+	
+	
+	@JsonIgnoreProperties(value={"listBarbers","hibernateLazyInitializer","handler"},allowSetters = true)
+	@ManyToOne(fetch = FetchType.LAZY) 
+	@JoinColumn (name = "barbershop_id") 
+	private  Barbershop barbershop;
+	
+	@OneToMany (mappedBy = "barber", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Booking> bokings;
 	
 	public Barber() {
 		super();
-		this.listBarbershops = new ArrayList<Barbershop>();
 	}
-
-
-
-
+	
+	
 	public Barber(Long id, String email, String password, String nickname, String city, String cellphone, int typeUser,
-			String photo, Date age, String description, Double qualification) {
+			String photo, Date age, String description, Double qualification, Barbershop barbershop,
+			List<Booking> bokings) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -59,8 +90,9 @@ public class Barber implements Serializable{
 		this.age = age;
 		this.description = description;
 		this.qualification = qualification;
+		this.barbershop = barbershop;
+		this.bokings = bokings;
 	}
-
 
 
 
@@ -162,8 +194,6 @@ public class Barber implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
 
 
 	public Double getQualification() {
@@ -171,23 +201,9 @@ public class Barber implements Serializable{
 	}
 
 
-
-
 	public void setQualification(Double qualification) {
 		this.qualification = qualification;
 	}
-
-
-	public List<Barbershop> getListBarbershops() {
-		return listBarbershops;
-	}
-
-
-	public void setListBarbershops(List<Barbershop> listBarbershops) {
-		this.listBarbershops = listBarbershops;
-	}
-
-
 
 
 	public static long getSerialversionuid() {

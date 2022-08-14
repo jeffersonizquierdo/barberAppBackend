@@ -1,4 +1,4 @@
-package com.barberapp.servicies.booking;
+package com.barberapp.services.booking;
 
 import java.util.Optional;
 

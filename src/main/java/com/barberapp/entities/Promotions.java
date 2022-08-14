@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,9 +14,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@CrossOrigin(origins = "http://localhost:4200/")
+
 @Entity
 @Table(name="Promotions")
 public class Promotions implements Serializable{
@@ -24,6 +25,7 @@ public class Promotions implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column (name = "id")
 	private Long id;
 	
 	@Column(length = 30)
@@ -35,7 +37,9 @@ public class Promotions implements Serializable{
 	@Column(length = 100)
 	private String description;
 	
-	@OneToOne @JoinColumn (name = "barbershop_id", referencedColumnName = "id") 
+	@JsonIgnoreProperties(value={"catalogue","hibernateLazyInitializer","handler"},allowSetters = true)
+	@OneToOne(fetch = FetchType.LAZY) 
+	@JoinColumn (name = "barbershop_id", referencedColumnName = "id")
 	private Barbershop owner;
 
 	public Promotions() {

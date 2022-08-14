@@ -26,7 +26,8 @@ public class Barbershop implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id")private Long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)@Column (name = "id")
+	private Long id;
 	@Column (name = "email", nullable = false, unique = true, length = 200) private String email;
 	@Column (name = "password", nullable = false) private String password;
 	@Column (name = "nickname", nullable = false) private String nickname;
@@ -38,22 +39,14 @@ public class Barbershop implements Serializable{
 	@Column (name = "location") private String location;
 	@Column (name = "qualification") private Double qualification;
 	
-	
-	@ManyToMany @JoinTable(name = "barbershops_barbers", joinColumns = @JoinColumn
-<<<<<<< HEAD
-			(name = "id_barbershop"), inverseJoinColumns = @JoinColumn (name = "id_barber")) private List<Barber> listBarbers;
-	
-	
-	@OneToMany (mappedBy = "barbershop", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	private List<Images> catalogue;
-	
+
+	@JsonIgnoreProperties(value={"owner","hibernateLazyInitializer","handler"},allowSetters = true)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "barbershop", cascade=CascadeType.ALL)
+	private List<Barber> listBarbers;
 	
 	@OneToMany (mappedBy = "barbershop", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Booking> bokings;
-=======
-			(name = "id_barbershop"), inverseJoinColumns = @JoinColumn (name = "id_barber")) 
-	private List<Barber> listBarbers;
-	
+
 	@OneToOne @JoinColumn (name = "promotions_id", referencedColumnName = "id")
 	private Promotions promotion; 
 	
@@ -61,7 +54,7 @@ public class Barbershop implements Serializable{
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner", cascade=CascadeType.ALL)
 	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
 	private List<Images> catalogue;
->>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
+
 	
 	
 	public Barbershop() {
@@ -92,10 +85,7 @@ public class Barbershop implements Serializable{
 		this.location = location;
 		this.qualification = qualification;
 		this.listBarbers = listBarbers;
-<<<<<<< HEAD
-=======
 		this.catalogue = catalogue;
->>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
 	}
 
 

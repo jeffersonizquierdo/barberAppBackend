@@ -9,10 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-<<<<<<< HEAD
 import javax.persistence.ManyToOne;
-=======
->>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,45 +18,24 @@ import javax.persistence.Table;
 public class Booking {
 	
 	private static final long serialVersionUID = 1L;
-
-	
-	
-	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-<<<<<<< HEAD
 	@Column(name="id")
-	 private Long  id;
-=======
-	@Column(name="id_booking")
-	 private Long  id_booking;
-	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_barber")
-	private Barber id_barber;
->>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
+	private Long  id;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="barber", referencedColumnName = "id")
+	private Barber barber;
 	
 	@Column(name="reservation_date")
 	private Date reservation_date;
-	
-<<<<<<< HEAD
-	@ManyToOne @JoinColumn (name = "id_barbershop", referencedColumnName = "id")
+
+	@ManyToOne @JoinColumn (name = "barbershop", referencedColumnName = "id")
 	private Barbershop barbershop;
-=======
-	@Column(name="id_barbershop")
-	private Long id_barbershop;
->>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
-	
 
-	@ManyToOne @JoinColumn (name = "id_barber", referencedColumnName = "id")
-	private Barber barber;
-	
-
-	@ManyToOne @JoinColumn (name = "id_customer", referencedColumnName = "id")
-	private Customer customer ;
-	
-<<<<<<< HEAD
+	@ManyToOne @JoinColumn (name = "customer", referencedColumnName = "id")
+	private Customer customer;
 	
 	@Column(name="completed")
     private Boolean completed ;
@@ -67,17 +43,16 @@ public class Booking {
 
 	public Booking() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 
-	public Booking(Long id, Date reservation_date, Barbershop barbershop, Barber barber, Customer customer,
+	public Booking(Long id, Barber barber, Date reservation_date, Barbershop barbershop, Customer customer,
 			Boolean completed) {
 		super();
 		this.id = id;
+		this.barber = barber;
 		this.reservation_date = reservation_date;
 		this.barbershop = barbershop;
-		this.barber = barber;
 		this.customer = customer;
 		this.completed = completed;
 	}
@@ -90,6 +65,16 @@ public class Booking {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+
+	public Barber getBarber() {
+		return barber;
+	}
+
+
+	public void setBarber(Barber barber) {
+		this.barber = barber;
 	}
 
 
@@ -110,16 +95,6 @@ public class Booking {
 
 	public void setBarbershop(Barbershop barbershop) {
 		this.barbershop = barbershop;
-	}
-
-
-	public Barber getBarber() {
-		return barber;
-	}
-
-
-	public void setBarber(Barber barber) {
-		this.barber = barber;
 	}
 
 
@@ -145,29 +120,8 @@ public class Booking {
 
 	@Override
 	public String toString() {
-		return "Booking [id=" + id + ", reservation_date=" + reservation_date + ", barbershop=" + barbershop
-				+ ", barber=" + barber + ", customer=" + customer + ", completed=" + completed + "]";
+		return "Booking [id=" + id + ", barber=" + barber + ", reservation_date=" + reservation_date + ", barbershop="
+				+ barbershop + ", customer=" + customer + ", completed=" + completed + "]";
 	}
 	
-=======
-	
-	
-	
-	
-	
-	
-	@Column(name="acceptatance_status")
-	private  Boolean   acceptatance_status ;
-	
-	@Column(name="completed")
-    private Boolean completed ;
->>>>>>> dda13c9490b8d90e24bbd864308407d67e6a31f8
-	
-	
-
-	
-
-	
-	
-
 }
