@@ -1,6 +1,6 @@
 package com.barberapp.controllers;
 
-<<<<<<< HEAD
+
 import java.util.HashMap;  
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.barberapp.entities.Barbershop;
 import com.barberapp.entities.Images;
-import com.barberapp.servicies.barbershop.ServiceBarbershop;
+import com.barberapp.services.barbershop.ServiceBarbershop;
+
 
 
 @CrossOrigin(origins = "http://localhost:4200/")
