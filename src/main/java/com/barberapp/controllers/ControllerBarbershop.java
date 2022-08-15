@@ -25,11 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.barberapp.entities.Barbershop;
 import com.barberapp.entities.Images;
-<<<<<<< HEAD
-import com.barberapp.services.barbershop.ServiceBarbershop;
-=======
 import com.barberapp.servicies.barbershop.ServiceBarbershop;
->>>>>>> 14db1c99a31e8217ede2a797ed69109f66929d71
+
 
 @CrossOrigin(origins = "http://localhost:4200/")
 @RestController
