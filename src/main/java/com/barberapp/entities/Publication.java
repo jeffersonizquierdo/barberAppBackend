@@ -26,6 +26,7 @@ public class Publication {
 	@Column(name="description")
 	private String description;
 	
+
 	
 	@Column(name="url")
 	private String url;

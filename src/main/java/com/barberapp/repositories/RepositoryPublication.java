@@ -10,4 +10,8 @@ import com.barberapp.entities.Publication;
 @Repository
 public interface RepositoryPublication extends JpaRepository<Publication, Long> {
 
+
 }
+
+
+
