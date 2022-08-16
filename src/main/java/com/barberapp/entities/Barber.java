@@ -70,58 +70,14 @@ public class Barber implements Serializable{
 	@OneToMany (mappedBy = "barber", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Booking> bokings;
 	
-	
-	@JsonIgnoreProperties(value={"owner_barber","hibernateLazyInitializer","handler"},allowSetters = true)
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner", cascade=CascadeType.ALL)
-	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
-	private List<Publication> publication;
-	
-	
-	
 	public Barber() {
 		super();
 	}
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-	public List<Publication> getPublication() {
-		return publication;
-	}
-
-
-
-
-
-
-
-
-	public void setPublication(List<Publication> publication) {
-		this.publication = publication;
-	}
-
-
-
-
-
-
-
-
-	public Barber(Long id, String email, String password, String nickname, String city, String cellphone, int typeUser,
-			String photo, Date age, String description, Double qualification, List<Barbershop> listBarbershops,
-			List<Publication> publication) {
-=======
 	
 	
 	public Barber(Long id, String email, String password, String nickname, String city, String cellphone, int typeUser,
 			String photo, Date age, String description, Double qualification, Barbershop barbershop,
 			List<Booking> bokings) {
->>>>>>> main
 		super();
 		this.id = id;
 		this.email = email;
@@ -134,20 +90,12 @@ public class Barber implements Serializable{
 		this.age = age;
 		this.description = description;
 		this.qualification = qualification;
-<<<<<<< HEAD
-		this.listBarbershops = listBarbershops;
-		this.publication = publication;
-	}
-
-
-=======
 		this.barbershop = barbershop;
 		this.bokings = bokings;
 	}
 
 
 
->>>>>>> main
 	public Long getId() {
 		return id;
 	}
@@ -258,37 +206,8 @@ public class Barber implements Serializable{
 	}
 
 
-<<<<<<< HEAD
-	public List<Barbershop> getListBarbershops() {
-		return listBarbershops;
-	}
-
-
-	public void setListBarbershops(List<Barbershop> listBarbershops) {
-		this.listBarbershops = listBarbershops;
-	}
-
-
-
-
-
-
-
-
-	@Override
-	public String toString() {
-		return "Barber [id=" + id + ", email=" + email + ", password=" + password + ", nickname=" + nickname + ", city="
-				+ city + ", cellphone=" + cellphone + ", typeUser=" + typeUser + ", photo=" + photo + ", age=" + age
-				+ ", description=" + description + ", qualification=" + qualification + ", listBarbershops="
-				+ listBarbershops + ", publication=" + publication + "]";
-=======
 	public static long getSerialversionuid() {
 		return serialVersionUID;
->>>>>>> main
 	}
-
-
-
-
 
 }
