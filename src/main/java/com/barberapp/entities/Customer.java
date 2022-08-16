@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,6 +33,9 @@ public class Customer  implements Serializable{
 	@Column (name = "type_user", nullable = false) private int typeUser;
 	@Column (name = "photo", nullable = true) private String photo;
 	@Column (name = "age", nullable = false) private Date age;
+	@OneToMany (mappedBy = "customer", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private List<Booking> bokings;
+
 	
 	
 	

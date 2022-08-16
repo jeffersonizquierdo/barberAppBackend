@@ -1,18 +1,22 @@
 package com.barberapp.controllers;
 
-import java.util.HashMap;
+
+import java.util.HashMap;  
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.NestedRuntimeException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +28,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.barberapp.entities.Barbershop;
-import com.barberapp.servicies.barbershop.ServiceBarbershop;
+import com.barberapp.entities.Images;
+import com.barberapp.services.barbershop.ServiceBarbershop;
+
+
 
 @CrossOrigin(origins = "http://localhost:4200/")
 @RestController
@@ -172,4 +179,35 @@ public class ControllerBarbershop {
 		return barbershops;
 	}
 
-}
+	
+/////////////////// CONSULT CATALOGUE BARBERSHOP
+/////////////////// http://localhost:8080/barbershop/consultCatalogue/id ////////////////
+	@GetMapping("/consultCatalogue/{id}")
+	public List<Images> consultCatalogueBarbershopId(@PathVariable(value = "id") Long id) {
+	
+	
+	Optional<Barbershop> barbershop = null;
+	Map<String, Object> response = new HashMap<>();
+	
+	try {
+	
+		barbershop = serviceBarbershop.findById(id);
+	
+	} catch (DataAccessException e) {
+	List<Images> catalogue;
+	response.put("Mensaje", "Error al hacer consulta en la base de datos");
+	response.put("Error", e.getMessage().concat(": ")
+			.concat(((NestedRuntimeException) e).getMostSpecificCause().getMessage()));
+	return catalogue= new ArrayList<Images>()  ;
+	}
+	
+	if (!barbershop.isPresent()) {
+		List<Images> catalogue;
+	response.put("Mensaje",
+			"La barberia con el ID ".concat(id.toString().concat(" no existe en la base de datos")));
+	return catalogue= new ArrayList<Images>();
+	}
+	
+	return barbershop.get().getCatalogue();
+	}
+	}

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.barberapp.entities.Booking;
-import com.barberapp.servicies.booking.ServiceBooking;
+import com.barberapp.services.booking.ServiceBooking;
 
 @RestController
 @RequestMapping("booking")
@@ -59,8 +59,7 @@ public class ControllerBooking {
 	
 		Optional<Booking> booking = serviceBooking.findById(id);
 		if (booking.isPresent()) {
-			
-	
+
 			
 			return ResponseEntity.status(HttpStatus.CREATED).body(serviceBooking.save(booking.get()));
 		

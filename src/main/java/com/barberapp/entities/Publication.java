@@ -123,8 +123,12 @@ public class Publication implements Serializable {
 	
 	
 
+<<<<<<< HEAD
 	
 	
 	
 	
 }
+=======
+}
+>>>>>>> main
