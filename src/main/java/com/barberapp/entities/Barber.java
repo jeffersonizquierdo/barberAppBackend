@@ -8,12 +8,15 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "barber")
@@ -35,6 +38,14 @@ public class Barber implements Serializable{
 	@Column (name = "qualification") private Double qualification;
 	@ManyToMany (mappedBy = "listBarbers") private List<Barbershop> listBarbershops;
 	
+	
+	@JsonIgnoreProperties(value={"owner_barber","hibernateLazyInitializer","handler"},allowSetters = true)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner", cascade=CascadeType.ALL)
+	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
+	private List<Publication> publication;
+	
+	
+	
 	public Barber() {
 		super();
 		this.listBarbershops = new ArrayList<Barbershop>();
@@ -43,8 +54,35 @@ public class Barber implements Serializable{
 
 
 
+
+
+
+
+	public List<Publication> getPublication() {
+		return publication;
+	}
+
+
+
+
+
+
+
+
+	public void setPublication(List<Publication> publication) {
+		this.publication = publication;
+	}
+
+
+
+
+
+
+
+
 	public Barber(Long id, String email, String password, String nickname, String city, String cellphone, int typeUser,
-			String photo, Date age, String description, Double qualification) {
+			String photo, Date age, String description, Double qualification, List<Barbershop> listBarbershops,
+			List<Publication> publication) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -57,9 +95,9 @@ public class Barber implements Serializable{
 		this.age = age;
 		this.description = description;
 		this.qualification = qualification;
+		this.listBarbershops = listBarbershops;
+		this.publication = publication;
 	}
-
-
 
 
 	public Long getId() {
@@ -188,8 +226,20 @@ public class Barber implements Serializable{
 
 
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+
+
+
+
+	@Override
+	public String toString() {
+		return "Barber [id=" + id + ", email=" + email + ", password=" + password + ", nickname=" + nickname + ", city="
+				+ city + ", cellphone=" + cellphone + ", typeUser=" + typeUser + ", photo=" + photo + ", age=" + age
+				+ ", description=" + description + ", qualification=" + qualification + ", listBarbershops="
+				+ listBarbershops + ", publication=" + publication + "]";
 	}
+
+
+
+
 
 }
