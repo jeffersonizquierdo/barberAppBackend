@@ -56,6 +56,11 @@ public class Barbershop implements Serializable{
 	private List<Images> catalogue;
 
 	
+	@JsonIgnoreProperties(value={"owner","hibernateLazyInitializer","handler"},allowSetters = true)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner", cascade=CascadeType.ALL)
+	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
+	private List<Publication> publication;
+	
 	
 	public Barbershop() {
 		super();
@@ -64,9 +69,14 @@ public class Barbershop implements Serializable{
 		this.listBarbers = new ArrayList<Barber>();
 	}
 
+
 	public Barbershop(Long id, String email, String password, String nickname, String city, String cellphone,
 			int typeUser, String photo, String description, String location, Double qualification,
+<<<<<<< HEAD
+			List<Barber> listBarbers, Promotions promotion, List<Images> catalogue, List<Publication> publication) {
+=======
 			List<Barber> listBarbers) {
+>>>>>>> main
 		super();
 		this.id = id;
 		this.email = email;
@@ -85,7 +95,9 @@ public class Barbershop implements Serializable{
 		this.location = location;
 		this.qualification = qualification;
 		this.listBarbers = listBarbers;
+		this.promotion = promotion;
 		this.catalogue = catalogue;
+		this.publication = publication;
 	}
 
 
@@ -93,14 +105,6 @@ public class Barbershop implements Serializable{
 		return id;
 	}
 
-
-	public List<Images> getCatalogue() {
-		return catalogue;
-	}
-
-	public void setCatalogue(List<Images> catalogue) {
-		this.catalogue = catalogue;
-	}
 
 	public void setId(Long id) {
 		this.id = id;
@@ -222,11 +226,52 @@ public class Barbershop implements Serializable{
 	}
 
 
+<<<<<<< HEAD
+	public Promotions getPromotion() {
+		return promotion;
+	}
+
+
+	public void setPromotion(Promotions promotion) {
+		this.promotion = promotion;
+	}
+
+
+	public List<Images> getCatalogue() {
+		return catalogue;
+	}
+
+
+	public void setCatalogue(List<Images> catalogue) {
+		this.catalogue = catalogue;
+	}
+
+
+	public List<Publication> getPublication() {
+		return publication;
+	}
+
+
+	public void setPublication(List<Publication> publication) {
+		this.publication = publication;
+=======
 	
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+>>>>>>> main
 	}
 
+
+	@Override
+	public String toString() {
+		return "Barbershop [id=" + id + ", email=" + email + ", password=" + password + ", nickname=" + nickname
+				+ ", city=" + city + ", cellphone=" + cellphone + ", typeUser=" + typeUser + ", photo=" + photo
+				+ ", description=" + description + ", location=" + location + ", qualification=" + qualification
+				+ ", listBarbers=" + listBarbers + ", promotion=" + promotion + ", catalogue=" + catalogue
+				+ ", publication=" + publication + "]";
+	}
+
+	
 
 }
