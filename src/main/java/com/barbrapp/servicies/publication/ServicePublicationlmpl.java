@@ -1,7 +1,9 @@
 package com.barbrapp.servicies.publication;
 
-import java.util.List;
+
+import java.util.List; 
 import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,15 +11,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.barberapp.entities.Customer;
 import com.barberapp.entities.Publication;
-
 import com.barberapp.repositories.RepositoryPublication;
 
+
 @Service
-public class ServicePublicationlmpl implements ServicePublication {
+public class ServicePublicationlmpl implements ServicePublication{
 	
-	@Autowired(required = true) private RepositoryPublication repositoryPublication;
+	@Autowired
+	private RepositoryPublication repositoryPublication;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -47,9 +49,5 @@ public class ServicePublicationlmpl implements ServicePublication {
 		repositoryPublication.deleteById(id_publication);
 		
 	}
-
-	
-
-
 
 }

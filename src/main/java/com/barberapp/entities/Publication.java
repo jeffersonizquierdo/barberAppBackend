@@ -1,6 +1,6 @@
 package com.barberapp.entities;
 
-import java.sql.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+@CrossOrigin(origins = "http://localhost:4200/")
 @Entity
 @Table(name = "publication")
 public class Publication {
@@ -22,6 +24,8 @@ public class Publication {
 	
 	@Column(name = "id_usuario")
 	private int id_usuario;
+	
+	
 	
 	@Column(name="description")
 	private String description;
