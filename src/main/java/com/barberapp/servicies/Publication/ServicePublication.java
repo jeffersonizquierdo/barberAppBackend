@@ -1,7 +1,6 @@
-package com.barbrapp.servicies.publication;
+package com.barberapp.servicies.Publication;
 
-
-import java.util.List;   
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -9,8 +8,11 @@ import org.springframework.data.domain.Pageable;
 
 import com.barberapp.entities.Publication;
 
+
+
 public interface ServicePublication {
 	
+
 	public List<Publication> findAll();
 	
 	public Page<Publication> findAll(Pageable pageable);

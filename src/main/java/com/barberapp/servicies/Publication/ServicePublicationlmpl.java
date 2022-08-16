@@ -1,9 +1,7 @@
-package com.barbrapp.servicies.publication;
+package com.barberapp.servicies.Publication;
 
-
-import java.util.List; 
+import java.util.List;
 import java.util.Optional;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,40 +11,42 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.barberapp.entities.Publication;
 import com.barberapp.repositories.RepositoryPublication;
-
-
 @Service
-public class ServicePublicationlmpl implements ServicePublication{
-	
-	@Autowired
-	private RepositoryPublication repositoryPublication;
+public class ServicePublicationlmpl implements ServicePublication {
 
+	@Autowired(required = true)
+	private RepositoryPublication repossitoryPublication;
+	
 	@Override
 	@Transactional(readOnly = true)
 	public List<Publication> findAll() {
 	
-		return repositoryPublication.findAll();
+		return repossitoryPublication.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Page<Publication> findAll(Pageable pageable) {
-		return repositoryPublication.findAll(pageable);
+		
+		return repossitoryPublication.findAll(pageable);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<Publication> findById(Long id_publication) {
-		return repositoryPublication.findById(id_publication);
-	}
-	@Override
-	public Publication save(Publication publication) {
-		return repositoryPublication.save( publication);
+	public Optional<Publication> findById(Long id) {
+
+		return repossitoryPublication.findById(id);
 	}
 
-	@Override 
-	public void deleteById(Long id_publication) {
-		repositoryPublication.deleteById(id_publication);
+	@Override
+	public Publication save(Publication publication) {
+	
+		return repossitoryPublication.save(publication) ;
+	}
+
+	@Override
+	public void deleteById(Long id) {
+			repossitoryPublication.deleteById(id);
 		
 	}
 
