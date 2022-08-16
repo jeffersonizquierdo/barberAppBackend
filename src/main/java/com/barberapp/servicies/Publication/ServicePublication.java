@@ -24,3 +24,6 @@ public interface ServicePublication {
 	public void deleteById (Long id);
 
 }
+
+
+

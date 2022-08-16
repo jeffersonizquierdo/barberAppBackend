@@ -9,3 +9,5 @@ import com.barberapp.entities.Publication;
 public interface RepositoryPublication extends JpaRepository<Publication,Long>{
 
 }
+
+

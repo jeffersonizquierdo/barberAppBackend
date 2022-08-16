@@ -42,6 +42,7 @@ public class Publication implements Serializable {
 	
 	
 	
+
 	@Column(name = "descripcion")
 	private String descripcion;
 	
