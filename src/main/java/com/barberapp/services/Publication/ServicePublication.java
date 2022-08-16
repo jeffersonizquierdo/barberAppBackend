@@ -1,4 +1,4 @@
-package com.barberapp.servicies.Publication;
+package com.barberapp.services.Publication;
 
 import java.util.List;
 import java.util.Optional;
