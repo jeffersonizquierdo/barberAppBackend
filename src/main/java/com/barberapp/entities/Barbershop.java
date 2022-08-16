@@ -26,7 +26,8 @@ public class Barbershop implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id")private Long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)@Column (name = "id")
+	private Long id;
 	@Column (name = "email", nullable = false, unique = true, length = 200) private String email;
 	@Column (name = "password", nullable = false) private String password;
 	@Column (name = "nickname", nullable = false) private String nickname;
@@ -38,11 +39,14 @@ public class Barbershop implements Serializable{
 	@Column (name = "location") private String location;
 	@Column (name = "qualification") private Double qualification;
 	
-	
-	@ManyToMany @JoinTable(name = "barbershops_barbers", joinColumns = @JoinColumn
-			(name = "id_barbershop"), inverseJoinColumns = @JoinColumn (name = "id_barber")) 
+
+	@JsonIgnoreProperties(value={"owner","hibernateLazyInitializer","handler"},allowSetters = true)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "barbershop", cascade=CascadeType.ALL)
 	private List<Barber> listBarbers;
 	
+	@OneToMany (mappedBy = "barbershop", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private List<Booking> bokings;
+
 	@OneToOne @JoinColumn (name = "promotions_id", referencedColumnName = "id")
 	private Promotions promotion; 
 	
@@ -50,26 +54,27 @@ public class Barbershop implements Serializable{
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner", cascade=CascadeType.ALL)
 	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
 	private List<Images> catalogue;
-	
-	@JsonIgnoreProperties(value={"owner","hibernateLazyInitializer","handler"},allowSetters = true)
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner", cascade=CascadeType.ALL)
-	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
-	private List<Publication> publication;
+
 	
 	
 	public Barbershop() {
 		super();
 
+		this.catalogue = new ArrayList<>();
 		this.listBarbers = new ArrayList<Barber>();
 	}
 
-
 	public Barbershop(Long id, String email, String password, String nickname, String city, String cellphone,
 			int typeUser, String photo, String description, String location, Double qualification,
-			List<Barber> listBarbers, Promotions promotion, List<Images> catalogue, List<Publication> publication) {
+			List<Barber> listBarbers) {
 		super();
 		this.id = id;
 		this.email = email;
+		
+		
+		
+		
+		
 		this.password = password;
 		this.nickname = nickname;
 		this.city = city;
@@ -80,9 +85,7 @@ public class Barbershop implements Serializable{
 		this.location = location;
 		this.qualification = qualification;
 		this.listBarbers = listBarbers;
-		this.promotion = promotion;
 		this.catalogue = catalogue;
-		this.publication = publication;
 	}
 
 
@@ -90,6 +93,14 @@ public class Barbershop implements Serializable{
 		return id;
 	}
 
+
+	public List<Images> getCatalogue() {
+		return catalogue;
+	}
+
+	public void setCatalogue(List<Images> catalogue) {
+		this.catalogue = catalogue;
+	}
 
 	public void setId(Long id) {
 		this.id = id;
@@ -204,47 +215,18 @@ public class Barbershop implements Serializable{
 	public void setListBarbers(List<Barber> listBarbers) {
 		this.listBarbers = listBarbers;
 	}
-
-
-	public Promotions getPromotion() {
-		return promotion;
+	
+	public List getListaImages() {
+		
+		return null;
 	}
 
-
-	public void setPromotion(Promotions promotion) {
-		this.promotion = promotion;
-	}
-
-
-	public List<Images> getCatalogue() {
-		return catalogue;
-	}
-
-
-	public void setCatalogue(List<Images> catalogue) {
-		this.catalogue = catalogue;
-	}
-
-
-	public List<Publication> getPublication() {
-		return publication;
-	}
-
-
-	public void setPublication(List<Publication> publication) {
-		this.publication = publication;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Barbershop [id=" + id + ", email=" + email + ", password=" + password + ", nickname=" + nickname
-				+ ", city=" + city + ", cellphone=" + cellphone + ", typeUser=" + typeUser + ", photo=" + photo
-				+ ", description=" + description + ", location=" + location + ", qualification=" + qualification
-				+ ", listBarbers=" + listBarbers + ", promotion=" + promotion + ", catalogue=" + catalogue
-				+ ", publication=" + publication + "]";
-	}
 
 	
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 
 }

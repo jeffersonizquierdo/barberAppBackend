@@ -1,4 +1,4 @@
-package com.barberapp.servicies.images;
+package com.barberapp.services.images;
 
 import java.util.Optional;
 

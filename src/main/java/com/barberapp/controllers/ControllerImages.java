@@ -1,6 +1,6 @@
 package com.barberapp.controllers;
-
-import java.util.HashMap;
+ 
+import java.util.HashMap; 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -21,11 +21,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.barberapp.entities.Barbershop;
 import com.barberapp.entities.Images;
-import com.barberapp.entities.Promotions;
-import com.barberapp.servicies.barbershop.ServiceBarbershop;
-import com.barberapp.servicies.images.ServiceImages;
+import com.barberapp.services.barbershop.ServiceBarbershop;
+import com.barberapp.services.images.ServiceImages;
+
 
 @CrossOrigin(origins = "http://localhost:4200/")
 @RestController
@@ -34,6 +33,8 @@ public class ControllerImages {
 
 	@Autowired
 	private ServiceImages serviceImages;
+	
+	@Autowired private ServiceBarbershop serviceBarbershop;
 		
 	
 	// Create a new Image  http://localhost:8080/images/save
@@ -134,8 +135,21 @@ public class ControllerImages {
 		response.put("Mensaje","El catalogo se ha eliminado con exito! ");
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
+
 	
-	
+	/////////////////// CONSULTALL CUSTOMER http://localhost:8080/images/consutlall/id
+	/////////////////// ////////////////
+	@GetMapping("/catalogue")
+	public List<Images> consultCatalogue(){
+		
+
+		List<Images> catalogue = StreamSupport.stream(serviceImages.findAll().spliterator(), false)
+				.collect(Collectors.toList());
+		
+		return catalogue;
+		
+	}
+
 	@GetMapping("/consultall")
 	public  List<Images> consultAllPromotions(){
 		
@@ -145,6 +159,5 @@ public class ControllerImages {
 				.collect(Collectors.toList());
 		
 		return  images;
-	}	
-	
+	}
 }

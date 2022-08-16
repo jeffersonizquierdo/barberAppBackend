@@ -1,4 +1,4 @@
-package com.barberapp.servicies.barbershop;
+package com.barberapp.services.barbershop;
 
 import java.util.List; 
 import java.util.Optional;

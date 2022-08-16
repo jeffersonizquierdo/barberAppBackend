@@ -111,7 +111,7 @@ public class ControllerPublication {
 		try {
 		;
 		
-		currentPublication.get().setDescripcion(newPublication.getDescripcion());
+		currentPublication.get().setDescription(newPublication.getDescription());
 		currentPublication.get().setUrl(newPublication.getUrl());
 		
 		PublicationUpdate = servicePublication.save(currentPublication.get());
