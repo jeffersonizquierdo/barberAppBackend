@@ -55,15 +55,37 @@ public class Barbershop implements Serializable{
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner", cascade=CascadeType.ALL)
 	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
 	private List<Images> catalogue;
+	
+	@JsonIgnoreProperties(value={"id_barbershop","hibernateLazyInitializer","handler"},allowSetters = true)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "id_barbershop", cascade=CascadeType.ALL)
+	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
+	private List<Publication> publications;
+	
+	@JsonIgnoreProperties(value={"id_barbershop","hibernateLazyInitializer","handler"},allowSetters = true)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "id_barbershop", cascade=CascadeType.ALL)
+	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
+	private List<Cuts> cuts;
 
+
+	
 	public Barbershop() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	
+
+
+
+
+
 
 	public Barbershop(Long id, String email, String password, String nickname, String city, String cellphone,
 			int typeUser, String photo, String description, String location, Double qualification,
-			List<Barber> listBarbers, List<Booking> bokings, List<Promotions> promotion, List<Images> catalogue) {
+			List<Barber> listBarbers, List<Booking> bokings, List<Promotions> promotion, List<Images> catalogue,
+			List<Publication> publications, List<Cuts> cuts) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -80,7 +102,64 @@ public class Barbershop implements Serializable{
 		this.bokings = bokings;
 		this.promotion = promotion;
 		this.catalogue = catalogue;
+		this.publications = publications;
+		this.cuts = cuts;
 	}
+
+
+
+
+
+
+
+
+
+
+	public List<Cuts> getCuts() {
+		return cuts;
+	}
+
+
+
+
+
+
+
+
+
+
+	public void setCuts(List<Cuts> cuts) {
+		this.cuts = cuts;
+	}
+
+
+
+
+
+
+
+
+
+
+	public List<Publication> getPublications() {
+		return publications;
+	}
+
+
+
+
+
+	public void setPublications(List<Publication> publications) {
+		this.publications = publications;
+	}
+
+
+
+
+
+
+
+
 
 	public Long getId() {
 		return id;
