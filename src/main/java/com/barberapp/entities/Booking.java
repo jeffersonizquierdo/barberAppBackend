@@ -1,5 +1,6 @@
 package com.barberapp.entities;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -15,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table (name = "booking ")
-public class Booking {
+public class Booking implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	

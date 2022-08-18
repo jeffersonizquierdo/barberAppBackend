@@ -1,11 +1,15 @@
 package com.barberapp.controllers;
 
-import java.util.List; 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.NestedRuntimeException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.barberapp.entities.Booking;
+
 import com.barberapp.services.booking.ServiceBooking;
 
 @RestController
@@ -33,70 +38,141 @@ public class ControllerBooking {
 	}
 	
 	
-	 /////////////////// BOOKING REGISTRAR   http://localhost:8080/booking/save ////////////////
-	@PostMapping("/save")
-	public ResponseEntity<Booking> createBooking (@RequestBody Booking booking){
-		System.out.println(booking.toString()+"este es el objeto obtenido");
-		return ResponseEntity.status(HttpStatus.CREATED).body(serviceBooking.save(booking));
-	}
-	
-	/////////////////// CONSULT BOOKING   http://localhost:8080/booking/consult/ID ////////////////
-	@GetMapping("/consult/{id}")
-	public ResponseEntity<Optional<Booking>> consultBookingId (@PathVariable(value = "id") Long id){
-		
-		Optional<Booking> booking = serviceBooking.findById(id);
-		
-		if (booking.isPresent()) {
-			return ResponseEntity.ok(booking);
-		} else {
-			return ResponseEntity.notFound().build();
+	 /////////////////// BOKING REGISTRAR   http://localhost:8080/booking/save ////////////////
+		@PostMapping("/save")
+		public ResponseEntity<?> create (@RequestBody Booking booking){
+			
+			Booking newBooking = null;
+			Map<String, Object> response = new HashMap<>();
+			
+			try {
+				
+				newBooking = serviceBooking.save(booking);
+				
+			} catch (DataAccessException e) {
+				
+				response.put("Mensaje", "Error al hacer insert en la base de datos");
+				response.put("Error", e.getMessage().concat(": ").concat(((NestedRuntimeException) e).getMostSpecificCause().getMessage()));
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			
+			response.put("menssaje","El booking  ha sido creado con exito");
+			response.put("Barbero: ", newBooking);
+			return new ResponseEntity<Map<String, Object >>(response, HttpStatus.CREATED);
+			
 		}
-	}
+		
+		
+	/////////////////// CONSULT BOOKING   http://localhost:8080/booking/consult/ID ////////////////
+		@GetMapping("/consult/{id}")
+		public ResponseEntity<?> consultBopkingId(@PathVariable(value = "id") Long id){
+		
+			Optional<Booking> booking = null;
+			Map<String, Object> response = new HashMap<>();
+			
+			try {
+				booking =serviceBooking.findById(id);
+				
+			} catch (DataAccessException e) {
+				response.put("Mensaje", "Error al hacer consulta en la base de datos");
+				response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			
+			if (!booking.isPresent()) {
+				response.put("Mensaje", "EL booking con el ID ".concat(id.toString().concat(" no existe en la base de datos")));
+				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+			}
+			
+				return ResponseEntity.ok(booking);
+		}
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/////////////////// UPDATE BOOKING   http://localhost:8080/booking/update/ID ////////////////
-	@PutMapping("/update/{id}")
-	public ResponseEntity<Booking> updateBooking (@RequestBody Booking newbBooking, @PathVariable(value = "id") Long id){
-	
-		Optional<Booking> booking = serviceBooking.findById(id);
-		if (booking.isPresent()) {
-
+		@PutMapping("/update/{id}")
+		public ResponseEntity<?>update(@RequestBody Booking newBooking,@PathVariable (value = "id")Long idbooking ){
 			
-			return ResponseEntity.status(HttpStatus.CREATED).body(serviceBooking.save(booking.get()));
+			Optional<Booking> currentbooking = serviceBooking.findById(idbooking);
+			Optional<Booking> BookingUpdate = null;
+			
+			Map<String, Object> response = new HashMap<>();
+			
+			if(!currentbooking.isPresent()) {
+			response.put("Mensaje", "No se pudo editar el booking con el ID ".concat(idbooking.toString().concat(" no existe en la base de datos")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			
+			try {
+			
+			
 		
-		} else {
-			return ResponseEntity.notFound().build();
+			
+			currentbooking.get().setReservation_date(newBooking.getReservation_date());
+			currentbooking.get().setCompleted(newBooking.getCompleted());
+			
+			BookingUpdate = Optional.ofNullable(serviceBooking.save(currentbooking.get()));
+			
+			} catch (DataAccessException e) {
+			
+			response.put("Mensaje", "Error al actualizar el booking en la base de datos");
+			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			
+			response.put("Mensaje", "El booking ha sido actualizado");
+			response.put("Barbero: ", BookingUpdate);
+			
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 		}
 	
-	}
 	
-	/////////////////// DELETE BOOKING   http://localhost:8080/booking/delete/ID ////////////////
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<Booking> deleteBooking(@PathVariable(value = "id")  Long id){
-		
-		
-		if(serviceBooking.findById(id).isPresent()) {
+	
+	
+/////////////////// CONSULT ALL USER   http://localhost:8080/booking/consultall ///////////////
+
+		@GetMapping("/consultall")
+		public  List<Booking> consultAllUsers(){
 			
-			serviceBooking.deleteById(id);
-			return ResponseEntity.ok().build();
 			
-		} else {
+			List<Booking> booking = StreamSupport
+					.stream(serviceBooking.findAll().spliterator(), false)
+					.collect(Collectors.toList());
 			
-			return ResponseEntity.notFound().build();
-		}		
-	}
+			return  booking;
+		}
 	
 
-	/////////////////// CONSULT ALL USER   http://localhost:8080/booking/consultall ///////////////	
-	@GetMapping("/consultall")
-	public  List<Booking> consultAllBooking(){
+	
+
+		/////////////////// DELETE BOOKING   http://localhost:8080/booking/delete/ID ////////////////
+		@DeleteMapping("/delete/{id}")
+		public ResponseEntity<?> deleteUser(@PathVariable(value = "id")  Long id){
 		
-		
-		List<Booking> booking = StreamSupport
-				.stream(serviceBooking.findAll().spliterator(), false)
-				.collect(Collectors.toList());
-		
-		return booking;
-	}
+			Map<String, Object> response = new HashMap<>();
+			
+			try {
+			
+				serviceBooking.deleteById(id);
+			
+			} catch (DataAccessException e) {
+			
+			response.put("Mensaje", "Error al eliminar el booking en la base de datos");
+			response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			
+			response.put("Mensaje","El booking se ha eliminado con exito! ");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+		}
 	
 	
 	
