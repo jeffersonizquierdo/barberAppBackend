@@ -39,7 +39,7 @@ public class Promotions implements Serializable{
 	
 	@JsonIgnoreProperties(value={"promotion","hibernateLazyInitializer","handler"},allowSetters = true)
 	@OneToOne(fetch = FetchType.LAZY) 
-	@JoinColumn (name = "owner", referencedColumnName = "id")
+	@JoinColumn (name = "owner", referencedColumnName = "id" )
 	private Barbershop owner;
 
 	public Promotions() {
