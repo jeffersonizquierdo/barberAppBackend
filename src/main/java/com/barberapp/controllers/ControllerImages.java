@@ -84,7 +84,7 @@ public class ControllerImages {
 	}
 
 	
-	// update an image
+	// update an image http://localhost:8080/images/update/id
 	@PutMapping("/update/{id}")
 	public ResponseEntity<?> update(@RequestBody Images imagesDetails, @PathVariable(value = "id") Long ImagesId) {
 		
@@ -117,7 +117,7 @@ public class ControllerImages {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 
-	// delete an image
+	// delete an image http://localhost:8080/images/delete/id
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> delete (@PathVariable(value = "id") Long id){
 		
