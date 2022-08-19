@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -36,14 +37,15 @@ public class Images implements Serializable{
 	@Column(length = 100)
 	private String description;
 	
-	@ManyToOne @JoinColumn (name = "barbershop", referencedColumnName = "id")
-	private Barbershop barbershop;
-	
-	@JsonIgnoreProperties(value={"catalogue","hibernateLazyInitializer","handler"},allowSetters = true)
-	@ManyToOne(fetch = FetchType.LAZY) 
-	@JoinColumn (name = "barbershop_id")
-	//@JoinColumn (name = "barbershop_id", referencedColumnName = "id")
+	@JsonIgnoreProperties(value={"promotion","hibernateLazyInitializer","handler"},allowSetters = true)
+	@OneToOne(fetch = FetchType.LAZY) 
+	@JoinColumn (name = "owner", referencedColumnName = "id")
 	private Barbershop owner;
+
+	public Images() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Images(Long id, String name, String url, String description, Barbershop owner) {
 		super();
@@ -51,7 +53,7 @@ public class Images implements Serializable{
 		this.name = name;
 		this.url = url;
 		this.description = description;
-
+		this.owner = owner;
 	}
 
 	public Long getId() {
@@ -60,14 +62,6 @@ public class Images implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public String getName() {
@@ -86,14 +80,28 @@ public class Images implements Serializable{
 		this.url = url;
 	}
 
-	public Images() {
-		super();
-		// TODO Auto-generated constructor stub
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Barbershop getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Barbershop owner) {
+		this.owner = owner;
 	}
 
 	@Override
 	public String toString() {
-		return "Images [id=" + id + ", name=" + name + ", url=" + url + ", description=" + description + "]";
+		return "Images [id=" + id + ", name=" + name + ", url=" + url + ", description=" + description + ", owner="
+				+ owner + "]";
 	}
+
+	
 
 }

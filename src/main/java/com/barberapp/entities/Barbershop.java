@@ -47,11 +47,12 @@ public class Barbershop implements Serializable{
 	@OneToMany (mappedBy = "barbershop", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Booking> bokings;
 
+	@JsonIgnoreProperties(value={"owner","hibernateLazyInitializer","handler"},allowSetters = true)
 	@OneToOne @JoinColumn (name = "promotions_id", referencedColumnName = "id")
 	private Promotions promotion; 
 	
 	@JsonIgnoreProperties(value={"owner","hibernateLazyInitializer","handler"},allowSetters = true)
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner", cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner")
 	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
 	private List<Images> catalogue;
 
