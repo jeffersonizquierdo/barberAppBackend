@@ -36,8 +36,6 @@ public class ControllerBarber {
 	private ServiceBarber barberService;
 	
 	
-	
-	
 	 /////////////////// BARBER REGISTRAR   http://localhost:8080/barber/save ////////////////
 	@PostMapping("/save")
 	public ResponseEntity<?> create (@RequestBody Barber barber){

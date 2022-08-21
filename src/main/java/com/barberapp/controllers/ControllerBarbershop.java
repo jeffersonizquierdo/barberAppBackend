@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.barberapp.entities.Barbershop;
 import com.barberapp.entities.Images;
+import com.barberapp.entities.Usuario;
 import com.barberapp.services.barbershop.ServiceBarbershop;
 
 @CrossOrigin(origins = "http://localhost:4200/")
@@ -48,8 +49,10 @@ public class ControllerBarbershop {
 		Map<String, Object> response = new HashMap<>();
 
 		try {
-
+			
+			
 			newBarbershop = serviceBarbershop.save(barbershop);
+
 
 		} catch (DataAccessException e) {
 
@@ -60,7 +63,7 @@ public class ControllerBarbershop {
 		}
 
 		response.put("menssaje", "El usuario barberia ha sido creado con exito");
-		response.put("Barbero: ", newBarbershop);
+		response.put("Barberia: ", newBarbershop);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 
 	}

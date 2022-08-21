@@ -38,22 +38,22 @@ public class Promotions implements Serializable{
 	private String description;
 	
 	@JsonIgnoreProperties(value={"catalogue","hibernateLazyInitializer","handler"},allowSetters = true)
-	@OneToOne(fetch = FetchType.LAZY) 
-	@JoinColumn (name = "barbershop_id", referencedColumnName = "id")
-	private Barbershop owner;
+	@ManyToOne(fetch = FetchType.LAZY) 
+	@JoinColumn (name = "barbershop_id")
+	private Barbershop barbershop;
 
 	public Promotions() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Promotions(Long id, String name, String url, String description, Barbershop owner) {
+	public Promotions(Long id, String name, String url, String description, Barbershop barbershop) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.url = url;
 		this.description = description;
-		this.owner = owner;
+		this.barbershop = barbershop;
 	}
 
 	public Long getId() {
@@ -89,17 +89,17 @@ public class Promotions implements Serializable{
 	}
 
 	public Barbershop getOwner() {
-		return owner;
+		return barbershop;
 	}
 
 	public void setOwner(Barbershop owner) {
-		this.owner = owner;
+		this.barbershop = owner;
 	}
 
 	@Override
 	public String toString() {
-		return "Promotions [id=" + id + ", name=" + name + ", url=" + url + ", description=" + description + ", owner="
-				+ owner + "]";
+		return "Promotions [id=" + id + ", name=" + name + ", url=" + url + ", description=" + description + ", barbershop="
+				+ barbershop + "]";
 	}
 
 	

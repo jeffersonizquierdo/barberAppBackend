@@ -1,6 +1,6 @@
 package com.barberapp.entities;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,8 +25,7 @@ public class Barbershop implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)@Column (name = "id")
-	private Long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)private Long id;
 	@Column (name = "email", nullable = false, unique = true, length = 200) private String email;
 	@Column (name = "password", nullable = false) private String password;
 	@Column (name = "nickname", nullable = false) private String nickname;
@@ -47,13 +45,15 @@ public class Barbershop implements Serializable{
 	@OneToMany (mappedBy = "barbershop", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Booking> bokings;
 
-	@OneToOne @JoinColumn (name = "promotions_id", referencedColumnName = "id")
-	private Promotions promotion; 
+	@OneToMany (mappedBy = "barbershop", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private List<Promotions> promotions; 
 	
 	@JsonIgnoreProperties(value={"owner","hibernateLazyInitializer","handler"},allowSetters = true)
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner", cascade=CascadeType.ALL)
 	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
 	private List<Images> catalogue;
+	
+
 
 	
 	
@@ -62,19 +62,18 @@ public class Barbershop implements Serializable{
 
 		this.catalogue = new ArrayList<>();
 		this.listBarbers = new ArrayList<Barber>();
+		this.bokings = new ArrayList<>();
 	}
+
+	
+
 
 	public Barbershop(Long id, String email, String password, String nickname, String city, String cellphone,
 			int typeUser, String photo, String description, String location, Double qualification,
-			List<Barber> listBarbers) {
+			List<Barber> listBarbers, List<Booking> bokings, List<Promotions> promotions, List<Images> catalogue) {
 		super();
 		this.id = id;
 		this.email = email;
-		
-		
-		
-		
-		
 		this.password = password;
 		this.nickname = nickname;
 		this.city = city;
@@ -85,8 +84,12 @@ public class Barbershop implements Serializable{
 		this.location = location;
 		this.qualification = qualification;
 		this.listBarbers = listBarbers;
+		this.bokings = bokings;
+		this.promotions = promotions;
 		this.catalogue = catalogue;
 	}
+
+
 
 
 	public Long getId() {
@@ -218,12 +221,30 @@ public class Barbershop implements Serializable{
 	
 	public List getListaImages() {
 		
-		return null;
+		return this.catalogue;
+	}
+
+	
+	public List<Booking> getBokings() {
+		return bokings;
 	}
 
 
-	
-	
+	public void setBokings(List<Booking> bokings) {
+		this.bokings = bokings;
+	}
+
+
+	public List<Promotions> getPromotions() {
+		return promotions;
+	}
+
+
+	public void setPromotions(List<Promotions> promotions) {
+		this.promotions = promotions;
+	}
+
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

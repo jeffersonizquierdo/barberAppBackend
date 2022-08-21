@@ -70,11 +70,16 @@ public class Barber implements Serializable{
 	@OneToMany (mappedBy = "barber", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Booking> bokings;
 	
+	
+	
 	public Barber() {
 		super();
 	}
 	
 	
+
+
+
 	public Barber(Long id, String email, String password, String nickname, String city, String cellphone, int typeUser,
 			String photo, Date age, String description, Double qualification, Barbershop barbershop,
 			List<Booking> bokings) {
@@ -93,6 +98,8 @@ public class Barber implements Serializable{
 		this.barbershop = barbershop;
 		this.bokings = bokings;
 	}
+
+
 
 
 
@@ -203,6 +210,26 @@ public class Barber implements Serializable{
 
 	public void setQualification(Double qualification) {
 		this.qualification = qualification;
+	}
+
+
+	public Barbershop getBarbershop() {
+		return barbershop;
+	}
+
+
+	public void setBarbershop(Barbershop barbershop) {
+		this.barbershop = barbershop;
+	}
+
+
+	public List<Booking> getBokings() {
+		return bokings;
+	}
+
+
+	public void setBokings(List<Booking> bokings) {
+		this.bokings = bokings;
 	}
 
 
