@@ -1,4 +1,4 @@
-package com.barberapp.servicies.customer;
+package com.barberapp.services.customer;
 
  
 import java.util.List; 

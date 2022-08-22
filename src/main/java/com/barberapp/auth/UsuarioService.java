@@ -19,31 +19,40 @@ import org.springframework.transaction.annotation.Transactional;
 import com.barberapp.entities.Usuario;
 
 @Service
-public class UsuarioService implements UserDetailsService{
-
-	private Logger logger = LoggerFactory.getLogger(UsuarioService.class);
+public class UsuarioService implements IUsuarioService, UserDetailsService{
 	
+	private Logger logger = LoggerFactory.getLogger(UsuarioService.class);
+
+
 	@Autowired
 	private IUsuarioDao usuarioDao;
 	
 	@Override
-	@Transactional(readOnly = true)
+	@Transactional(readOnly=true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-		Usuario usuairo = usuarioDao.findByUsername(username);
 		
+		Usuario usuario = usuarioDao.findByUsername(username);
 		
-		if (usuairo == null) {
-			
-			logger.error("Error en el login: No existe el usuario " + username + " en el sistema");
-			throw new UsernameNotFoundException("Error en el login: No existe el usuario '"+ username + "' en el sistema");
+		if(usuario == null) {
+			logger.error("Error en el login: no existe el usuario '"+username+"' en el sistema!");
+			throw new UsernameNotFoundException("Error en el login: no existe el usuario '"+username+"' en el sistema!");
 		}
-		List<GrantedAuthority> authorities = usuairo.getRoles().stream()
-				.map(role -> new SimpleGrantedAuthority(role.getName()))
-				.peek(authority -> logger.info("Role " + authority.getAuthority()))
+		
+		List<GrantedAuthority> authorities = usuario.getRoles()
+				.stream()
+				.map(role -> new SimpleGrantedAuthority(role.getNombre()))
+				.peek(authority -> logger.info("Role: " + authority.getAuthority()))
 				.collect(Collectors.toList());
 		
-		return new User(usuairo.getUsername(), usuairo.getPassword(), usuairo.getEnabled(), true, true, true, authorities);
+		return new User(usuario.getUsername(), usuario.getPassword(), usuario.getEnabled(), true, true, true, authorities);
 	}
+
+
+
+		@Override
+		@Transactional(readOnly=true)
+		public Usuario findByUsername(String username) {
+			return usuarioDao.findByUsername(username);
+		}
 
 }

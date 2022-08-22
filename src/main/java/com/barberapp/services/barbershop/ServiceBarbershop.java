@@ -1,4 +1,4 @@
-package com.barberapp.servicies.barbershop;
+package com.barberapp.services.barbershop;
 
 import java.util.List;   
 import java.util.Optional;
@@ -20,4 +20,7 @@ public interface ServiceBarbershop {
 	public Barbershop save (Barbershop barbershop);
 	
 	public void deleteById (Long id);
+	
+	
+
 }

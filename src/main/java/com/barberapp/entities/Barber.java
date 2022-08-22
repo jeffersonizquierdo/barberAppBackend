@@ -1,13 +1,13 @@
 package com.barberapp.entities;
 
-import java.io.Serializable; 
+
+import java.io.Serializable;
 import java.sql.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.List;
+
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "barber")
@@ -16,28 +16,59 @@ public class Barber implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id")private Long id;
-	@Column (name = "email", nullable = false, unique = true, length = 200) private String email;
-	@Column (name = "password", nullable = false) private String password;
-	@Column (name = "nickname", nullable = false) private String nickname;
-	@Column (name = "city", nullable = false) private String city;
-	@Column (name = "cellphone", nullable = false, length = 10) private String cellphone;
-	@Column (name = "type_user", nullable = false) private int typeUser;
-	@Column (name = "photo", nullable = true) private String photo;
-	@Column (name = "age", nullable = false) private Date age;
-	@Column (name = "description", length = 300) private String description;
-	@Column (name = "qualification") private Double qualification;
 
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id")
+	private Long id;
 	
+	@Column (name = "email", nullable = false, unique = true, length = 200)
+	private String email;
+	
+	@Column (name = "password", nullable = false)
+	private String password;
+	
+	@Column (name = "nickname", nullable = false)
+	private String nickname;
+	
+	@Column (name = "city", nullable = false)
+	private String city;
+	
+	@Column (name = "cellphone", nullable = false, length = 10)
+	private String cellphone;
+	
+	@Column (name = "type_user", nullable = false)
+	private int typeUser;
+	
+	@Column (name = "photo", nullable = true)
+	private String photo;
+	
+	@Column (name = "age", nullable = false)
+	private Date age;
+	
+	@Column (name = "description", length = 300)
+	private String description;
+	
+	@Column (name = "qualification")
+	private Double qualification;
+	
+	
+	@JsonIgnoreProperties(value={"listBarbers","hibernateLazyInitializer","handler"},allowSetters = true)
+	@ManyToOne(fetch = FetchType.LAZY) 
+	@JoinColumn (name = "barbershop_id") 
+	private  Barbershop barbershop;
+	
+	@OneToMany (mappedBy = "barber", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private List<Booking> bokings;
+
 	
 	public Barber() {
 		super();
-
+		// TODO Auto-generated constructor stub
 	}
 
 
 	public Barber(Long id, String email, String password, String nickname, String city, String cellphone, int typeUser,
-			String photo, Date age, String description, Double qualification) {
+			String photo, Date age, String description, Double qualification, Barbershop barbershop,
+			List<Booking> bokings) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -50,8 +81,9 @@ public class Barber implements Serializable{
 		this.age = age;
 		this.description = description;
 		this.qualification = qualification;
+		this.barbershop = barbershop;
+		this.bokings = bokings;
 	}
-
 
 
 	public Long getId() {
@@ -152,13 +184,11 @@ public class Barber implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
+
 
 	public Double getQualification() {
 		return qualification;
 	}
-
 
 
 	public void setQualification(Double qualification) {
@@ -166,9 +196,24 @@ public class Barber implements Serializable{
 	}
 
 
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public Barbershop getBarbershop() {
+		return barbershop;
 	}
 
+
+	public void setBarbershop(Barbershop barbershop) {
+		this.barbershop = barbershop;
+	}
+
+
+	public List<Booking> getBokings() {
+		return bokings;
+	}
+
+
+	public void setBokings(List<Booking> bokings) {
+		this.bokings = bokings;
+	}
+	
+	
 }

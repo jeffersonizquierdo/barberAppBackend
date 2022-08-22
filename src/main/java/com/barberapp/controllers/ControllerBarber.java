@@ -1,6 +1,6 @@
 package com.barberapp.controllers;
 
-import java.util.HashMap;
+import java.util.HashMap; 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -34,8 +34,6 @@ public class ControllerBarber {
 	
 	@Autowired
 	private ServiceBarber barberService;
-	
-	
 	
 	
 	 /////////////////// BARBER REGISTRAR   http://localhost:8080/barber/save ////////////////

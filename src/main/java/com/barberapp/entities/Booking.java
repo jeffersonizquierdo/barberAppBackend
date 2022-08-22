@@ -1,10 +1,16 @@
 package com.barberapp.entities;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -12,80 +18,110 @@ import javax.persistence.Table;
 public class Booking {
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_booking")
-	 private Long  id_booking;
-	
+	@Column(name="id")
+	private Long  id;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="barber", referencedColumnName = "id")
+	private Barber barber;
 	
 	@Column(name="reservation_date")
-	private String reservation_date;
-	
-	@Column(name="id_barbershop")
-	private Long Inid_barbershop;
-	
-	@Column(name="id_customer")
-	private Long id_customer ;
-	
-	@Column(name="acceptatance_status")
-	private  Boolean   acceptatance_status ;
+	private Date reservation_date;
+
+	@ManyToOne @JoinColumn (name = "barbershop", referencedColumnName = "id")
+	private Barbershop barbershop;
+
+	@ManyToOne @JoinColumn (name = "customer", referencedColumnName = "id")
+	private Customer customer;
 	
 	@Column(name="completed")
     private Boolean completed ;
 
-	public Long getId_booking() {
-		return id_booking;
+
+	public Booking() {
+		super();
 	}
 
-	public void setId_booking(Long id_booking) {
-		this.id_booking = id_booking;
+
+	public Booking(Long id, Barber barber, Date reservation_date, Barbershop barbershop, Customer customer,
+			Boolean completed) {
+		super();
+		this.id = id;
+		this.barber = barber;
+		this.reservation_date = reservation_date;
+		this.barbershop = barbershop;
+		this.customer = customer;
+		this.completed = completed;
 	}
 
-	public String getReservation_date() {
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public Barber getBarber() {
+		return barber;
+	}
+
+
+	public void setBarber(Barber barber) {
+		this.barber = barber;
+	}
+
+
+	public Date getReservation_date() {
 		return reservation_date;
 	}
 
-	public void setReservation_date(String reservation_date) {
+
+	public void setReservation_date(Date reservation_date) {
 		this.reservation_date = reservation_date;
 	}
 
-	public Long getInid_barbershop() {
-		return Inid_barbershop;
+
+	public Barbershop getBarbershop() {
+		return barbershop;
 	}
 
-	public void setInid_barbershop(Long inid_barbershop) {
-		Inid_barbershop = inid_barbershop;
+
+	public void setBarbershop(Barbershop barbershop) {
+		this.barbershop = barbershop;
 	}
 
-	public Long getId_customer() {
-		return id_customer;
+
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setId_customer(Long id_customer) {
-		this.id_customer = id_customer;
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
-	public Boolean getAcceptatance_status() {
-		return acceptatance_status;
-	}
-
-	public void setAcceptatance_status(Boolean acceptatance_status) {
-		this.acceptatance_status = acceptatance_status;
-	}
 
 	public Boolean getCompleted() {
 		return completed;
 	}
 
+
 	public void setCompleted(Boolean completed) {
 		this.completed = completed;
 	}
-	
-	
 
 
+	@Override
+	public String toString() {
+		return "Booking [id=" + id + ", barber=" + barber + ", reservation_date=" + reservation_date + ", barbershop="
+				+ barbershop + ", customer=" + customer + ", completed=" + completed + "]";
+	}
 	
-	
-
 }

@@ -1,29 +1,31 @@
 package com.barberapp.entities;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table (name = "barbershops")
 public class Barbershop implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id")private Long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)private Long id;
 	@Column (name = "email", nullable = false, unique = true, length = 200) private String email;
 	@Column (name = "password", nullable = false) private String password;
 	@Column (name = "nickname", nullable = false) private String nickname;
@@ -34,20 +36,38 @@ public class Barbershop implements Serializable{
 	@Column (name = "description") private String description;
 	@Column (name = "location") private String location;
 	@Column (name = "qualification") private Double qualification;
-	@Column (name = "id_catalogue") private int id_catalogue;
-	@ManyToMany @JoinTable(name = "barbershops_barbers") private List<Barber> listBarbers;
+
+	@JsonIgnoreProperties(value={"owner","hibernateLazyInitializer","handler"},allowSetters = true)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "barbershop", cascade=CascadeType.ALL)
+	private List<Barber> listBarbers;
+	
+	@OneToMany (mappedBy = "barbershop", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private List<Booking> bokings;
+
+	@OneToMany (mappedBy = "barbershop", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private List<Promotions> promotions; 
+	
+	@JsonIgnoreProperties(value={"owner","hibernateLazyInitializer","handler"},allowSetters = true)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner", cascade=CascadeType.ALL)
+	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
+	private List<Images> catalogue;
+	
 	
 	
 	public Barbershop() {
 		super();
 
+		this.catalogue = new ArrayList<>();
 		this.listBarbers = new ArrayList<Barber>();
+		this.bokings = new ArrayList<>();
 	}
+
+	
 
 
 	public Barbershop(Long id, String email, String password, String nickname, String city, String cellphone,
-			int typeUser, String photo, String description, String location, Double qualification, int id_catalogue,
-			List<Barber> listBarbers) {
+			int typeUser, String photo, String description, String location, Double qualification,
+			List<Barber> listBarbers, List<Booking> bokings, List<Promotions> promotions, List<Images> catalogue) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -60,15 +80,27 @@ public class Barbershop implements Serializable{
 		this.description = description;
 		this.location = location;
 		this.qualification = qualification;
-		this.id_catalogue = id_catalogue;
 		this.listBarbers = listBarbers;
+		this.bokings = bokings;
+		this.promotions = promotions;
+		this.catalogue = catalogue;
 	}
+
+
 
 
 	public Long getId() {
 		return id;
 	}
 
+
+	public List<Images> getCatalogue() {
+		return catalogue;
+	}
+
+	public void setCatalogue(List<Images> catalogue) {
+		this.catalogue = catalogue;
+	}
 
 	public void setId(Long id) {
 		this.id = id;
@@ -182,6 +214,31 @@ public class Barbershop implements Serializable{
 
 	public void setListBarbers(List<Barber> listBarbers) {
 		this.listBarbers = listBarbers;
+	}
+	
+	public List getListaImages() {
+		
+		return this.catalogue;
+	}
+
+	
+	public List<Booking> getBokings() {
+		return bokings;
+	}
+
+
+	public void setBokings(List<Booking> bokings) {
+		this.bokings = bokings;
+	}
+
+
+	public List<Promotions> getPromotions() {
+		return promotions;
+	}
+
+
+	public void setPromotions(List<Promotions> promotions) {
+		this.promotions = promotions;
 	}
 
 

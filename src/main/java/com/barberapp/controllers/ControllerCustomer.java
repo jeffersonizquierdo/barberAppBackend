@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.barberapp.entities.Customer;
-import com.barberapp.servicies.customer.ServiceCustomer;
+import com.barberapp.services.customer.ServiceCustomer;
 
 @CrossOrigin(origins = "http://localhost:4200/")
 @RestController
@@ -154,7 +154,7 @@ public class ControllerCustomer {
 
 	}
 
-	/////////////////// CONSULTALL CUSTOMER http://localhost:8080/customer/delete/id
+	/////////////////// CONSULTALL CUSTOMER http://localhost:8080/customer/consultall
 	/////////////////// ////////////////
 	@GetMapping("/consultall")
 	public List<Customer> consultAllCustomers() {
