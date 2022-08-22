@@ -1,6 +1,8 @@
 package com.barberapp.controllers;
 
+
 import java.util.HashMap;  
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -23,8 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.barberapp.entities.Barbershop;
 import com.barberapp.entities.Images;
-import com.barberapp.entities.Usuario;
+import com.barberapp.entities.Promotions;
 import com.barberapp.services.barbershop.ServiceBarbershop;
+
+
 
 @CrossOrigin(origins = "http://localhost:4200/")
 @RestController
@@ -174,4 +178,66 @@ public class ControllerBarbershop {
 		return barbershops;
 	}
 
-}
+	
+/////////////////// CONSULT CATALOGUE BARBERSHOP
+/////////////////// http://localhost:8080/barbershop/consultCatalogue/id ////////////////
+	@GetMapping("/consultCatalogue/{id}")
+	public List<Images> consultCatalogueBarbershopId(@PathVariable(value = "id") Long id) {
+	
+	
+	Optional<Barbershop> barbershop = null;
+	Map<String, Object> response = new HashMap<>();
+	
+	try {
+	
+		barbershop = serviceBarbershop.findById(id);
+	
+	} catch (DataAccessException e) {
+	List<Images> catalogue;
+	response.put("Mensaje", "Error al hacer consulta en la base de datos");
+	response.put("Error", e.getMessage().concat(": ")
+			.concat(((NestedRuntimeException) e).getMostSpecificCause().getMessage()));
+	return catalogue= new ArrayList<Images>()  ;
+	}
+	
+	if (!barbershop.isPresent()) {
+		List<Images> catalogue;
+	response.put("Mensaje",
+			"La barberia con el ID ".concat(id.toString().concat(" no existe en la base de datos")));
+	return catalogue= new ArrayList<Images>();
+	}
+	
+	return barbershop.get().getCatalogue();
+	}
+	
+	/////////////////// CONSULT PROMOTIO BARBERSHOP
+	/////////////////// http://localhost:8080/barbershop/consultPromotion/id ////////////////
+	@GetMapping("/consultPromotion/{id}")
+	public List<Promotions> consultPromotionBarbershopId(@PathVariable(value = "id") Long id) {
+	
+	
+	Optional<Barbershop> barbershop = null;
+	Map<String, Object> response = new HashMap<>();
+	
+	try {
+	
+	barbershop = serviceBarbershop.findById(id);
+	
+	} catch (DataAccessException e) {
+	List<Promotions> promotions;
+	response.put("Mensaje", "Error al hacer consulta en la base de datos");
+	response.put("Error", e.getMessage().concat(": ")
+	.concat(((NestedRuntimeException) e).getMostSpecificCause().getMessage()));
+	return promotions= new ArrayList<Promotions>()  ;
+	}
+	
+	if (!barbershop.isPresent()) {
+		List<Promotions> promotions;
+	response.put("Mensaje",
+	"La barberia con el ID ".concat(id.toString().concat(" no existe en la base de datos")));
+	return promotions= new ArrayList<Promotions>();
+	}
+	
+	return barbershop.get().getPromotion();
+	}
+		}

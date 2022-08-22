@@ -51,6 +51,19 @@ public class Barber implements Serializable{
 	private Double qualification;
 	
 	
+	
+	@JsonIgnoreProperties(value={"id_barber","hibernateLazyInitializer","handler"},allowSetters = true)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "id_barber", cascade=CascadeType.ALL)
+	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
+	private List<Publication> publication;
+	
+	
+	
+	@JsonIgnoreProperties(value={"id_barber","hibernateLazyInitializer","handler"},allowSetters = true)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "id_barber", cascade=CascadeType.ALL)
+	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
+	private List<Cuts> cuts;
+	
 	@JsonIgnoreProperties(value={"listBarbers","hibernateLazyInitializer","handler"},allowSetters = true)
 	@ManyToOne(fetch = FetchType.LAZY) 
 	@JoinColumn (name = "barbershop_id") 
@@ -67,8 +80,8 @@ public class Barber implements Serializable{
 
 
 	public Barber(Long id, String email, String password, String nickname, String city, String cellphone, int typeUser,
-			String photo, Date age, String description, Double qualification, Barbershop barbershop,
-			List<Booking> bokings) {
+			String photo, Date age, String description, Double qualification, List<Publication> publication,
+			List<Cuts> cuts, Barbershop barbershop, List<Booking> bokings) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -81,6 +94,8 @@ public class Barber implements Serializable{
 		this.age = age;
 		this.description = description;
 		this.qualification = qualification;
+		this.publication = publication;
+		this.cuts = cuts;
 		this.barbershop = barbershop;
 		this.bokings = bokings;
 	}
@@ -196,6 +211,26 @@ public class Barber implements Serializable{
 	}
 
 
+	public List<Publication> getPublication() {
+		return publication;
+	}
+
+
+	public void setPublication(List<Publication> publication) {
+		this.publication = publication;
+	}
+
+
+	public List<Cuts> getCuts() {
+		return cuts;
+	}
+
+
+	public void setCuts(List<Cuts> cuts) {
+		this.cuts = cuts;
+	}
+
+
 	public Barbershop getBarbershop() {
 		return barbershop;
 	}
@@ -214,6 +249,5 @@ public class Barber implements Serializable{
 	public void setBokings(List<Booking> bokings) {
 		this.bokings = bokings;
 	}
-	
 	
 }

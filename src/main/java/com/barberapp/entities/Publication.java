@@ -1,17 +1,25 @@
 package com.barberapp.entities;
 
-import java.sql.Date;
+
+
+import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "publication")
-public class Publication {
+public class Publication implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -20,12 +28,23 @@ public class Publication {
 	@Column (name = "id_publication")private Long id_publication;
 	
 	
-	@Column(name = "id_usuario")
-	private int id_usuario;
+	
+	@JsonIgnoreProperties(value={"publications","hibernateLazyInitializer","handler"},allowSetters = true)
+	@ManyToOne(fetch = FetchType.LAZY) 
+	@JoinColumn (name = "id_barbershop", referencedColumnName = "id" )
+	private Barbershop id_barbershop;
+	
+	
+	@JsonIgnoreProperties(value={"publication","hibernateLazyInitializer","handler"},allowSetters = true)
+	@ManyToOne(fetch = FetchType.LAZY) 
+	@JoinColumn (name = "id_barber", referencedColumnName = "id" )
+	private Barber id_barber;
+
 	
 	@Column(name="description")
 	private String description;
 	
+
 	
 	@Column(name="url")
 	private String url;
@@ -39,13 +58,7 @@ public class Publication {
 	
 
 
-	public Publication(Long id_publication, String description, String url) {
-		super();
-		this.id_publication = id_publication;
-		this.description = description;
-		this.url = url;
-	}
-
+	
 
 
 
