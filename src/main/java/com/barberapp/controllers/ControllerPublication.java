@@ -60,7 +60,11 @@ public class ControllerPublication {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
+<<<<<<< HEAD
 			response.put("menssaje", "Se publico con exito");
+=======
+			response.put("menssaje", "El usuario publicasion ha sido creado con exito");
+>>>>>>> 6655aa180e43e3ce9448c6bb137fb0f6771ea2cf
 			response.put("Barbero: ", newPublication);
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
@@ -87,7 +91,7 @@ public class ControllerPublication {
 		
 		if (!publication.isPresent()) {
 			response.put("Mensaje",
-					"EL cliente con el ID ".concat(id.toString().concat(" no existe en la base de datos")));
+					"la publicasion con el ID ".concat(id.toString().concat(" no existe en la base de datos")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
@@ -104,7 +108,7 @@ public class ControllerPublication {
 		Map<String, Object> response = new HashMap<>();
 		
 		if(!currentPublication.isPresent()) {
-		response.put("Mensaje", "No se pudo editar el cliente con el ID ".concat(id.toString().concat(" no existe en la base de datos")));
+		response.put("Mensaje", "No se pudo editar la publicasion con el ID ".concat(id.toString().concat(" no existe en la base de datos")));
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
@@ -118,12 +122,12 @@ public class ControllerPublication {
 		
 		} catch (DataAccessException e) {
 		
-		response.put("Mensaje", "Error al actualizar el cliente en la base de datos");
+		response.put("Mensaje", "Error al actualizar la publicasion en la base de datos");
 		response.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("Mensaje", "El cliente ha sido actualizado");
+		response.put("Mensaje", "la publicasion ha sido actualizado");
 		response.put("Barbero: ", PublicationUpdate);
 		
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
@@ -152,11 +156,11 @@ public class ControllerPublication {
 			servicePublication.deleteById(id);
 			
 		} catch (Exception e) {
-			response.put("Mensaje", "Error al eliminar el cliente en la base de datos");
+			response.put("Mensaje", "Error al eliminar la publicasion en la base de datos");
 			response.put("Error", e.getMessage().concat(": ").concat(((NestedRuntimeException) e).getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		response.put("Mensaje","El cliente se ha eliminado con exito! ");
+		response.put("Mensaje","la publicasion se ha eliminado con exito! ");
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 
 	}

@@ -38,8 +38,14 @@ public class Images implements Serializable{
 	private String description;
 	
 	@JsonIgnoreProperties(value={"catalogue","hibernateLazyInitializer","handler"},allowSetters = true)
+<<<<<<< HEAD
 	@OneToOne(fetch = FetchType.LAZY) 
 	@JoinColumn (name = "owner", referencedColumnName = "id")
+=======
+	@ManyToOne(fetch = FetchType.LAZY) 
+	@JoinColumn (name = "barbershop_id", referencedColumnName = "id")
+	//@JoinColumn (name = "barbershop_id", referencedColumnName = "id")
+>>>>>>> 6655aa180e43e3ce9448c6bb137fb0f6771ea2cf
 	private Barbershop owner;
 
 	public Images() {
@@ -103,5 +109,8 @@ public class Images implements Serializable{
 	}
 
 	
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6655aa180e43e3ce9448c6bb137fb0f6771ea2cf
 }
