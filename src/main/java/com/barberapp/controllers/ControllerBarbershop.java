@@ -235,7 +235,8 @@ public class ControllerBarbershop {
 	"La barberia con el ID ".concat(id.toString().concat(" no existe en la base de datos")));
 	return promotions= new ArrayList<Promotions>();
 	}
-	
 	return barbershop.get().getPromotion();
+	
+	
 	}
 		}
