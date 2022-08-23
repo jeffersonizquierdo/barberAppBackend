@@ -52,6 +52,10 @@ public class Barbershop implements Serializable{
 	private Promotions promotion; 
 	
 	@JsonIgnoreProperties(value={"owner","hibernateLazyInitializer","handler"},allowSetters = true)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner") 
+	private List<Publication> publication;
+
+	@JsonIgnoreProperties(value={"owner","hibernateLazyInitializer","handler"},allowSetters = true)
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner")
 	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
 	private List<Images> catalogue;
@@ -60,22 +64,18 @@ public class Barbershop implements Serializable{
 	
 	public Barbershop() {
 		super();
-
-		this.catalogue = new ArrayList<>();
-		this.listBarbers = new ArrayList<Barber>();
+		// TODO Auto-generated constructor stub
 	}
+
+
 
 	public Barbershop(Long id, String email, String password, String nickname, String city, String cellphone,
 			int typeUser, String photo, String description, String location, Double qualification,
-			List<Barber> listBarbers) {
+			List<Barber> listBarbers, List<Booking> bokings, Promotions promotion, List<Publication> publication,
+			List<Images> catalogue) {
 		super();
 		this.id = id;
 		this.email = email;
-		
-		
-		
-		
-		
 		this.password = password;
 		this.nickname = nickname;
 		this.city = city;
@@ -86,8 +86,12 @@ public class Barbershop implements Serializable{
 		this.location = location;
 		this.qualification = qualification;
 		this.listBarbers = listBarbers;
+		this.bokings = bokings;
+		this.promotion = promotion;
+		this.publication = publication;
 		this.catalogue = catalogue;
 	}
+
 
 
 	public Long getId() {
@@ -95,17 +99,11 @@ public class Barbershop implements Serializable{
 	}
 
 
-	public List<Images> getCatalogue() {
-		return catalogue;
-	}
-
-	public void setCatalogue(List<Images> catalogue) {
-		this.catalogue = catalogue;
-	}
 
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 
 
 	public String getEmail() {
@@ -113,9 +111,11 @@ public class Barbershop implements Serializable{
 	}
 
 
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 
 
 	public String getPassword() {
@@ -123,9 +123,11 @@ public class Barbershop implements Serializable{
 	}
 
 
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 
 
 	public String getNickname() {
@@ -133,9 +135,11 @@ public class Barbershop implements Serializable{
 	}
 
 
+
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+
 
 
 	public String getCity() {
@@ -143,9 +147,11 @@ public class Barbershop implements Serializable{
 	}
 
 
+
 	public void setCity(String city) {
 		this.city = city;
 	}
+
 
 
 	public String getCellphone() {
@@ -153,9 +159,11 @@ public class Barbershop implements Serializable{
 	}
 
 
+
 	public void setCellphone(String cellphone) {
 		this.cellphone = cellphone;
 	}
+
 
 
 	public int getTypeUser() {
@@ -163,9 +171,11 @@ public class Barbershop implements Serializable{
 	}
 
 
+
 	public void setTypeUser(int typeUser) {
 		this.typeUser = typeUser;
 	}
+
 
 
 	public String getPhoto() {
@@ -173,9 +183,11 @@ public class Barbershop implements Serializable{
 	}
 
 
+
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
+
 
 
 	public String getDescription() {
@@ -183,9 +195,11 @@ public class Barbershop implements Serializable{
 	}
 
 
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 
 
 	public String getLocation() {
@@ -193,9 +207,11 @@ public class Barbershop implements Serializable{
 	}
 
 
+
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
 
 
 	public Double getQualification() {
@@ -203,9 +219,11 @@ public class Barbershop implements Serializable{
 	}
 
 
+
 	public void setQualification(Double qualification) {
 		this.qualification = qualification;
 	}
+
 
 
 	public List<Barber> getListBarbers() {
@@ -213,21 +231,70 @@ public class Barbershop implements Serializable{
 	}
 
 
+
 	public void setListBarbers(List<Barber> listBarbers) {
 		this.listBarbers = listBarbers;
 	}
-	
-	public List getListaImages() {
-		
-		return null;
+
+
+
+	public List<Booking> getBokings() {
+		return bokings;
 	}
 
 
-	
-	
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+
+	public void setBokings(List<Booking> bokings) {
+		this.bokings = bokings;
 	}
 
+
+
+	public Promotions getPromotion() {
+		return promotion;
+	}
+
+
+
+	public void setPromotion(Promotions promotion) {
+		this.promotion = promotion;
+	}
+
+
+
+	public List<Publication> getPublication() {
+		return publication;
+	}
+
+
+
+	public void setPublication(List<Publication> publication) {
+		this.publication = publication;
+	}
+
+
+
+	public List<Images> getCatalogue() {
+		return catalogue;
+	}
+
+
+
+	public void setCatalogue(List<Images> catalogue) {
+		this.catalogue = catalogue;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Barbershop [id=" + id + ", email=" + email + ", password=" + password + ", nickname=" + nickname
+				+ ", city=" + city + ", cellphone=" + cellphone + ", typeUser=" + typeUser + ", photo=" + photo
+				+ ", description=" + description + ", location=" + location + ", qualification=" + qualification
+				+ ", listBarbers=" + listBarbers + ", bokings=" + bokings + ", promotion=" + promotion
+				+ ", publication=" + publication + ", catalogue=" + catalogue + "]";
+	}
+	
+	
 
 }
