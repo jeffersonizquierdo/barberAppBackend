@@ -17,7 +17,8 @@ public class Barber implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id")
+	@Id 
+	@Column (name = "id")
 	private Long id;
 	
 	@Column (name = "email", nullable = false, unique = true, length = 200)
@@ -72,6 +73,10 @@ public class Barber implements Serializable{
 	@OneToMany (mappedBy = "barber", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Booking> bokings;
 
+	@JsonIgnoreProperties(value={"barber","hibernateLazyInitializer","handler"},allowSetters = true)
+	@ManyToOne(fetch = FetchType.LAZY) 
+	@JoinColumn (name = "usuario") 
+	private  Usuario usuario;
 	
 	public Barber() {
 		super();

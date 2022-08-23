@@ -50,7 +50,7 @@ public class Usuario implements Serializable {
 	
 	@Column(name = "date_or_birth")
 	private Date date;
-
+	
 	@JsonIgnoreProperties(value={"usuario","hibernateLazyInitializer","handler"},allowSetters = true)
 	@OneToOne(fetch = FetchType.LAZY) 
 	@JoinColumn (name = "barbershop")
@@ -62,9 +62,8 @@ public class Usuario implements Serializable {
 	@JoinColumn (name = "barber")
 	private Barber barber;
 	
-	
 	@JsonIgnoreProperties(value={"usuario","hibernateLazyInitializer","handler"},allowSetters = true)
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY) 
 	@JoinColumn (name = "customer")
 	private Customer customer;
 
