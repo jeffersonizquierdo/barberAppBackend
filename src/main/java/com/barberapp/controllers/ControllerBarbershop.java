@@ -53,8 +53,10 @@ public class ControllerBarbershop {
 		Map<String, Object> response = new HashMap<>();
 
 		try {
-
+			
+			
 			newBarbershop = serviceBarbershop.save(barbershop);
+
 
 		} catch (DataAccessException e) {
 
@@ -65,7 +67,7 @@ public class ControllerBarbershop {
 		}
 
 		response.put("menssaje", "El usuario barberia ha sido creado con exito");
-		response.put("Barbero: ", newBarbershop);
+		response.put("Barberia: ", newBarbershop);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 
 	}

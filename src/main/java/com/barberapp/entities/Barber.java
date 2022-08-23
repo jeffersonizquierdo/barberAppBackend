@@ -1,23 +1,11 @@
 package com.barberapp.entities;
 
+
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -27,6 +15,7 @@ public class Barber implements Serializable{
 	
 	
 	private static final long serialVersionUID = 1L;
+
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id")
 	private Long id;
@@ -82,25 +71,12 @@ public class Barber implements Serializable{
 	
 	@OneToMany (mappedBy = "barber", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Booking> bokings;
+
 	
 	public Barber() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
-	
-	
-
-
-
-	
-
-
-
-
-
-
 
 
 	public Barber(Long id, String email, String password, String nickname, String city, String cellphone, int typeUser,
@@ -123,115 +99,6 @@ public class Barber implements Serializable{
 		this.barbershop = barbershop;
 		this.bokings = bokings;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	public List<Cuts> getCuts() {
-		return cuts;
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	public void setCuts(List<Cuts> cuts) {
-		this.cuts = cuts;
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	public List<Publication> getPublication() {
-		return publication;
-	}
-
-
-
-
-
-
-	public void setPublication(List<Publication> publication) {
-		this.publication = publication;
-	}
-
-
-
-
-
-
-	public Barbershop getBarbershop() {
-		return barbershop;
-	}
-
-
-
-
-
-
-	public void setBarbershop(Barbershop barbershop) {
-		this.barbershop = barbershop;
-	}
-
-
-
-
-
-
-	public List<Booking> getBokings() {
-		return bokings;
-	}
-
-
-
-
-
-
-	public void setBokings(List<Booking> bokings) {
-		this.bokings = bokings;
-	}
-
-
-
-
 
 
 	public Long getId() {
@@ -344,8 +211,43 @@ public class Barber implements Serializable{
 	}
 
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public List<Publication> getPublication() {
+		return publication;
 	}
 
+
+	public void setPublication(List<Publication> publication) {
+		this.publication = publication;
+	}
+
+
+	public List<Cuts> getCuts() {
+		return cuts;
+	}
+
+
+	public void setCuts(List<Cuts> cuts) {
+		this.cuts = cuts;
+	}
+
+
+	public Barbershop getBarbershop() {
+		return barbershop;
+	}
+
+
+	public void setBarbershop(Barbershop barbershop) {
+		this.barbershop = barbershop;
+	}
+
+
+	public List<Booking> getBokings() {
+		return bokings;
+	}
+
+
+	public void setBokings(List<Booking> bokings) {
+		this.bokings = bokings;
+	}
+	
 }
