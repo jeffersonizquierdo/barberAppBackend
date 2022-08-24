@@ -40,7 +40,6 @@ public class Customer  implements Serializable{
 	private List<Booking> bokings;
 
 	
-	
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub

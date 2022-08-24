@@ -17,7 +17,8 @@ public class Barber implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id")
+	@Id 
+	@Column (name = "id")
 	private Long id;
 	
 	@Column (name = "email", nullable = false, unique = true, length = 200)
@@ -58,11 +59,7 @@ public class Barber implements Serializable{
 	private List<Publication> publication;
 	
 	
-	
-	@JsonIgnoreProperties(value={"id_barber","hibernateLazyInitializer","handler"},allowSetters = true)
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "id_barber", cascade=CascadeType.ALL)
-	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
-	private List<Cuts> cuts;
+
 	
 	@JsonIgnoreProperties(value={"listBarbers","hibernateLazyInitializer","handler"},allowSetters = true)
 	@ManyToOne(fetch = FetchType.LAZY) 
@@ -80,8 +77,7 @@ public class Barber implements Serializable{
 
 
 	public Barber(Long id, String email, String password, String nickname, String city, String cellphone, int typeUser,
-			String photo, Date age, String description, Double qualification, List<Publication> publication,
-			List<Cuts> cuts, Barbershop barbershop, List<Booking> bokings) {
+			String photo, Date age, String description, Double qualification, List<Publication> publication, Barbershop barbershop, List<Booking> bokings) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -95,7 +91,7 @@ public class Barber implements Serializable{
 		this.description = description;
 		this.qualification = qualification;
 		this.publication = publication;
-		this.cuts = cuts;
+	
 		this.barbershop = barbershop;
 		this.bokings = bokings;
 	}
@@ -220,15 +216,6 @@ public class Barber implements Serializable{
 		this.publication = publication;
 	}
 
-
-	public List<Cuts> getCuts() {
-		return cuts;
-	}
-
-
-	public void setCuts(List<Cuts> cuts) {
-		this.cuts = cuts;
-	}
 
 
 	public Barbershop getBarbershop() {
