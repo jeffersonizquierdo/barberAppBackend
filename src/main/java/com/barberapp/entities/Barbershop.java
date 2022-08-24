@@ -58,11 +58,7 @@ public class Barbershop implements Serializable{
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "id_barbershop", cascade=CascadeType.ALL)
 	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
 	private List<Publication> publications;
-	
-	@JsonIgnoreProperties(value={"id_barbershop","hibernateLazyInitializer","handler"},allowSetters = true)
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "id_barbershop", cascade=CascadeType.ALL)
-	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
-	private List<Cuts> cuts;
+
 
 	public Barbershop() {
 		super();
@@ -73,7 +69,7 @@ public class Barbershop implements Serializable{
 	public Barbershop(Long id, String email, String password, String nickname, String city, String cellphone,
 			int typeUser, String photo, String description, String location, Double qualification,
 			List<Barber> listBarbers, List<Booking> bokings, List<Promotions> promotion, List<Images> catalogue,
-			List<Publication> publications, List<Cuts> cuts) {
+			List<Publication> publications) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -91,7 +87,7 @@ public class Barbershop implements Serializable{
 		this.promotion = promotion;
 		this.catalogue = catalogue;
 		this.publications = publications;
-		this.cuts = cuts;
+	
 	}
 
 	public Long getId() {
@@ -222,13 +218,7 @@ public class Barbershop implements Serializable{
 		this.publications = publications;
 	}
 
-	public List<Cuts> getCuts() {
-		return cuts;
-	}
 
-	public void setCuts(List<Cuts> cuts) {
-		this.cuts = cuts;
-	}
 
 
 	
