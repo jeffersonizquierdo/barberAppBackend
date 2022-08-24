@@ -39,9 +39,6 @@ public class Customer  implements Serializable{
 	@OneToMany (mappedBy = "customer", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Booking> bokings;
 
-	@JsonIgnoreProperties(value={"customer","hibernateLazyInitializer","handler"},allowSetters = true)
-	@ManyToOne(fetch = FetchType.LAZY) 
-	private  Usuario usuario;
 	
 	public Customer() {
 		super();

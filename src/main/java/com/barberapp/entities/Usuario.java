@@ -1,7 +1,5 @@
 package com.barberapp.entities;
 
-
-
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -33,6 +31,7 @@ public class Usuario implements Serializable {
 
 	@Column(length = 60)
 	private String password;
+	
 
 	private Boolean enabled;
 
@@ -53,19 +52,8 @@ public class Usuario implements Serializable {
 	
 	@JsonIgnoreProperties(value={"usuario","hibernateLazyInitializer","handler"},allowSetters = true)
 	@OneToOne(fetch = FetchType.LAZY) 
-	@JoinColumn (name = "barbershop")
-	private Barbershop barbershop;
-	
-	
-	@JsonIgnoreProperties(value={"usuario","hibernateLazyInitializer","handler"},allowSetters = true)
-	@OneToOne(fetch = FetchType.LAZY) 
-	@JoinColumn (name = "barber")
-	private Barber barber;
-	
-	@JsonIgnoreProperties(value={"usuario","hibernateLazyInitializer","handler"},allowSetters = true)
-	@OneToOne(fetch = FetchType.LAZY) 
-	@JoinColumn (name = "customer")
-	private Customer customer;
+	@JoinColumn (name = "cuts")
+	private Cuts cuts;
 
 
 	public Usuario() {
@@ -75,8 +63,9 @@ public class Usuario implements Serializable {
 	}
 
 
+
 	public Usuario(Long id, String username, String email, String password, Boolean enabled, List<Role> roles,
-			int typeUser, Date date, Barbershop barbershop, Barber barber, Customer customer) {
+			int typeUser, Date date, Cuts cuts) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -86,10 +75,23 @@ public class Usuario implements Serializable {
 		this.roles = roles;
 		this.typeUser = typeUser;
 		this.date = date;
-		this.barbershop = barbershop;
-		this.barber = barber;
-		this.customer = customer;
+		this.cuts = cuts;
 	}
+
+
+
+	public Cuts getCuts() {
+		return cuts;
+	}
+
+
+
+
+	public void setCuts(Cuts cuts) {
+		this.cuts = cuts;
+	}
+
+
 
 
 	public Long getId() {
@@ -171,35 +173,6 @@ public class Usuario implements Serializable {
 		this.date = date;
 	}
 
-
-	public Barbershop getBarbershop() {
-		return barbershop;
-	}
-
-
-	public void setBarbershop(Barbershop barbershop) {
-		this.barbershop = barbershop;
-	}
-
-
-	public Barber getBarber() {
-		return barber;
-	}
-
-
-	public void setBarber(Barber barber) {
-		this.barber = barber;
-	}
-
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
 	
 
 }

@@ -59,11 +59,7 @@ public class Barber implements Serializable{
 	private List<Publication> publication;
 	
 	
-	
-	@JsonIgnoreProperties(value={"id_barber","hibernateLazyInitializer","handler"},allowSetters = true)
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "id_barber", cascade=CascadeType.ALL)
-	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
-	private List<Cuts> cuts;
+
 	
 	@JsonIgnoreProperties(value={"listBarbers","hibernateLazyInitializer","handler"},allowSetters = true)
 	@ManyToOne(fetch = FetchType.LAZY) 
@@ -73,10 +69,6 @@ public class Barber implements Serializable{
 	@OneToMany (mappedBy = "barber", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Booking> bokings;
 
-	@JsonIgnoreProperties(value={"barber","hibernateLazyInitializer","handler"},allowSetters = true)
-	@ManyToOne(fetch = FetchType.LAZY) 
-	@JoinColumn (name = "usuario") 
-	private  Usuario usuario;
 	
 	public Barber() {
 		super();
@@ -85,8 +77,7 @@ public class Barber implements Serializable{
 
 
 	public Barber(Long id, String email, String password, String nickname, String city, String cellphone, int typeUser,
-			String photo, Date age, String description, Double qualification, List<Publication> publication,
-			List<Cuts> cuts, Barbershop barbershop, List<Booking> bokings) {
+			String photo, Date age, String description, Double qualification, List<Publication> publication, Barbershop barbershop, List<Booking> bokings) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -100,7 +91,7 @@ public class Barber implements Serializable{
 		this.description = description;
 		this.qualification = qualification;
 		this.publication = publication;
-		this.cuts = cuts;
+	
 		this.barbershop = barbershop;
 		this.bokings = bokings;
 	}
@@ -225,15 +216,6 @@ public class Barber implements Serializable{
 		this.publication = publication;
 	}
 
-
-	public List<Cuts> getCuts() {
-		return cuts;
-	}
-
-
-	public void setCuts(List<Cuts> cuts) {
-		this.cuts = cuts;
-	}
 
 
 	public Barbershop getBarbershop() {
