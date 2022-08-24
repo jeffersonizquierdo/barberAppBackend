@@ -24,11 +24,11 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(unique = true, length = 30)
+	@Column(unique = true, length = 200)
 	private String username;
 	
 	@Column(unique = true, length = 200)
-	private String email;
+	private String nickname;
 
 
 	@Column(length = 60)
@@ -76,12 +76,12 @@ public class Usuario implements Serializable {
 	}
 
 
-	public Usuario(Long id, String username, String email, String password, Boolean enabled, List<Role> roles,
+	public Usuario(Long id, String username, String nickname, String password, Boolean enabled, List<Role> roles,
 			int typeUser, Date date, Barbershop barbershop, Barber barber, Customer customer) {
 		super();
 		this.id = id;
 		this.username = username;
-		this.email = email;
+		this.nickname = nickname;
 		this.password = password;
 		this.enabled = enabled;
 		this.roles = roles;
@@ -113,13 +113,13 @@ public class Usuario implements Serializable {
 	}
 
 
-	public String getEmail() {
-		return email;
+	public String getNickname() {
+		return nickname;
 	}
 
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 
