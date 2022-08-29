@@ -12,10 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-<<<<<<< HEAD
-=======
-import javax.persistence.OneToOne;
->>>>>>> 6655aa180e43e3ce9448c6bb137fb0f6771ea2cf
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -30,10 +26,6 @@ public class Publication implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column (name = "id_publication")private Long id_publication;
 	
-<<<<<<< HEAD
-=======
-	
-	
 	@JsonIgnoreProperties(value={"publications","hibernateLazyInitializer","handler"},allowSetters = true)
 	@ManyToOne(fetch = FetchType.LAZY) 
 	@JoinColumn (name = "id_barbershop", referencedColumnName = "id" )
@@ -45,8 +37,6 @@ public class Publication implements Serializable {
 	@JoinColumn (name = "id_barber", referencedColumnName = "id" )
 	private Barber id_barber;
 
-	
->>>>>>> 6655aa180e43e3ce9448c6bb137fb0f6771ea2cf
 	@Column(name="description")
 	private String description;
 	
@@ -63,7 +53,7 @@ public class Publication implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-<<<<<<< HEAD
+
 	public Publication(Long id_publication, String description, String url, Barbershop owner) {
 		super();
 		this.id_publication = id_publication;
@@ -71,12 +61,10 @@ public class Publication implements Serializable {
 		this.url = url;
 		this.owner = owner;
 	}
-=======
 
 	
 
 
->>>>>>> 6655aa180e43e3ce9448c6bb137fb0f6771ea2cf
 
 	public Long getId_publication() {
 		return id_publication;
