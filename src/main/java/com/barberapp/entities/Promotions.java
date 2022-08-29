@@ -37,10 +37,12 @@ public class Promotions implements Serializable{
 	@Column(length = 100)
 	private String description;
 	
+
 	@JsonIgnoreProperties(value={"promotion","hibernateLazyInitializer","handler"},allowSetters = true)
 	@OneToOne(fetch = FetchType.LAZY) 
 	@JoinColumn (name = "owner", referencedColumnName = "id" )
 	private Barbershop owner;
+
 
 	public Promotions() {
 		super();
@@ -96,11 +98,8 @@ public class Promotions implements Serializable{
 		this.owner = owner;
 	}
 
-	@Override
-	public String toString() {
-		return "Promotions [id=" + id + ", name=" + name + ", url=" + url + ", description=" + description + ", owner="
-				+ owner + "]";
-	}
+	
+	
 
 	
 }

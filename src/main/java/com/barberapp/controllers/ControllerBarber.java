@@ -36,8 +36,6 @@ public class ControllerBarber {
 	private ServiceBarber barberService;
 	
 	
-	
-	
 	 /////////////////// BARBER REGISTRAR   http://localhost:8080/barber/save ////////////////
 	@PostMapping("/save")
 	public ResponseEntity<?> create (@RequestBody Barber barber){
@@ -51,7 +49,7 @@ public class ControllerBarber {
 			
 		} catch (DataAccessException e) {
 			
-			response.put("Mensaje", "Error al hacer insert en la base de datos");
+			response.put("Mensaje", "Error al registrar");
 			response.put("Error", e.getMessage().concat(": ").concat(((NestedRuntimeException) e).getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -158,11 +156,11 @@ public class ControllerBarber {
 	public  List<Barber> consultAllUsers(){
 		
 		
-		List<Barber> barber = StreamSupport
+		List<Barber> barbers = StreamSupport
 				.stream(barberService.findAll().spliterator(), false)
 				.collect(Collectors.toList());
 		
-		return  barber;
+		return  barbers;
 	}
 
 }

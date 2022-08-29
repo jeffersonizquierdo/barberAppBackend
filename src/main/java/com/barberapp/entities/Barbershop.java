@@ -1,6 +1,6 @@
 package com.barberapp.entities;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -26,8 +25,7 @@ public class Barbershop implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)@Column (name = "id")
-	private Long id;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)private Long id;
 	@Column (name = "email", nullable = false, unique = true, length = 200) private String email;
 	@Column (name = "password", nullable = false) private String password;
 	@Column (name = "nickname", nullable = false) private String nickname;
@@ -38,7 +36,6 @@ public class Barbershop implements Serializable{
 	@Column (name = "description") private String description;
 	@Column (name = "location") private String location;
 	@Column (name = "qualification") private Double qualification;
-	
 
 	@JsonIgnoreProperties(value={"owner","hibernateLazyInitializer","handler"},allowSetters = true)
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "barbershop", cascade=CascadeType.ALL)
@@ -53,6 +50,7 @@ public class Barbershop implements Serializable{
 
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner", cascade=CascadeType.ALL)
 	private List<Promotions> promotion; 
+
 	
 	@JsonIgnoreProperties(value={"owner","hibernateLazyInitializer","handler"},allowSetters = true)
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner") 
@@ -62,23 +60,19 @@ public class Barbershop implements Serializable{
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner")
 	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
 	private List<Images> catalogue;
-	
+
 	@JsonIgnoreProperties(value={"id_barbershop","hibernateLazyInitializer","handler"},allowSetters = true)
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "id_barbershop", cascade=CascadeType.ALL)
 	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
 	private List<Publication> publications;
-	
-	@JsonIgnoreProperties(value={"id_barbershop","hibernateLazyInitializer","handler"},allowSetters = true)
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "id_barbershop", cascade=CascadeType.ALL)
-	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
-	private List<Cuts> cuts;
 
 
-	
 	public Barbershop() {
 		super();
+		
 		// TODO Auto-generated constructor stub
 	}
+<<<<<<< HEAD
 
 
 
@@ -86,6 +80,13 @@ public class Barbershop implements Serializable{
 			int typeUser, String photo, String description, String location, Double qualification,
 			List<Barber> listBarbers, List<Booking> bokings, List<Promotions> promotion, List<Publication> publication,
 			List<Images> catalogue, List<Publication> publications, List<Cuts> cuts) {
+=======
+
+	public Barbershop(Long id, String email, String password, String nickname, String city, String cellphone,
+			int typeUser, String photo, String description, String location, Double qualification,
+			List<Barber> listBarbers, List<Booking> bokings, List<Promotions> promotion, List<Images> catalogue,
+			List<Publication> publications) {
+>>>>>>> 48f7f8f4e258a87fa26e21158056a66a9bebf0f2
 		super();
 		this.id = id;
 		this.email = email;
@@ -104,11 +105,17 @@ public class Barbershop implements Serializable{
 		this.publication = publication;
 		this.catalogue = catalogue;
 		this.publications = publications;
+<<<<<<< HEAD
 		this.cuts = cuts;
 	}
 
 
 
+=======
+	
+	}
+
+>>>>>>> 48f7f8f4e258a87fa26e21158056a66a9bebf0f2
 	public Long getId() {
 		return id;
 	}
@@ -299,20 +306,27 @@ public class Barbershop implements Serializable{
 		this.catalogue = catalogue;
 	}
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 48f7f8f4e258a87fa26e21158056a66a9bebf0f2
 	public List<Publication> getPublications() {
 		return publications;
 	}
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 48f7f8f4e258a87fa26e21158056a66a9bebf0f2
 	public void setPublications(List<Publication> publications) {
 		this.publications = publications;
 	}
 
 
 
+<<<<<<< HEAD
 	public List<Cuts> getCuts() {
 		return cuts;
 	}
@@ -333,9 +347,9 @@ public class Barbershop implements Serializable{
 
 
 
+=======
+>>>>>>> 48f7f8f4e258a87fa26e21158056a66a9bebf0f2
 
 	
 	
-	
-
 }
