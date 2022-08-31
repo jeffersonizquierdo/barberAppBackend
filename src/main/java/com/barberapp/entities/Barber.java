@@ -1,23 +1,11 @@
 package com.barberapp.entities;
 
+
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -28,7 +16,9 @@ public class Barber implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id")
+
+	@Id 
+	@Column (name = "id")
 	private Long id;
 	
 	@Column (name = "email", nullable = false, unique = true, length = 200)
@@ -69,11 +59,7 @@ public class Barber implements Serializable{
 	private List<Publication> publication;
 	
 	
-	
-	@JsonIgnoreProperties(value={"id_barber","hibernateLazyInitializer","handler"},allowSetters = true)
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "id_barber", cascade=CascadeType.ALL)
-	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
-	private List<Cuts> cuts;
+
 	
 	@JsonIgnoreProperties(value={"listBarbers","hibernateLazyInitializer","handler"},allowSetters = true)
 	@ManyToOne(fetch = FetchType.LAZY) 
@@ -82,30 +68,16 @@ public class Barber implements Serializable{
 	
 	@OneToMany (mappedBy = "barber", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Booking> bokings;
+
 	
 	public Barber() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
-	
-	
-
-
-
-	
-
-
-
-
-
-
 
 
 	public Barber(Long id, String email, String password, String nickname, String city, String cellphone, int typeUser,
-			String photo, Date age, String description, Double qualification, List<Publication> publication,
-			List<Cuts> cuts, Barbershop barbershop, List<Booking> bokings) {
+			String photo, Date age, String description, Double qualification, List<Publication> publication, Barbershop barbershop, List<Booking> bokings) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -119,119 +91,10 @@ public class Barber implements Serializable{
 		this.description = description;
 		this.qualification = qualification;
 		this.publication = publication;
-		this.cuts = cuts;
+	
 		this.barbershop = barbershop;
 		this.bokings = bokings;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	public List<Cuts> getCuts() {
-		return cuts;
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	public void setCuts(List<Cuts> cuts) {
-		this.cuts = cuts;
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	public List<Publication> getPublication() {
-		return publication;
-	}
-
-
-
-
-
-
-	public void setPublication(List<Publication> publication) {
-		this.publication = publication;
-	}
-
-
-
-
-
-
-	public Barbershop getBarbershop() {
-		return barbershop;
-	}
-
-
-
-
-
-
-	public void setBarbershop(Barbershop barbershop) {
-		this.barbershop = barbershop;
-	}
-
-
-
-
-
-
-	public List<Booking> getBokings() {
-		return bokings;
-	}
-
-
-
-
-
-
-	public void setBokings(List<Booking> bokings) {
-		this.bokings = bokings;
-	}
-
-
-
-
 
 
 	public Long getId() {
@@ -344,8 +207,34 @@ public class Barber implements Serializable{
 	}
 
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public List<Publication> getPublication() {
+		return publication;
 	}
 
+
+	public void setPublication(List<Publication> publication) {
+		this.publication = publication;
+	}
+
+
+
+	public Barbershop getBarbershop() {
+		return barbershop;
+	}
+
+
+	public void setBarbershop(Barbershop barbershop) {
+		this.barbershop = barbershop;
+	}
+
+
+	public List<Booking> getBokings() {
+		return bokings;
+	}
+
+
+	public void setBokings(List<Booking> bokings) {
+		this.bokings = bokings;
+	}
+	
 }
