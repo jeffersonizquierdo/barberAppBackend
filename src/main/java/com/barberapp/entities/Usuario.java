@@ -34,21 +34,25 @@ public class Usuario implements Serializable {
 	
 
 	private Boolean enabled;
-
+	
+	@Column(name = "type_user")
+	private int typeUser;
+	
+	@Column(length = 60)
+	private String city;
+	
+	@Column(length = 10)
+	private String cellphone;
+	
+	
+	@Column(name = "date_or_birth")
+	private Date date;
+	
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "users_roles", joinColumns =  @JoinColumn(name = "user_id"), 
 	inverseJoinColumns = @JoinColumn(name = "role_id"), uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id","role_id"})})
 	List<Role> roles;
-
-	
-	@Column(name = "type_user")
-	private int typeUser;
-
-	
-	
-	@Column(name = "date_or_birth")
-	private Date date;
 	
 	@JsonIgnoreProperties(value={"usuario","hibernateLazyInitializer","handler"},allowSetters = true)
 	@OneToOne(fetch = FetchType.LAZY) 
@@ -63,22 +67,21 @@ public class Usuario implements Serializable {
 	}
 
 
-
-
-	public Usuario(Long id, String username, String email, String password, Boolean enabled, List<Role> roles,
-			int typeUser, Date date, Cuts cuts) {
+	public Usuario(Long id, String username, String nickname, String password, Boolean enabled, int typeUser,
+			String city, String cellphone, Date date, List<Role> roles, Cuts cuts) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.nickname = nickname;
 		this.password = password;
 		this.enabled = enabled;
-		this.roles = roles;
 		this.typeUser = typeUser;
+		this.city = city;
+		this.cellphone = cellphone;
 		this.date = date;
+		this.roles = roles;
 		this.cuts = cuts;
 	}
-
 
 
 	public Cuts getCuts() {
@@ -173,6 +176,28 @@ public class Usuario implements Serializable {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
+
+	public String getCity() {
+		return city;
+	}
+
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+
+	public String getCellphone() {
+		return cellphone;
+	}
+
+
+	public void setCellphone(String cellphone) {
+		this.cellphone = cellphone;
+	}
+	
+	
 
 	
 
