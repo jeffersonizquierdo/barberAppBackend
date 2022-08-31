@@ -1,7 +1,6 @@
 package com.barberapp.entities;
 
 import java.io.Serializable; 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,10 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -72,21 +68,12 @@ public class Barbershop implements Serializable{
 		
 		// TODO Auto-generated constructor stub
 	}
-<<<<<<< HEAD
-
 
 
 	public Barbershop(Long id, String email, String password, String nickname, String city, String cellphone,
 			int typeUser, String photo, String description, String location, Double qualification,
 			List<Barber> listBarbers, List<Booking> bokings, List<Promotions> promotion, List<Publication> publication,
-			List<Images> catalogue, List<Publication> publications, List<Cuts> cuts) {
-=======
-
-	public Barbershop(Long id, String email, String password, String nickname, String city, String cellphone,
-			int typeUser, String photo, String description, String location, Double qualification,
-			List<Barber> listBarbers, List<Booking> bokings, List<Promotions> promotion, List<Images> catalogue,
-			List<Publication> publications) {
->>>>>>> 48f7f8f4e258a87fa26e21158056a66a9bebf0f2
+			List<Images> catalogue, List<Publication> publications) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -105,21 +92,12 @@ public class Barbershop implements Serializable{
 		this.publication = publication;
 		this.catalogue = catalogue;
 		this.publications = publications;
-<<<<<<< HEAD
-		this.cuts = cuts;
 	}
 
 
-
-=======
-	
-	}
-
->>>>>>> 48f7f8f4e258a87fa26e21158056a66a9bebf0f2
 	public Long getId() {
 		return id;
 	}
-
 
 
 	public void setId(Long id) {
@@ -127,11 +105,9 @@ public class Barbershop implements Serializable{
 	}
 
 
-
 	public String getEmail() {
 		return email;
 	}
-
 
 
 	public void setEmail(String email) {
@@ -139,11 +115,9 @@ public class Barbershop implements Serializable{
 	}
 
 
-
 	public String getPassword() {
 		return password;
 	}
-
 
 
 	public void setPassword(String password) {
@@ -151,11 +125,9 @@ public class Barbershop implements Serializable{
 	}
 
 
-
 	public String getNickname() {
 		return nickname;
 	}
-
 
 
 	public void setNickname(String nickname) {
@@ -163,11 +135,9 @@ public class Barbershop implements Serializable{
 	}
 
 
-
 	public String getCity() {
 		return city;
 	}
-
 
 
 	public void setCity(String city) {
@@ -175,11 +145,9 @@ public class Barbershop implements Serializable{
 	}
 
 
-
 	public String getCellphone() {
 		return cellphone;
 	}
-
 
 
 	public void setCellphone(String cellphone) {
@@ -187,11 +155,9 @@ public class Barbershop implements Serializable{
 	}
 
 
-
 	public int getTypeUser() {
 		return typeUser;
 	}
-
 
 
 	public void setTypeUser(int typeUser) {
@@ -199,11 +165,9 @@ public class Barbershop implements Serializable{
 	}
 
 
-
 	public String getPhoto() {
 		return photo;
 	}
-
 
 
 	public void setPhoto(String photo) {
@@ -211,11 +175,9 @@ public class Barbershop implements Serializable{
 	}
 
 
-
 	public String getDescription() {
 		return description;
 	}
-
 
 
 	public void setDescription(String description) {
@@ -223,11 +185,9 @@ public class Barbershop implements Serializable{
 	}
 
 
-
 	public String getLocation() {
 		return location;
 	}
-
 
 
 	public void setLocation(String location) {
@@ -235,11 +195,9 @@ public class Barbershop implements Serializable{
 	}
 
 
-
 	public Double getQualification() {
 		return qualification;
 	}
-
 
 
 	public void setQualification(Double qualification) {
@@ -247,11 +205,9 @@ public class Barbershop implements Serializable{
 	}
 
 
-
 	public List<Barber> getListBarbers() {
 		return listBarbers;
 	}
-
 
 
 	public void setListBarbers(List<Barber> listBarbers) {
@@ -259,11 +215,9 @@ public class Barbershop implements Serializable{
 	}
 
 
-
 	public List<Booking> getBokings() {
 		return bokings;
 	}
-
 
 
 	public void setBokings(List<Booking> bokings) {
@@ -271,11 +225,9 @@ public class Barbershop implements Serializable{
 	}
 
 
-
 	public List<Promotions> getPromotion() {
 		return promotion;
 	}
-
 
 
 	public void setPromotion(List<Promotions> promotion) {
@@ -283,11 +235,9 @@ public class Barbershop implements Serializable{
 	}
 
 
-
 	public List<Publication> getPublication() {
 		return publication;
 	}
-
 
 
 	public void setPublication(List<Publication> publication) {
@@ -295,60 +245,37 @@ public class Barbershop implements Serializable{
 	}
 
 
-
 	public List<Images> getCatalogue() {
 		return catalogue;
 	}
-
 
 
 	public void setCatalogue(List<Images> catalogue) {
 		this.catalogue = catalogue;
 	}
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 48f7f8f4e258a87fa26e21158056a66a9bebf0f2
 	public List<Publication> getPublications() {
 		return publications;
 	}
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 48f7f8f4e258a87fa26e21158056a66a9bebf0f2
 	public void setPublications(List<Publication> publications) {
 		this.publications = publications;
 	}
 
 
-
-<<<<<<< HEAD
-	public List<Cuts> getCuts() {
-		return cuts;
+	@Override
+	public String toString() {
+		return "Barbershop [id=" + id + ", email=" + email + ", password=" + password + ", nickname=" + nickname
+				+ ", city=" + city + ", cellphone=" + cellphone + ", typeUser=" + typeUser + ", photo=" + photo
+				+ ", description=" + description + ", location=" + location + ", qualification=" + qualification
+				+ ", listBarbers=" + listBarbers + ", bokings=" + bokings + ", promotion=" + promotion
+				+ ", publication=" + publication + ", catalogue=" + catalogue + ", publications=" + publications + "]";
 	}
 
 
 
-	public void setCuts(List<Cuts> cuts) {
-		this.cuts = cuts;
-	}
-	
-	
-
-	
-
-
-
-
-
-
-
-=======
->>>>>>> 48f7f8f4e258a87fa26e21158056a66a9bebf0f2
 
 	
 	

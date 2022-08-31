@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -38,13 +37,9 @@ public class Images implements Serializable{
 	private String description;
 	
 	@JsonIgnoreProperties(value={"catalogue","hibernateLazyInitializer","handler"},allowSetters = true)
-<<<<<<< HEAD
-	@JoinColumn (name = "owner", referencedColumnName = "id")
-	@ManyToOne(fetch = FetchType.LAZY) 
-=======
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn (name = "barbershop_id")
->>>>>>> 48f7f8f4e258a87fa26e21158056a66a9bebf0f2
 	//@JoinColumn (name = "barbershop_id", referencedColumnName = "id")
 	private Barbershop owner;
 
