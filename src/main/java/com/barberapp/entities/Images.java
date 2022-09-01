@@ -37,6 +37,7 @@ public class Images implements Serializable{
 	private String description;
 	
 	@JsonIgnoreProperties(value={"catalogue","hibernateLazyInitializer","handler"},allowSetters = true)
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn (name = "barbershop_id")
 	//@JoinColumn (name = "barbershop_id", referencedColumnName = "id")
