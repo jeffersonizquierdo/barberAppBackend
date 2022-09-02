@@ -85,7 +85,7 @@ public class ControllerCustomer {
 
 		}
 
-		if (!customer.isPresent()) {
+		if (customer == null) {
 			response.put("Mensaje",
 					"EL cliente con el ID ".concat(id.toString().concat(" no existe en la base de datos")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
