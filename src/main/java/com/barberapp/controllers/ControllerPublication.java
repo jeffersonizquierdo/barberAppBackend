@@ -60,8 +60,8 @@ public class ControllerPublication {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-			response.put("menssaje", "El usuario publicasion ha sido creado con exito");
-			response.put("Barbero: ", newPublication);
+			response.put("menssaje", "Se publico con exito");
+			response.put("Publicación: ", newPublication);
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	

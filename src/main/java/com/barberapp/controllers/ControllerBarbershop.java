@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestController; 
 
 import com.barberapp.entities.Barber;
 import com.barberapp.entities.Barbershop;
@@ -238,8 +238,9 @@ public class ControllerBarbershop {
 	"La barberia con el ID ".concat(id.toString().concat(" no existe en la base de datos")));
 	return promotions= new ArrayList<Promotions>();
 	}
-	
 	return barbershop.get().getPromotion();
+	
+	
 	}
 	
 	/////////////////// CONSULT PROMOTIO BARBERSHOP
