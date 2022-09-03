@@ -66,6 +66,26 @@ public class Publication implements Serializable {
 
 
 
+	public Barbershop getId_barbershop() {
+		return id_barbershop;
+	}
+
+
+	public void setId_barbershop(Barbershop id_barbershop) {
+		this.id_barbershop = id_barbershop;
+	}
+
+
+	public Barber getId_barber() {
+		return id_barber;
+	}
+
+
+	public void setId_barber(Barber id_barber) {
+		this.id_barber = id_barber;
+	}
+
+
 	public Long getId_publication() {
 		return id_publication;
 	}
