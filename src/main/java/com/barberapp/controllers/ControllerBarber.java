@@ -111,6 +111,7 @@ public class ControllerBarber {
 			currentBarber.get().setAge(newBarber.getAge());
 			currentBarber.get().setPhoto(newBarber.getPhoto());
 			currentBarber.get().setQualification(newBarber.getQualification());
+			currentBarber.get().setBarbershop(newBarber.getBarbershop());
 			
 			barberUpdate = Optional.ofNullable(barberService.save(currentBarber.get()));
 			
