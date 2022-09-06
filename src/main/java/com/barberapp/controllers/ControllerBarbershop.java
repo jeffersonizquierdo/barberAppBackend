@@ -213,7 +213,7 @@ public class ControllerBarbershop {
 	
 	/////////////////// CONSULT PROMOTIO BARBERSHOP
 	/////////////////// http://localhost:8080/barbershop/consultPromotion/id ////////////////
-	@GetMapping("/consultPromotion/{id}")
+	@GetMapping("/consultpromotion/{id}")
 	public List<Promotions> consultPromotionBarbershopId(@PathVariable(value = "id") Long id) {
 	
 	

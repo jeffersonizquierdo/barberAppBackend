@@ -33,11 +33,14 @@ public class Bonding implements Serializable{
 	
 
 	@JsonIgnoreProperties(value={"bondings","hibernateLazyInitializer","handler"},allowSetters = true)
+
 	@OneToOne(fetch = FetchType.LAZY) 
 	@JoinColumn (name = "barbershop", referencedColumnName = "id" )
 	private Barbershop barbershop;	
 	
+
 	@JsonIgnoreProperties(value={"bondings","hibernateLazyInitializer","handler"},allowSetters = true)
+
 	@OneToOne(fetch = FetchType.LAZY) 
 	@JoinColumn (name = "barber", referencedColumnName = "id" )
 	private Barber barber;
@@ -104,6 +107,7 @@ public class Bonding implements Serializable{
 	public Boolean getAcceptance() {
 		return acceptance;
 	}
+
 
 
 
