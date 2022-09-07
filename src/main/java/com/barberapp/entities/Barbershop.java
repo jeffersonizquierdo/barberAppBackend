@@ -37,6 +37,7 @@ public class Barbershop implements Serializable{
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "barbershop", cascade=CascadeType.ALL)
 	private List<Barber> listBarbers;
 	
+	@JsonIgnoreProperties(value={"barbershop","hibernateLazyInitializer","handler"},allowSetters = true)
 	@OneToMany (mappedBy = "barbershop", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Booking> bokings;
 
