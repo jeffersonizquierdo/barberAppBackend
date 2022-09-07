@@ -36,6 +36,13 @@ public class ControllerBonding {
 	private ServiceBonding serviceBonding;
 	
 	
+	@GetMapping("hola")
+	public String saludo() {
+
+		return "Saludo desde controlado bonding";
+	}
+
+	
 	
 	/////////////////// BONDING REGISTRAR http://localhost:8080/bonding/save
 	/////////////////// ////////////////
@@ -138,7 +145,11 @@ public class ControllerBonding {
 	
 	
 	
+<<<<<<< HEAD
 	/////////////////// DELTE BONDING http://localhost:8080/bonding/consult
+=======
+	/////////////////// DELTE BONDING http://localhost:8080/bonding/delete/id
+>>>>>>> 203e9685957fb59546fe3325e7aa0a6b29052ecc
 	/////////////////// ////////////////
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> deleteBondgin(@PathVariable(value = "id") Long id) {
@@ -169,6 +180,8 @@ public class ControllerBonding {
 
 		List<Bonding> bondings = StreamSupport.stream(serviceBonding.findAll().spliterator(), false)
 				.collect(Collectors.toList());
+		
+		System.out.println(bondings);
 
 		return bondings;
 	}

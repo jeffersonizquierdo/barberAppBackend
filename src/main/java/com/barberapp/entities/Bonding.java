@@ -24,17 +24,23 @@ public class Bonding implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column (name = "id")
 	private Long id;
 	
-	@JsonIgnoreProperties(value={"bonding","hibernateLazyInitializer","handler"},allowSetters = true)
+
+	@JsonIgnoreProperties(value={"bondings","hibernateLazyInitializer","handler"},allowSetters = true)
+
 	@OneToOne(fetch = FetchType.LAZY) 
 	@JoinColumn (name = "barbershop", referencedColumnName = "id" )
 	private Barbershop barbershop;	
 	
-	@JsonIgnoreProperties(value={"bonding","hibernateLazyInitializer","handler"},allowSetters = true)
+
+	@JsonIgnoreProperties(value={"bondings","hibernateLazyInitializer","handler"},allowSetters = true)
+
 	@OneToOne(fetch = FetchType.LAZY) 
 	@JoinColumn (name = "barber", referencedColumnName = "id" )
 	private Barber barber;
