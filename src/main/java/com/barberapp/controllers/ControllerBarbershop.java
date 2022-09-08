@@ -27,6 +27,7 @@ import com.barberapp.entities.Barber;
 import com.barberapp.entities.Barbershop;
 import com.barberapp.entities.Images;
 import com.barberapp.entities.Promotions;
+import com.barberapp.entities.Publication;
 import com.barberapp.services.barbershop.ServiceBarbershop;
 
 
@@ -243,10 +244,10 @@ public class ControllerBarbershop {
 	
 	}
 	
-	/////////////////// CONSULT PROMOTIO BARBERSHOP
-	/////////////////// http://localhost:8080/barbershop/consultbarber/id ////////////////
-	@GetMapping("/consultbarber/{id}")
-	public List<Barber> consultBarberId(@PathVariable(value = "id") Long id) {
+	/////////////////// CONSULT PUBLICATION BARBERSHOP
+	/////////////////// http://localhost:8080/barbershop/consultpublication/id ////////////////
+	@GetMapping("/consultpublication/{id}")
+	public List<Publication> consultpublicatiopnId(@PathVariable(value = "id") Long id) {
 	
 	
 	Optional<Barbershop> barbershop = null;
@@ -257,21 +258,22 @@ public class ControllerBarbershop {
 		barbershop = serviceBarbershop.findById(id);
 		
 	} catch (DataAccessException e) {
-		List<Barber> barber;
+		List<Publication> publication;
 		response.put("Mensaje", "Error al hacer consulta en la base de datos");
 		response.put("Error", e.getMessage().concat(": ")
 		.concat(((NestedRuntimeException) e).getMostSpecificCause().getMessage()));
-		return barber= new ArrayList<Barber>()  ;
+		return publication= new ArrayList<Publication>()  ;
 	}
 	
 		if (!barbershop.isPresent()) {
-			List<Barber> barber;
+			List<Publication> publication;
 		response.put("Mensaje",
 		"La barberia con el ID ".concat(id.toString().concat(" no existe en la base de datos")));
-		return barber= new ArrayList<Barber>();
+		return publication= new ArrayList<Publication>();
 	}
 		
-		return barbershop.get().getListBarbers();
+		return barbershop.get().getPublications();
 	}
+	
 	
 }

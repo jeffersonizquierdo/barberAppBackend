@@ -48,9 +48,6 @@ public class Barbershop implements Serializable{
 	private List<Promotions> promotion; 
 
 	
-	@JsonIgnoreProperties(value={"owner","hibernateLazyInitializer","handler"},allowSetters = true)
-	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner") 
-	private List<Publication> publication;
 
 	@JsonIgnoreProperties(value={"owner","hibernateLazyInitializer","handler"},allowSetters = true)
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "owner")
@@ -72,7 +69,7 @@ public class Barbershop implements Serializable{
 
 	public Barbershop(Long id, String email, String password, String nickname, String city, String cellphone,
 			int typeUser, String photo, String description, String location, Double qualification,
-			List<Barber> listBarbers, List<Booking> bokings, List<Promotions> promotion, List<Publication> publication,
+			List<Barber> listBarbers, List<Booking> bokings, List<Promotions> promotion,
 			List<Images> catalogue, List<Publication> publications) {
 		super();
 		this.id = id;
@@ -89,7 +86,6 @@ public class Barbershop implements Serializable{
 		this.listBarbers = listBarbers;
 		this.bokings = bokings;
 		this.promotion = promotion;
-		this.publication = publication;
 		this.catalogue = catalogue;
 		this.publications = publications;
 	}
@@ -235,15 +231,6 @@ public class Barbershop implements Serializable{
 	}
 
 
-	public List<Publication> getPublication() {
-		return publication;
-	}
-
-
-	public void setPublication(List<Publication> publication) {
-		this.publication = publication;
-	}
-
 
 	public List<Images> getCatalogue() {
 		return catalogue;
@@ -271,7 +258,7 @@ public class Barbershop implements Serializable{
 				+ ", city=" + city + ", cellphone=" + cellphone + ", typeUser=" + typeUser + ", photo=" + photo
 				+ ", description=" + description + ", location=" + location + ", qualification=" + qualification
 				+ ", listBarbers=" + listBarbers + ", bokings=" + bokings + ", promotion=" + promotion
-				+ ", publication=" + publication + ", catalogue=" + catalogue + ", publications=" + publications + "]";
+				+ ", publication=" +  ", catalogue=" + catalogue + ", publications=" + publications + "]";
 	}
 
 
