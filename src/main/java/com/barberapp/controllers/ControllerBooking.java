@@ -88,15 +88,6 @@ public class ControllerBooking {
 		}
 			
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/////////////////// UPDATE BOOKING   http://localhost:8080/booking/update/ID ////////////////
 		@PutMapping("/update/{id}")
 		public ResponseEntity<?>update(@RequestBody Booking newBooking,@PathVariable (value = "id")Long idbooking ){
@@ -134,10 +125,9 @@ public class ControllerBooking {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 		}
 	
+
 	
-	
-	
-/////////////////// CONSULT ALL USER   http://localhost:8080/booking/consultall ///////////////
+	/////////////////// CONSULT ALL USER   http://localhost:8080/booking/consultall ///////////////
 
 		@GetMapping("/consultall")
 		public  List<Booking> consultAllUsers(){

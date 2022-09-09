@@ -66,6 +66,7 @@ public class Barber implements Serializable{
 	@JoinColumn (name = "barbershop_id") 
 	private  Barbershop barbershop;
 	
+	@JsonIgnoreProperties(value={"barber","hibernateLazyInitializer","handler"},allowSetters = true)
 	@OneToMany (mappedBy = "barber", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Booking> bokings;
 
