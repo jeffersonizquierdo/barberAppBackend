@@ -27,7 +27,8 @@ public class Customer  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column (name = "id")private Long id;
+	@Id
+	@Column (name = "id")private Long id;
 	@Column (name = "email", nullable = false, unique = true, length = 200) private String email;
 	@Column (name = "password", nullable = false) private String password;
 	@Column (name = "nickname", nullable = false) private String nickname;
@@ -36,6 +37,9 @@ public class Customer  implements Serializable{
 	@Column (name = "type_user", nullable = false) private int typeUser;
 	@Column (name = "photo", nullable = true) private String photo;
 	@Column (name = "age", nullable = false) private Date age;
+	
+	
+	@JsonIgnoreProperties(value={"customer","hibernateLazyInitializer","handler"},allowSetters = true)
 	@OneToMany (mappedBy = "customer", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Booking> bokings;
 

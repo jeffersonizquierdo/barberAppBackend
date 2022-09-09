@@ -43,10 +43,7 @@ public class Publication implements Serializable {
 	@Column(name="url")
 	private String url;
 
-	@JsonIgnoreProperties(value={"promotion","hibernateLazyInitializer","handler"},allowSetters = true)
-	@ManyToOne(fetch = FetchType.LAZY) 
-	@JoinColumn (name = "owner", referencedColumnName = "id")
-	private Barbershop owner;
+
 
 	public Publication() {
 		super();
@@ -54,12 +51,12 @@ public class Publication implements Serializable {
 	}
 
 
-	public Publication(Long id_publication, String description, String url, Barbershop owner) {
+	public Publication(Long id_publication, String description, String url) {
 		super();
 		this.id_publication = id_publication;
 		this.description = description;
 		this.url = url;
-		this.owner = owner;
+		
 	}
 
 	
@@ -110,13 +107,7 @@ public class Publication implements Serializable {
 		this.url = url;
 	}
 
-	public Barbershop getOwner() {
-		return owner;
-	}
 
-	public void setOwner(Barbershop owner) {
-		this.owner = owner;
-	}
 
 
 	
