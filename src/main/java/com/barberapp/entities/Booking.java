@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table (name = "booking ")
 public class Booking implements Serializable {
@@ -25,6 +27,7 @@ public class Booking implements Serializable {
 	@Column(name="id")
 	private Long  id;
 
+	@JsonIgnoreProperties(value={"bokings","hibernateLazyInitializer","handler"},allowSetters = true)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="barber", referencedColumnName = "id")
 	private Barber barber;
@@ -32,9 +35,11 @@ public class Booking implements Serializable {
 	@Column(name="reservation_date")
 	private Date reservation_date;
 
+	@JsonIgnoreProperties(value={"bokings","hibernateLazyInitializer","handler"},allowSetters = true)
 	@ManyToOne @JoinColumn (name = "barbershop", referencedColumnName = "id")
 	private Barbershop barbershop;
 
+	@JsonIgnoreProperties(value={"bokings","hibernateLazyInitializer","handler"},allowSetters = true)
 	@ManyToOne @JoinColumn (name = "customer", referencedColumnName = "id")
 	private Customer customer;
 	
