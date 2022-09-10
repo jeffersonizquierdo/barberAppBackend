@@ -2,6 +2,7 @@ package com.barberapp.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,7 +29,7 @@ public class Booking implements Serializable {
 	private Long  id;
 
 	@Column(name="reservationDate")
-	private Date reservationDate;
+	private Timestamp  reservationDate;
 	
 	@Column(name="barbershop")
 	private int barbershop;
@@ -55,7 +56,8 @@ public class Booking implements Serializable {
 
 
 
-	public Booking(Long id, Date reservationDate, int barbershop, Barber barber, Customer customer, Boolean completed) {
+	public Booking(Long id, Timestamp reservationDate, int barbershop, Barber barber, Customer customer,
+			Boolean completed) {
 		super();
 		this.id = id;
 		this.reservationDate = reservationDate;
@@ -79,13 +81,13 @@ public class Booking implements Serializable {
 
 
 
-	public Date getReservationDate() {
+	public Timestamp getReservationDate() {
 		return reservationDate;
 	}
 
 
 
-	public void setReservationDate(Date reservationDate) {
+	public void setReservationDate(Timestamp reservationDate) {
 		this.reservationDate = reservationDate;
 	}
 
@@ -144,7 +146,6 @@ public class Booking implements Serializable {
 		return "Booking [id=" + id + ", reservationDate=" + reservationDate + ", barbershop=" + barbershop + ", barber="
 				+ barber + ", customer=" + customer + ", completed=" + completed + "]";
 	}
-
 
 
 	
