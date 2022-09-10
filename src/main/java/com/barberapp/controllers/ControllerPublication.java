@@ -140,7 +140,7 @@ public class ControllerPublication {
 		return publication;
 	}
 	
-	/////////////////// DELETE REGISTRAR http://localhost:8080/customer/delete/id
+	/////////////////// DELETE REGISTRAR http://localhost:8080/publication/delete/id
 	/////////////////// ////////////////
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> deleteCustomer(@PathVariable Long id) {
