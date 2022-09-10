@@ -145,7 +145,11 @@ public class ControllerBonding {
 	
 	
 	
+
+	/////////////////// DELTE BONDING http://localhost:8080/bonding/consult
+
 	/////////////////// DELTE BONDING http://localhost:8080/bonding/delete/id
+
 	/////////////////// ////////////////
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> deleteBondgin(@PathVariable(value = "id") Long id) {
