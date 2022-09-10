@@ -29,7 +29,7 @@ import com.barberapp.services.booking.ServiceBooking;
 @RequestMapping("booking")
 public class ControllerBooking {
 	
-	@Autowired(required = true) private ServiceBooking serviceBooking;
+@Autowired(required = true) private ServiceBooking serviceBooking;
 	
 	@GetMapping("hola")
 	public String saludo() {
@@ -88,15 +88,6 @@ public class ControllerBooking {
 		}
 			
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/////////////////// UPDATE BOOKING   http://localhost:8080/booking/update/ID ////////////////
 		@PutMapping("/update/{id}")
 		public ResponseEntity<?>update(@RequestBody Booking newBooking,@PathVariable (value = "id")Long idbooking ){
@@ -134,10 +125,9 @@ public class ControllerBooking {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 		}
 	
+
 	
-	
-	
-/////////////////// CONSULT ALL USER   http://localhost:8080/booking/consultall ///////////////
+	/////////////////// CONSULT ALL USER   http://localhost:8080/booking/consultall ///////////////
 
 		@GetMapping("/consultall")
 		public  List<Booking> consultAllUsers(){
@@ -149,9 +139,7 @@ public class ControllerBooking {
 			
 			return  booking;
 		}
-	
 
-	
 
 		/////////////////// DELETE BOOKING   http://localhost:8080/booking/delete/ID ////////////////
 		@DeleteMapping("/delete/{id}")
@@ -173,6 +161,7 @@ public class ControllerBooking {
 			response.put("Mensaje","El booking se ha eliminado con exito! ");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 		}
+	
 	
 	
 	

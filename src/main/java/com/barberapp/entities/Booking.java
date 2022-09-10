@@ -27,101 +27,126 @@ public class Booking implements Serializable {
 	@Column(name="id")
 	private Long  id;
 
-	@JsonIgnoreProperties(value={"bokings","hibernateLazyInitializer","handler"},allowSetters = true)
+	@Column(name="reservationDate")
+	private Date reservationDate;
+	
+	@Column(name="barbershop")
+	private int barbershop;
+	
+	@JsonIgnoreProperties(value={"bookingsBarber","hibernateLazyInitializer","handler"},allowSetters = true)
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="barber", referencedColumnName = "id")
+	@JoinColumn (name = "barber_id")
 	private Barber barber;
 	
-	@Column(name="reservation_date")
-	private Date reservationDate;
-
-	@JsonIgnoreProperties(value={"bokings","hibernateLazyInitializer","handler"},allowSetters = true)
-	@ManyToOne @JoinColumn (name = "barbershop", referencedColumnName = "id")
-	private Barbershop barbershop;
-
-	@JsonIgnoreProperties(value={"bokings","hibernateLazyInitializer","handler"},allowSetters = true)
-	@ManyToOne @JoinColumn (name = "customer", referencedColumnName = "id")
+	@JsonIgnoreProperties(value={"bookingsCustomer","hibernateLazyInitializer","handler"},allowSetters = true)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn (name = "customer_id")
 	private Customer customer;
+	
 	
 	@Column(name="completed")
     private Boolean completed ;
 
+
+
 	public Booking() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Booking(Long id, Barber barber, Date reservationDate, Barbershop barbershop, Customer customer,
-			Boolean completed) {
+
+
+	public Booking(Long id, Date reservationDate, int barbershop, Barber barber, Customer customer, Boolean completed) {
 		super();
 		this.id = id;
-		this.barber = barber;
 		this.reservationDate = reservationDate;
 		this.barbershop = barbershop;
+		this.barber = barber;
 		this.customer = customer;
 		this.completed = completed;
 	}
+
+
 
 	public Long getId() {
 		return id;
 	}
 
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Barber getBarber() {
-		return barber;
-	}
 
-	public void setBarber(Barber barber) {
-		this.barber = barber;
-	}
 
 	public Date getReservationDate() {
 		return reservationDate;
 	}
 
+
+
 	public void setReservationDate(Date reservationDate) {
 		this.reservationDate = reservationDate;
 	}
 
-	public Barbershop getBarbershop() {
+
+
+	public int getBarbershop() {
 		return barbershop;
 	}
 
-	public void setBarbershop(Barbershop barbershop) {
+
+
+	public void setBarbershop(int barbershop) {
 		this.barbershop = barbershop;
 	}
+
+
+
+	public Barber getBarber() {
+		return barber;
+	}
+
+
+
+	public void setBarber(Barber barber) {
+		this.barber = barber;
+	}
+
+
 
 	public Customer getCustomer() {
 		return customer;
 	}
 
+
+
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+
+
 
 	public Boolean getCompleted() {
 		return completed;
 	}
 
+
+
 	public void setCompleted(Boolean completed) {
 		this.completed = completed;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "Booking [id=" + id + ", barber=" + barber + ", reservationDate=" + reservationDate + ", barbershop="
-				+ barbershop + ", customer=" + customer + ", completed=" + completed + "]";
+		return "Booking [id=" + id + ", reservationDate=" + reservationDate + ", barbershop=" + barbershop + ", barber="
+				+ barber + ", customer=" + customer + ", completed=" + completed + "]";
 	}
 
 
 
-
 	
-
-
-
 
 }

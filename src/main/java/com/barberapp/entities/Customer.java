@@ -38,22 +38,20 @@ public class Customer  implements Serializable{
 	@Column (name = "photo", nullable = true) private String photo;
 	@Column (name = "age", nullable = false) private Date age;
 	
+	
 	@JsonIgnoreProperties(value={"customer","hibernateLazyInitializer","handler"},allowSetters = true)
-	@OneToMany (mappedBy = "customer", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	private List<Booking> bokings;
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "customer")
+	private List<Booking> bookingsCustomer;
 
 	
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-
-
 
 
 	public Customer(Long id, String email, String password, String nickname, String city, String cellphone,
-			int typeUser, String photo, Date age, List<Booking> bokings) {
+			int typeUser, String photo, Date age, List<Booking> bookingsCustomer) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -64,103 +62,116 @@ public class Customer  implements Serializable{
 		this.typeUser = typeUser;
 		this.photo = photo;
 		this.age = age;
-		this.bokings = bokings;
-
+		this.bookingsCustomer = bookingsCustomer;
 	}
 
 
-
-	public List<Booking> getBokings() {
-		return bokings;
-	}
-
-
-	public void setBokings(List<Booking> bokings) {
-		this.bokings = bokings;
-	}
-
-	
 	public Long getId() {
 		return id;
 	}
 
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	
+
 	public String getEmail() {
 		return email;
 	}
-	
+
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 
 	public String getPassword() {
 		return password;
 	}
 
-	
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	
+
 	public String getNickname() {
 		return nickname;
 	}
 
-	
+
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
 
-	
+
 	public String getCity() {
 		return city;
 	}
-	
+
 
 	public void setCity(String city) {
 		this.city = city;
 	}
 
+
 	public String getCellphone() {
 		return cellphone;
 	}
+
 
 	public void setCellphone(String cellphone) {
 		this.cellphone = cellphone;
 	}
 
+
 	public int getTypeUser() {
 		return typeUser;
 	}
+
 
 	public void setTypeUser(int typeUser) {
 		this.typeUser = typeUser;
 	}
 
+
 	public String getPhoto() {
 		return photo;
 	}
+
 
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
 
+
 	public Date getAge() {
 		return age;
 	}
+
 
 	public void setAge(Date age) {
 		this.age = age;
 	}
 
+
+	public List<Booking> getBookingsCustomer() {
+		return bookingsCustomer;
+	}
+
+
+	public void setBookingsCustomer(List<Booking> bookingsCustomer) {
+		this.bookingsCustomer = bookingsCustomer;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", email=" + email + ", password=" + password + ", nickname=" + nickname
+				+ ", city=" + city + ", cellphone=" + cellphone + ", typeUser=" + typeUser + ", photo=" + photo
+				+ ", age=" + age + ", bookingsCustomer=" + bookingsCustomer + "]";
+	}
 	
 	
 
