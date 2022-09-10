@@ -2,6 +2,7 @@ package com.barberapp.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,24 +28,26 @@ public class Booking implements Serializable {
 	@Column(name="id")
 	private Long  id;
 
-	@JsonIgnoreProperties(value={"bokings","hibernateLazyInitializer","handler"},allowSetters = true)
+	@Column(name="reservationDate")
+	private Timestamp  reservationDate;
+	
+	@Column(name="barbershop")
+	private int barbershop;
+	
+	@JsonIgnoreProperties(value={"bookingsBarber","hibernateLazyInitializer","handler"},allowSetters = true)
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="barber", referencedColumnName = "id")
+	@JoinColumn (name = "barber_id")
 	private Barber barber;
 	
-	@Column(name="reservation_date")
-	private Date reservation_date;
-
-	@JsonIgnoreProperties(value={"bokings","hibernateLazyInitializer","handler"},allowSetters = true)
-	@ManyToOne @JoinColumn (name = "barbershop", referencedColumnName = "id")
-	private Barbershop barbershop;
-
-	@JsonIgnoreProperties(value={"bokings","hibernateLazyInitializer","handler"},allowSetters = true)
-	@ManyToOne @JoinColumn (name = "customer", referencedColumnName = "id")
+	@JsonIgnoreProperties(value={"bookingsCustomer","hibernateLazyInitializer","handler"},allowSetters = true)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn (name = "customer_id")
 	private Customer customer;
+	
 	
 	@Column(name="completed")
     private Boolean completed ;
+
 
 
 	public Booking() {
@@ -52,16 +55,18 @@ public class Booking implements Serializable {
 	}
 
 
-	public Booking(Long id, Barber barber, Date reservation_date, Barbershop barbershop, Customer customer,
+
+	public Booking(Long id, Timestamp reservationDate, int barbershop, Barber barber, Customer customer,
 			Boolean completed) {
 		super();
 		this.id = id;
-		this.barber = barber;
-		this.reservation_date = reservation_date;
+		this.reservationDate = reservationDate;
 		this.barbershop = barbershop;
+		this.barber = barber;
 		this.customer = customer;
 		this.completed = completed;
 	}
+
 
 
 	public Long getId() {
@@ -69,9 +74,35 @@ public class Booking implements Serializable {
 	}
 
 
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+
+
+	public Timestamp getReservationDate() {
+		return reservationDate;
+	}
+
+
+
+	public void setReservationDate(Timestamp reservationDate) {
+		this.reservationDate = reservationDate;
+	}
+
+
+
+	public int getBarbershop() {
+		return barbershop;
+	}
+
+
+
+	public void setBarbershop(int barbershop) {
+		this.barbershop = barbershop;
+	}
+
 
 
 	public Barber getBarber() {
@@ -79,29 +110,11 @@ public class Booking implements Serializable {
 	}
 
 
+
 	public void setBarber(Barber barber) {
 		this.barber = barber;
 	}
 
-
-	public Date getReservation_date() {
-		return reservation_date;
-	}
-
-
-	public void setReservation_date(Date reservation_date) {
-		this.reservation_date = reservation_date;
-	}
-
-
-	public Barbershop getBarbershop() {
-		return barbershop;
-	}
-
-
-	public void setBarbershop(Barbershop barbershop) {
-		this.barbershop = barbershop;
-	}
 
 
 	public Customer getCustomer() {
@@ -109,9 +122,11 @@ public class Booking implements Serializable {
 	}
 
 
+
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+
 
 
 	public Boolean getCompleted() {
@@ -119,15 +134,20 @@ public class Booking implements Serializable {
 	}
 
 
+
 	public void setCompleted(Boolean completed) {
 		this.completed = completed;
 	}
 
 
+
 	@Override
 	public String toString() {
-		return "Booking [id=" + id + ", barber=" + barber + ", reservation_date=" + reservation_date + ", barbershop="
-				+ barbershop + ", customer=" + customer + ", completed=" + completed + "]";
+		return "Booking [id=" + id + ", reservationDate=" + reservationDate + ", barbershop=" + barbershop + ", barber="
+				+ barber + ", customer=" + customer + ", completed=" + completed + "]";
 	}
+
+
 	
+
 }

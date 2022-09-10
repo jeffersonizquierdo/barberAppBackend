@@ -51,15 +51,10 @@ public class Barber implements Serializable{
 	@Column (name = "qualification")
 	private Double qualification;
 	
-	
-	
 	@JsonIgnoreProperties(value={"id_barber","hibernateLazyInitializer","handler"},allowSetters = true)
 	@OneToMany(fetch=FetchType.LAZY, mappedBy = "id_barber", cascade=CascadeType.ALL)
 	//@OneToMany (mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
 	private List<Publication> publication;
-	
-	
-
 	
 	@JsonIgnoreProperties(value={"listBarbers","hibernateLazyInitializer","handler"},allowSetters = true)
 	@ManyToOne(fetch = FetchType.LAZY) 
@@ -67,8 +62,8 @@ public class Barber implements Serializable{
 	private  Barbershop barbershop;
 	
 	@JsonIgnoreProperties(value={"barber","hibernateLazyInitializer","handler"},allowSetters = true)
-	@OneToMany (mappedBy = "barber", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	private List<Booking> bokings;
+	@OneToMany(fetch=FetchType.LAZY, mappedBy = "barber")
+	private List<Booking> bookingsBarber;
 
 	
 	public Barber() {
@@ -78,7 +73,8 @@ public class Barber implements Serializable{
 
 
 	public Barber(Long id, String email, String password, String nickname, String city, String cellphone, int typeUser,
-			String photo, Date age, String description, Double qualification, List<Publication> publication, Barbershop barbershop, List<Booking> bokings) {
+			String photo, Date age, String description, Double qualification, List<Publication> publication,
+			Barbershop barbershop, List<Booking> bookingsBarber) {
 		super();
 		this.id = id;
 		this.email = email;
@@ -92,9 +88,8 @@ public class Barber implements Serializable{
 		this.description = description;
 		this.qualification = qualification;
 		this.publication = publication;
-	
 		this.barbershop = barbershop;
-		this.bokings = bokings;
+		this.bookingsBarber = bookingsBarber;
 	}
 
 
@@ -218,7 +213,6 @@ public class Barber implements Serializable{
 	}
 
 
-
 	public Barbershop getBarbershop() {
 		return barbershop;
 	}
@@ -229,13 +223,21 @@ public class Barber implements Serializable{
 	}
 
 
-	public List<Booking> getBokings() {
-		return bokings;
+	public List<Booking> getBookingsBarber() {
+		return bookingsBarber;
 	}
 
 
-	public void setBokings(List<Booking> bokings) {
-		this.bokings = bokings;
+	public void setBookingsBarber(List<Booking> bookingsBarber) {
+		this.bookingsBarber = bookingsBarber;
 	}
-	
+
+
+	@Override
+	public String toString() {
+		return "Barber [id=" + id + ", email=" + email + ", password=" + password + ", nickname=" + nickname + ", city="
+				+ city + ", cellphone=" + cellphone + ", typeUser=" + typeUser + ", photo=" + photo + ", age=" + age
+				+ ", description=" + description + ", qualification=" + qualification + ", publication=" + publication
+				+ ", barbershop=" + barbershop + ", bookingsBarber=" + bookingsBarber + "]";
+	}
 }
