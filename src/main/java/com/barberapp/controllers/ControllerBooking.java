@@ -116,7 +116,7 @@ public class ControllerBooking {
 			
 		
 			
-			currentbooking.get().setReservation_date(newBooking.getReservation_date());
+			currentbooking.get().setReservationDate(newBooking.getReservationDate());
 			currentbooking.get().setCompleted(newBooking.getCompleted());
 			
 			BookingUpdate = Optional.ofNullable(serviceBooking.save(currentbooking.get()));
