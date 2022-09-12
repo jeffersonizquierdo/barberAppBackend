@@ -179,6 +179,38 @@ public class ControllerBarbershop {
 
 		return barbershops;
 	}
+	
+	
+/////////////////// CONSULT BARBER BARBERSHOP
+/////////////////// http://localhost:8080/barbershop/consultbarber/id ////////////////
+	@GetMapping("/consultbarber/{id}")
+	public List<Barber> consultBarbersId(@PathVariable(value = "id") Long id) {
+	
+	
+		Optional<Barbershop> barbershop = null;
+		Map<String, Object> response = new HashMap<>();
+	
+	try {
+	
+		barbershop = serviceBarbershop.findById(id);
+	
+	} catch (DataAccessException e) {
+		List<Barber> barber;
+		response.put("Mensaje", "Error al hacer consulta en la base de datos");
+		response.put("Error", e.getMessage().concat(": ")
+		.concat(((NestedRuntimeException) e).getMostSpecificCause().getMessage()));
+		return barber= new ArrayList<Barber>()  ;
+	}
+	
+	if (!barbershop.isPresent()) {
+		List<Barber> barber;
+		response.put("Mensaje",
+		"La barberia con el ID ".concat(id.toString().concat(" no existe en la base de datos")));
+		return barber= new ArrayList<Barber>();
+	}
+	
+	return barbershop.get().getListBarbers();
+	}
 
 	
 /////////////////// CONSULT CATALOGUE BARBERSHOP
