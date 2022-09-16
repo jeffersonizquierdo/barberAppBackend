@@ -47,6 +47,9 @@ public class Booking implements Serializable {
 	
 	@Column(name="completed")
     private Boolean completed ;
+	
+	@Column(name="cancelled")
+	private Boolean cancelled;
 
 
 
@@ -55,9 +58,8 @@ public class Booking implements Serializable {
 	}
 
 
-
 	public Booking(Long id, Timestamp reservationDate, int barbershop, Barber barber, Customer customer,
-			Boolean completed) {
+			Boolean completed, Boolean cancelled) {
 		super();
 		this.id = id;
 		this.reservationDate = reservationDate;
@@ -65,8 +67,8 @@ public class Booking implements Serializable {
 		this.barber = barber;
 		this.customer = customer;
 		this.completed = completed;
+		this.cancelled = cancelled;
 	}
-
 
 
 	public Long getId() {
@@ -137,6 +139,15 @@ public class Booking implements Serializable {
 
 	public void setCompleted(Boolean completed) {
 		this.completed = completed;
+	}
+
+
+	public Boolean getCancelled() {
+		return cancelled;
+	}
+
+	public void setCancelled(Boolean cancelled) {
+		this.cancelled = cancelled;
 	}
 
 
