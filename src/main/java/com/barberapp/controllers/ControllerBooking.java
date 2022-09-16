@@ -109,6 +109,7 @@ public class ControllerBooking {
 			
 			currentbooking.get().setReservationDate(newBooking.getReservationDate());
 			currentbooking.get().setCompleted(newBooking.getCompleted());
+			currentbooking.get().setCancelled(newBooking.getCancelled());
 			
 			BookingUpdate = Optional.ofNullable(serviceBooking.save(currentbooking.get()));
 			
@@ -161,16 +162,6 @@ public class ControllerBooking {
 			response.put("Mensaje","El booking se ha eliminado con exito! ");
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 		}
-	
-	
-	
-	
-		
-		
-		
-
-
-	
 	
 
 }
