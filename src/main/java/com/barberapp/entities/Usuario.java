@@ -43,10 +43,8 @@ public class Usuario implements Serializable {
 	
 	@Column(length = 10)
 	private String cellphone;
-	
-	
-	@Column(name = "date_or_birth")
-	private Date date;
+
+	private Date age;
 	
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -68,7 +66,7 @@ public class Usuario implements Serializable {
 
 
 	public Usuario(Long id, String username, String nickname, String password, Boolean enabled, int typeUser,
-			String city, String cellphone, Date date, List<Role> roles, Cuts cuts) {
+			String city, String cellphone, Date age, List<Role> roles, Cuts cuts) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -78,7 +76,7 @@ public class Usuario implements Serializable {
 		this.typeUser = typeUser;
 		this.city = city;
 		this.cellphone = cellphone;
-		this.date = date;
+		this.age = age;
 		this.roles = roles;
 		this.cuts = cuts;
 	}
@@ -96,6 +94,14 @@ public class Usuario implements Serializable {
 	}
 
 
+	public Date getAge() {
+		return age;
+	}
+
+
+	public void setAge(Date age) {
+		this.age = age;
+	}
 
 
 	public Long getId() {
@@ -168,14 +174,6 @@ public class Usuario implements Serializable {
 	}
 
 
-	public Date getDate() {
-		return date;
-	}
-
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
 
 
 	public String getCity() {

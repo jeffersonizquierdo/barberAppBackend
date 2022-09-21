@@ -94,7 +94,7 @@ public class ControllerUsuario {
 		
 		
 		
-		/////////////////// UPDATE USUARIO   http://localhost:8080/barber/update/ID ////////////////
+		/////////////////// UPDATE USUARIO   http://localhost:8080/usuario/update/ID ////////////////
 		
 		@PutMapping("/update/{id}")
 		public ResponseEntity<?>update(@RequestBody Usuario newUsuario,@PathVariable (value = "id")Long idUsuario ){
@@ -113,6 +113,9 @@ public class ControllerUsuario {
 
 				currentUsuario.get().setUsername(newUsuario.getUsername());
 				currentUsuario.get().setPassword(newUsuario.getPassword());
+				currentUsuario.get().setCity(newUsuario.getCity());
+				currentUsuario.get().setCellphone(newUsuario.getCellphone());
+				currentUsuario.get().setAge(newUsuario.getAge());
 				usuarioUpdate = Optional.ofNullable(serviceUsuario.save(currentUsuario.get()));
 				
 			} catch (DataAccessException e) {
